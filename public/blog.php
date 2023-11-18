@@ -1,3 +1,4 @@
+<?php include 'models/Post.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,10 +39,10 @@
        </div>
        <div class="collapse navbar-collapse navbar-right" id="menu">
           <ul class="nav navbar-nav">
-            <li class=" lien"><a href="index.html"><i class="fa fa-home sr-icons"></i> Home</a></li>
-            <li class="lien"><a href="about.html"><i class="fa fa-bookmark sr-icons"></i> About</a></li>
+            <li class=" lien"><a href="index.php"><i class="fa fa-home sr-icons"></i> Home</a></li>
+            <li class="lien"><a href="about.php"><i class="fa fa-bookmark sr-icons"></i> About</a></li>
             <li class="active lien"><a href="#"><i class="fa fa-file-text sr-icons"></i> Blog</a></li>
-            <li><a href="contact.html"><i class="fa fa-phone-square sr-icons"></i> Contact</a></li>
+            <li><a href="contact.php"><i class="fa fa-phone-square sr-icons"></i> Contact</a></li>
           </ul>
        </div>
      </div>
@@ -55,7 +56,22 @@
 
       <!-- Blocks of Posts -->
         <div class="col-xs-12 col-sm-8 row">
-           <div class="col-xs-12 col-sm-12">
+          <?php
+            $post = new Post(
+              "doloremque illum", 
+              "Duis ultrices tortor non felis convallis bibendum. Maecenas diam velit, sollicitudin at imperdiet ac, consectetur non nibh. Etiam eget dapibus nulla. ", 
+              array("test_1", "test_2"),
+              "Category I",
+              "6 JANUARY", 
+              "images/blog/landscape.jpg", 
+              10
+            );
+
+            for($i = 0; $i < 3; $i++){
+              $post->show_demo_post();
+            }
+          ?>
+           <!--<div class="col-xs-12 col-sm-12">
              <div class="post">
                <div class="post-heading">
                  <span>6 JANUARY</span>
@@ -117,7 +133,7 @@
                  </span>
                </div>
              </div>
-           </div>
+           </div>-->
               <nav class="text-left">
                 <ul class="pagination">
                   <li class="active"><a href="#">1</a></li>
