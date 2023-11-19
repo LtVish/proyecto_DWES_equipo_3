@@ -1,4 +1,4 @@
-<?php include 'models/Post.php';?>
+<?php include 'models/Event.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,8 +41,8 @@
           <ul class="nav navbar-nav">
             <li class=" lien"><a href="index.php"><i class="fa fa-home sr-icons"></i> Home</a></li>
             <li class=" lien"><a href="about.php"><i class="fa fa-bookmark sr-icons"></i> About</a></li>
-            <li class=" lien"><a href="event.php"><i class="fa fa-calendar sr-icons"></i> Event</a></li>
-            <li class="active lien"><a href="#"><i class="fa fa-file-text sr-icons"></i> Blog</a></li>
+            <li class="active lien"><a href="event.php"><i class="fa fa-calendar sr-icons"></i> Event</a></li>
+            <li class=" lien"><a href="blog.php"><i class="fa fa-file-text sr-icons"></i> Blog</a></li>
             <li class=" lien"><a href="contact.php"><i class="fa fa-phone-square sr-icons"></i> Contact</a></li>
           </ul>
        </div>
@@ -58,19 +58,22 @@
       <!-- Blocks of Posts -->
         <div class="col-xs-12 col-sm-8 row">
           <?php
-            $post = new Post(
-              "doloremque illum", 
-              "Duis ultrices tortor non felis convallis bibendum. Maecenas diam velit, sollicitudin at imperdiet ac, consectetur non nibh. Etiam eget dapibus nulla. ", 
-              array("test_1", "test_2"),
-              "Category I",
-              "6 JANUARY", 
-              "images/blog/landscape.jpg", 
-              10
+            $event = new Event(
+              "Eventazo",
+              "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod soluta corrupti earum officia vel inventore vitae quidem, consequuntur odit impedit.",
+              "Terreno salado y resbaladizo",
+              "10/10/2017",
+              "Fiesta",
+              "Kouven",
+              ["Kouven", "Kouven2", "Kouven3"],
+              ["Kouven", "Kouven2", "Kouven3"],
+              "images/blog/elephant.jpg",
+              "Lomé"
             );
 
             for($i = 0; $i < 3; $i++){
-              $post->show_demo_post();
-              $post->create_footer();
+              $event->show_demo_post();
+              $event->create_footer();
             }
           ?>
            <!--<div class="col-xs-12 col-sm-12">
@@ -161,9 +164,9 @@
            </form>
            <div class="panel">
              <div class="panel-heading">
-               <h4>Categories</h4>
+               <button class="btn btn-primary btn-block" type="button">Nuevo Evento</button>
              </div>
-             <div class="panel-body">
+             <!--<div class="panel-body">
                <ul class="nav">
                  <li><a href="#">Category I</a></li>
                  <li><a href="#">Category II</a></li>
@@ -171,7 +174,7 @@
                  <li><a href="#">Category IV</a></li>
                  <li class="last"><a href="#">Category V</a></li>
                </ul>
-             </div>
+             </div>-->
            </div>
            <div class="well">
              <h4>Soluta</h4>
