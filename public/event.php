@@ -156,7 +156,7 @@
         <div class="col-xs-12 col-sm-4">
            <form class="form-horizontal">
              <div class="input-group">
-               <input class="form-control" type="text" placeholder="Research">
+               <input class="form-control" type="text" placeholder="Buscar Evento">
                <span class="input-group-btn">
                   <a href="" class="btn"><i class="fa fa-search"></i></a>
                </span>
@@ -164,7 +164,9 @@
            </form>
            <div class="panel">
              <div class="panel-heading">
-               <button class="btn btn-primary btn-block" type="button">Nuevo Evento</button>
+                <form action="new_event.php" metjod="post">
+                  <button class="btn btn-primary btn-block" type="submit">Nuevo Evento</button>
+                </form>
              </div>
              <!--<div class="panel-body">
                <ul class="nav">
