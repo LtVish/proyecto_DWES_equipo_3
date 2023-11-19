@@ -58,23 +58,6 @@
       <!-- Blocks of Posts -->
         <div class="col-xs-12 col-sm-8 row">
           <?php
-            $event = new Event(
-              "Eventazo",
-              "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod soluta corrupti earum officia vel inventore vitae quidem, consequuntur odit impedit.",
-              "Terreno salado y resbaladizo",
-              "10/10/2017",
-              "Fiesta",
-              "Kouven",
-              ["Kouven", "Kouven2", "Kouven3"],
-              ["Kouven", "Kouven2", "Kouven3"],
-              "images/blog/elephant.jpg",
-              "Lomé"
-            );
-
-            for($i = 0; $i < 3; $i++){
-              $event->show_demo_post();
-              $event->create_footer();
-            }
           ?>
            <!--<div class="col-xs-12 col-sm-12">
              <div class="post">

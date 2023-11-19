@@ -1,11 +1,12 @@
 <?php
     class Post{
-        protected $title;
-        protected $content;
+        private $id;
+        private $title;
+        private $content;
         private $tags;
         private $category;
-        protected $publish_date;
-        protected $image_path;
+        private $publish_date;
+        private $image_path;
         private $likes;
 
         function __construct(
@@ -33,6 +34,7 @@
                   <p><?=substr($this->content, 0, 250)?>
                   </p>
                 </div>
+              <?php $this->create_footer();?>
         <?php
         }
 
