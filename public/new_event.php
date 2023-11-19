@@ -102,6 +102,12 @@
 						<input class="form-control" type="date">
 					</div>
 				</div>
+				<div class="form-group">
+					<div class="col-xs-12">
+						<label class="label-control">Foto</label>
+						<input class="form-control" type="file">
+					</div>
+				</div>
 	       	  <!--<div class="form-group">
 	       	  	<div class="col-xs-12">
 	       	  		<label class="label-control">Message</label>
