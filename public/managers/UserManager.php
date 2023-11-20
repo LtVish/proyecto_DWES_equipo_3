@@ -9,6 +9,14 @@ class UserManager{
     {
         $this->driver=$driver;
     }
+    function GetUserByID(int $id):User{
+        $user=null;
+        $savedStatement=$this->driver->ExecuteSQLQuery("select * from user where id=$id;");
+        while($row=$savedStatement->fetch()){
+            $user=new User($row['id'],$row['nick'],$row['email'],$row['full_name'],$row['karma']);
+        }
+        return $user;
+    }
     function GetAllUsers():array{
         $users=[];
         $savedStatement=$this->driver->ExecuteSQLQuery("select * from user;");
@@ -25,7 +33,7 @@ class UserManager{
     }
     function LoginUser(User $user):bool{
         $DBusers=$this->GetAllUsers();
-        if(count(array_filter($DBusers,fn ($p)=>$p==$user))>0){
+        if(count(array_filter($DBusers,fn ($p)=>$p->nick == $user->nick || $p->email == $user -> email))>0){
             return true;
         }
         else{

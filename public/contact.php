@@ -1,5 +1,54 @@
+<?php
+	include_once "models/User.php";
+	include_once "managers/UserManager.php";
+	include_once "utils/DBdriver.php";
+	$manager = new UserManager(new DBdriver("database", "reforestaDB", "root", "Pass1234"));
+	$registered = false;
+	$logged = false;
+	$user = null;
 
+	if(isset($_POST["full_name"]) && isset($_POST["nick"]) && isset($_POST["email"])){
+		$full_name = $_POST["full_name"];
+		$nick = $_POST["nick"];
+		$email = $_POST["email"];
 
+		$user = new User(0, $nick, $email, $full_name, 0);
+		$manager->RegisterUser($user);
+
+		$registered = true;
+	}
+
+	if(isset($_POST["login"])){
+		$user = new User(0, $_POST["login"], $_POST["login"], $_POST["login"], 0);
+		if($manager->LoginUser($user)){
+			$logged = true;
+			$users = $manager->GetAllUsers();
+			$user = array_values(array_filter($users, fn ($p) => $p->nick == $user->nick || $p->email == $user->email))[0];
+		}
+	}
+
+	if(isset($_POST["mod_nombre"]) && isset($_POST["mod_email"]) && isset($_POST["mod_nick"])){
+		$logged = true;
+
+		$user = $manager->GetUserByID($_POST["id"]);
+
+		if($_POST["mod_nombre"] != "")
+			$name = $_POST["mod_nombre"];
+		else
+			$name = $user->full_name;
+		if($_POST["mod_email"] != "")
+			$email = $_POST["mod_email"];
+		else
+			$email = $user->email;
+		if($_POST["mod_nick"] != "")
+			$nick = $_POST["mod_nick"];
+		else
+			$nick = $user->nick;
+		
+		$user = new User($user->id, $nick, $email, $name, $user->karma);
+		$manager->ModifyUser($user);
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,95 +103,92 @@
 <!-- Principal Content Start -->
    <div id="contact">
    	  <div class="container">
-   	    <div class="col-xs-12 col-sm-8 col-sm-push-2">
+		<?php if (!$logged) { ?>
+   	    <div class="col-xs-12 col-sm-6">
        	   <h1>Regístrate</h1>
-       	   <hr>
-       	   <!--<p>Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>-->
-	       <form class="form-horizontal">
-	       	  <!--<div class="form-group">
-	       	  	<div class="col-xs-6">
-	       	  	    <label class="label-control">First Name</label>
-	       	  		<input class="form-control" type="text">
-	       	  	</div>
-	       	  	<div class="col-xs-6">
-	       	  	    <label class="label-control">Last Name</label>
-	       	  		<input class="form-control" type="text">
-	       	  	</div>
-	       	  </div>-->
+		   <hr>
+	       <form class="form-horizontal" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>", method="POST">
 				 <div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Nombre completo</label>
-						<input class="form-control" type="text">
+						<input class="form-control" type="text" name="full_name" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Nombre de usuario</label>
-						<input class="form-control" type="text">
+						<input class="form-control" type="text" name="nick" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Email</label>
-						<input class="form-control" type="text">
+						<input class="form-control" type="text" type="email" name="email" required>
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-xs-12">
-						<label class="label-control">Contraseña</label>
-						<input class="form-control" type="text">
+				<?php if ($registered) { ?>
+					<div class="form-group">
+						<div class="col-xs-12">
+							<label class="label-control">¡Te has registrado!</label>
+						</div>
 					</div>
-				</div>
-	       	  <!--<div class="form-group">
-	       	  	<div class="col-xs-12">
-	       	  		<label class="label-control">Message</label>
-	       	  		<textarea class="form-control"></textarea>
-	       	  		<button class="pull-right btn btn-lg sr-button">SEND</button>
-	       	  	</div>
-	       	  </div>-->
+				<?php } ?>
 			  <div class = "form-group">
 				<button class="pull-right btn btn-lg sr-button">SEND</button>
 			  </div>
 	       </form>
-	       <hr class="divider">
-	       <div class="address">
-	           <!--<p>Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero.</p>
-		       <div class="ending text-center">
-			        <ul class="list-inline social-buttons">
-			            <li><a href="#"><i class="fa fa-facebook sr-icons"></i></a>
-			            </li>
-			            <li><a href="#"><i class="fa fa-twitter sr-icons"></i></a>
-			            </li>
-			            <li><a href="#"><i class="fa fa-google-plus sr-icons"></i></a>
-			            </li>
-			        </ul>
-				    <ul class="list-inline contact">
-				       <li class="footer-number"><i class="fa fa-phone sr-icons"></i>  (00228)92229954 </li>
-				       <li><i class="fa fa-envelope sr-icons"></i>  kouvenceslas93@gmail.com</li>
-				    </ul>
-				    <p>Photography Fanatic Template &copy; 2017</p>
-		       </div>-->
-			   <form class="form-horizontal">
-					<h3>Iniciar Sesión</h3>
-					<hr>
-						<div class="form-group">
-						<div class="col-xs-12">
-							<label class="label-control">Email</label>
-							<input class="form-control" type="text">
-						</div>
+		</div> 
+	       <!--<hr class="divider">-->
+		<div class="col-xs-12 col-sm-6">
+			<h1>Iniciar Sesión</h1>
+			<hr>
+			<form class="form-horizontal" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>", method="POST">
+				<div class="form-group">
+				<div class="col-xs-12">
+					<label class="label-control">Nombre de Usuario o Email</label>
+					<input class="form-control" type="text" name="login">
+				</div>
+				</div>
+				<div class = "form-group">
+					<button class="pull-right btn btn-lg sr-button">SEND</button>
+				</div>
+			</form>
+		</div>
+		<?php } else { ?>
+		<div class="col-xs-12 col-sm-6">
+			<h1><?=$user->nick?></h1>
+		   	<hr>
+		   	<form class="form-horizontal" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>", method="POST">
+			   <div class="form-group">
+					<div class="col-xs-12">
+						<label class="label-control">Karma: <?=$user->karma?></label>
 					</div>
-					<div class="form-group">
-						<div class="col-xs-12">
-							<label class="label-control">Contraseña</label>
-							<input class="form-control" type="text">
-						</div>
+				</div>
+			   <div class="form-group">
+					<div class="col-xs-12">
+						<label class="label-control">Nombre Completo: <?=$user->full_name?></label>
+						<input class="form-control" type="text" type="text" name="mod_nombre">
 					</div>
-					<div class = "form-group">
-						<button class="pull-right btn btn-lg sr-button">SEND</button>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-12">
+						<label class="label-control">Nombre de Usuario: <?=$user->nick?></label>
+						<input class="form-control" type="text" type="text" name="mod_nick">
 					</div>
-			   </form>
-	       </div>
-	    </div>   
+				</div>
+				<div class="form-group">
+					<div class="col-xs-12">
+						<label class="label-control">Email: <?=$user->email?></label>
+						<input class="form-control" type="text" type="email" name="mod_email">
+					</div>
+				</div>
+				<input type="hidden" name="id" value="<?=$user->id?>">
+				<div class = "form-group">
+					<button class="pull-right btn btn-lg sr-button">MODIFICAR</button>
+				</div>
+		   	</form>
+		</div>
+		<?php } ?>
    	  </div>
    </div>
 <!-- Principal Content Start -->

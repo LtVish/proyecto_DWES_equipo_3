@@ -1,5 +1,10 @@
-
-
+<?php
+	if(isset($_FILES["image"]["tmp_name"]) && is_uploaded_file($_FILES["image"]["tmp_name"])){
+		$dir = "images/";
+		$name = $_FILES["image"]["name"];
+		move_uploaded_file($_FILES["image"]["tmp_name"], $dir.$name);
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,7 +63,7 @@
        	   <h1>Crea Nuevo Evento</h1>
        	   <hr>
        	   <!--<p>Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>-->
-	       <form class="form-horizontal">
+	       <form class="form-horizontal" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>", method="POST" enctype="multipart/form-data">
 	       	  <!--<div class="form-group">
 	       	  	<div class="col-xs-6">
 	       	  	    <label class="label-control">First Name</label>
@@ -105,7 +110,7 @@
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Foto</label>
-						<input class="form-control" type="file">
+						<input class="form-control" type="file" name="image">
 					</div>
 				</div>
 	       	  <!--<div class="form-group">
