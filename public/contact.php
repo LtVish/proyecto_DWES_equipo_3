@@ -100,7 +100,7 @@
    </nav>
 <!-- End of Navigation Bar -->
 
-<!-- Principal Content Start -->
+<!-- Loggin and Register part -->
    <div id="contact">
    	  <div class="container">
 		<?php if (!$logged) { ?>
@@ -154,6 +154,8 @@
 				</div>
 			</form>
 		</div>
+
+		<!-- user profile part -->
 		<?php } else { ?>
 		<div class="col-xs-12 col-sm-6">
 			<h1><?=$user->nick?></h1>
@@ -187,6 +189,82 @@
 					<button class="pull-right btn btn-lg sr-button">MODIFICAR</button>
 				</div>
 		   	</form>
+		</div>
+		<div class="col-xs-12 col-sm-3">
+			<h1>Tus Eventos</h1>
+			<div class="form-group text-right">
+				<button class="btn btn-lg sr-button">Nuevo Evento</button>
+			</div>
+			<div class="row" style="height: 100vh; overflow: hidden; overflow-y:scroll;">
+				<div>
+					<div style="margin:10px;">
+						<h2 class="label-control">Evento 1</h2>
+						<img src="images/pino.jpg" class="img-responsive">
+						<div class="form-group text-right">
+							<button class="btn">Modificar</button>
+						</div>
+					</div>
+					<div style="margin:10px;">
+						<h2 class="label-control">Evento 2</h2>
+						<img src="images/pino.jpg" class="img-responsive">
+						<div class="form-group text-right">
+							<button class="btn">Modificar</button>
+						</div>
+					</div>
+					<div style="margin:10px;">
+						<h2 class="label-control">Evento 3</h2>
+						<img src="images/pino.jpg" class="img-responsive">
+						<div class="form-group text-right">
+							<button class="btn">Modificar</button>
+						</div>
+					</div>
+					<div style="margin:10px;">
+						<h2 class="label-control">Evento 4</h2>
+						<img src="images/pino.jpg" class="img-responsive">
+						<div class="form-group text-right">
+							<button class="btn">Modificar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-3">
+			<h1>Tus Posts</h1>
+			<div class="form-group text-right">
+				<button class="btn btn-lg sr-button">Nuevo Post</button>
+			</div>
+			<div class="row" style="height: 100vh; overflow: hidden; overflow-y:scroll;">
+				<div>
+					<div style="margin:10px;">
+						<h2 class="label-control">Post 1</h2>
+						<img src="images/roble.jpg" class="img-responsive">
+						<div class="form-group text-right">
+							<button class="btn">Modificar</button>
+						</div>
+					</div>
+					<div style="margin:10px;">
+						<h2 class="label-control">Post 2</h2>
+						<img src="images/roble.jpg" class="img-responsive">
+						<div class="form-group text-right">
+							<button class="btn">Modificar</button>
+						</div>
+					</div>
+					<div style="margin:10px;">
+						<h2 class="label-control">Post 3</h2>
+						<img src="images/roble.jpg" class="img-responsive">
+						<div class="form-group text-right">
+							<button class="btn">Modificar</button>
+						</div>
+					</div>
+					<div style="margin:10px;">
+						<h2 class="label-control">Post 4</h2>
+						<img src="images/roble.jpg" class="img-responsive">
+						<div class="form-group text-right">
+							<button class="btn">Modificar</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<?php } ?>
    	  </div>
