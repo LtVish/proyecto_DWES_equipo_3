@@ -70,7 +70,7 @@
 
             for($i = 0; $i < 3; $i++){
               $post->show_demo_post();
-              $post->create_footer();
+              //$post->create_footer();
             }
           ?>
            <!--<div class="col-xs-12 col-sm-12">

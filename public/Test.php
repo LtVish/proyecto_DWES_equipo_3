@@ -1,11 +1,18 @@
 <?php
+include './models/Specie.php';
 include './models/Event.php';
 include './models/User.php';
-include './managers/UserManager.php';
-include './utils/DBdriver.php';
-include './managers/EventManager.php';
-echo 'h';
+include './models/Post.php';
+include './db/DBdriver.php';
+require './fpdf186/fpdf.php';
+$species=Specie::GetAll();
+$species[0]->events_id=[1];
+$species[0]->Update();
+//array_push($user->participant_events_id,2);
 
+//echo join(", ",array_map(fn($p)=>$p->name.";".$p->id,Event::GetAll()));
+//$u->RegisterUser();
+/*
 $driver=new DBdriver('database','reforestaDB','root','Pass1234');
 $manager= new UserManager($driver);
 if($manager->LoginUser(new User(3,"JohnyTest","Johnny@gmail.com","John John",0))){
@@ -16,5 +23,7 @@ $events=$emanager->GetAllEvents();
 $event=new Event(1,"HHH","","","2020-12-1","1",
 new User(3,"JohnyTest","Johnny@gmail.com","John John",0),[new User(3,"JohnyTest","Johnny@gmail.com","John John",0)],
 [],"","");
-$emanager->ValidateEvent($event);
+foreach($events as $e){
+    echo '<p>EVENT: '.$e->name.'</p>';
+}*/
 ?>
