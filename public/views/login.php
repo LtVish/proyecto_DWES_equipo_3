@@ -1,53 +1,5 @@
 <?php
 	include_once "../models/User.php";
-	include_once "../managers/UserManager.php";
-	include_once "../utils/DBdriver.php";
-	$manager = new UserManager(new DBdriver("database", "reforestaDB", "root", "Pass1234"));
-	$registered = false;
-	$logged = false;
-	$user = null;
-
-	if(isset($_POST["full_name"]) && isset($_POST["nick"]) && isset($_POST["email"])){
-		$full_name = $_POST["full_name"];
-		$nick = $_POST["nick"];
-		$email = $_POST["email"];
-
-		$user = new User(0, $nick, $email, $full_name, 0);
-		$manager->RegisterUser($user);
-
-		$registered = true;
-	}
-
-	if(isset($_POST["login"])){
-		$user = new User(0, $_POST["login"], $_POST["login"], $_POST["login"], 0);
-		if($manager->LoginUser($user)){
-			$logged = true;
-			$users = $manager->GetAllUsers();
-			$user = array_values(array_filter($users, fn ($p) => $p->nick == $user->nick || $p->email == $user->email))[0];
-		}
-	}
-
-	if(isset($_POST["mod_nombre"]) && isset($_POST["mod_email"]) && isset($_POST["mod_nick"])){
-		$logged = true;
-
-		$user = $manager->GetUserByID($_POST["id"]);
-
-		if($_POST["mod_nombre"] != "")
-			$name = $_POST["mod_nombre"];
-		else
-			$name = $user->full_name;
-		if($_POST["mod_email"] != "")
-			$email = $_POST["mod_email"];
-		else
-			$email = $user->email;
-		if($_POST["mod_nick"] != "")
-			$nick = $_POST["mod_nick"];
-		else
-			$nick = $user->nick;
-		
-		$user = new User($user->id, $nick, $email, $name, $user->karma);
-		$manager->ModifyUser($user);
-	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -89,7 +41,7 @@
 	   	 </div>
 	   	 <div class="collapse navbar-collapse navbar-right" id="menu">
 	   	 	<ul class="nav navbar-nav">
-	   	 		<li class=" lien"><a href="index.php"><i class="fa fa-home sr-icons"></i> Home</a></li>
+	   	 		<li class=" lien"><a href="home.php"><i class="fa fa-home sr-icons"></i> Home</a></li>
 	   	 		<li class=" lien"><a href="about.php"><i class="fa fa-bookmark sr-icons"></i> About</a></li>
 				<li class=" lien"><a href="event.php"><i class="fa fa-calendar sr-icons"></i> Event</a></li>
 	   	 		<li class=" lien"><a href="blog.php"><i class="fa fa-file-text sr-icons"></i> Blog</a></li>
@@ -157,7 +109,7 @@
 
 		<!-- user profile part -->
 		<?php } else { ?>
-		<div class="col-xs-12 col-sm-6">
+		<div class="col-xs-4">
 			<h1><?=$user->nick?></h1>
 		   	<hr>
 		   	<form class="form-horizontal" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>", method="POST">
@@ -186,83 +138,33 @@
 				</div>
 				<input type="hidden" name="id" value="<?=$user->id?>">
 				<div class = "form-group">
-					<button class="pull-right btn btn-lg sr-button">MODIFICAR</button>
+					<button class="btn btn-lg sr-button">MODIFICAR USUARIO</button>
+					<button class="btn btn-lg sr-button">VER POSTS</button>
+					<button class="btn btn-lg sr-button">PANEL ADMINISTRADOR</button>
 				</div>
 		   	</form>
 		</div>
-		<div class="col-xs-12 col-sm-3">
-			<h1>Tus Eventos</h1>
-			<div class="form-group text-right">
-				<button class="btn btn-lg sr-button">Nuevo Evento</button>
-			</div>
-			<div class="row" style="height: 100vh; overflow: hidden; overflow-y:scroll;">
-				<div>
-					<div style="margin:10px;">
-						<h2 class="label-control">Evento 1</h2>
-						<img src="../images/pino.jpg" class="img-responsive">
-						<div class="form-group text-right">
-							<button class="btn">Modificar</button>
-						</div>
-					</div>
-					<div style="margin:10px;">
-						<h2 class="label-control">Evento 2</h2>
-						<img src="../images/pino.jpg" class="img-responsive">
-						<div class="form-group text-right">
-							<button class="btn">Modificar</button>
-						</div>
-					</div>
-					<div style="margin:10px;">
-						<h2 class="label-control">Evento 3</h2>
-						<img src="../images/pino.jpg" class="img-responsive">
-						<div class="form-group text-right">
-							<button class="btn">Modificar</button>
-						</div>
-					</div>
-					<div style="margin:10px;">
-						<h2 class="label-control">Evento 4</h2>
-						<img src="../images/pino.jpg" class="img-responsive">
-						<div class="form-group text-right">
-							<button class="btn">Modificar</button>
-						</div>
-					</div>
+		<div class="col-xs-8 p-and-e">
+			<div>
+				<h1>Tus Eventos</h1>
+				<div class="form-group text-right">
+					<button class="btn btn-lg sr-button">Nuevo Evento</button>
 				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-3">
-			<h1>Tus Posts</h1>
-			<div class="form-group text-right">
-				<button class="btn btn-lg sr-button">Nuevo Post</button>
-			</div>
-			<div class="row" style="height: 100vh; overflow: hidden; overflow-y:scroll;">
-				<div>
-					<div style="margin:10px;">
-						<h2 class="label-control">Post 1</h2>
-						<img src="../images/roble.jpg" class="img-responsive">
-						<div class="form-group text-right">
-							<button class="btn">Modificar</button>
-						</div>
-					</div>
-					<div style="margin:10px;">
-						<h2 class="label-control">Post 2</h2>
-						<img src="../images/roble.jpg" class="img-responsive">
-						<div class="form-group text-right">
-							<button class="btn">Modificar</button>
-						</div>
-					</div>
-					<div style="margin:10px;">
-						<h2 class="label-control">Post 3</h2>
-						<img src="../images/roble.jpg" class="img-responsive">
-						<div class="form-group text-right">
-							<button class="btn">Modificar</button>
-						</div>
-					</div>
-					<div style="margin:10px;">
-						<h2 class="label-control">Post 4</h2>
-						<img src="../images/roble.jpg" class="img-responsive">
-						<div class="form-group text-right">
-							<button class="btn">Modificar</button>
-						</div>
-					</div>
+				<div class="horizontal-scroller">
+					<?php
+						for($i = 1; $i < 8; $i++){
+							?>
+							<div style="margin:10px;">
+								<h4 class="label-control">Evento <?=$i?> buen evento venid a disfrutar</h4>
+								<img src="../images/roble.jpg" class="img-responsive">
+								<p style="display:inline">Por validar</p>
+								<div class="form-group text-right">
+									<button class="btn">Modificar</button>
+								</div>
+							</div>
+					<?php
+						}
+					?>
 				</div>
 			</div>
 		</div>

@@ -1,4 +1,4 @@
-<?php include "models/Event.php";?>
+<?php include "../models/Event.php";?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,11 +8,11 @@
 	  <title>PhotographItem-Responsive Theme | Blog</title>
 
   	<!-- Bootstrap core css -->
-  	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+  	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
   	<!-- Bootstrap core css -->
-  	<link rel="stylesheet" type="text/css" href="css/style.css">
+  	<link rel="stylesheet" type="text/css" href="../css/style.css">
   	<!-- Font Awesome icons -->
-  	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
+  	<link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -57,39 +57,41 @@
     <!-- Full Article -->
       <?php
         $event = new Event(
+          1,
           "Eventazo",
           "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod soluta corrupti earum officia vel inventore vitae quidem, consequuntur odit impedit.",
           "Terreno salado y resbaladizo",
           "10/10/2017",
           "Fiesta",
-          "Kouven",
-          ["Kouven", "Kouven2", "Kouven3"],
-          ["Kouven", "Kouven2", "Kouven3"],
-          "images/blog/elephant.jpg",
-          "Lomé"
+          1,
+          [1, 2, 3],
+          [1, 2, 3],
+          "../images/pino.jpg",
+          "Lomé",
+          true
         );
       ?>
       <div class="row">
-      <h2><?=$event->title?></h2>
+      <h2><?=$event->__get("name")?></h2>
       <hr class="subtitle">
       <div class=" block1">
       <div class="col-xs-12 col-sm-9">
         <h3>Descripción</h3>
-        <p><?=$event->content?></p>
+        <p><?=$event->__get("description")?></p>
         <h3>Terreno</h3>
-        <p><?=$event->terrain?></p>
+        <p><?=$event->__get("terrain")?></p>
         <h3>Type</h3>
-        <p><?=$event->type?></p>
+        <p><?=$event->__get("type")?></p>
         <form style="display: inline;">
           <button type="submit" class="btn btn-success">Participar</button>
         </form>
         <form style="display: inline;">
           <button type="submit" class="btn btn-warning">Validar</button>
         </form>
-        <h4>- By <?=$event->creator?></h4>
+        <h4>- By <?=$event->__get("creator_id")?></h4>
         <hr>
         <ul class="list-inline">
-          <li><?=$event->publish_date?>|</li>
+          <li><?=$event->__get("date")?>|</li>
         </ul>
       </div>
       <div class="col-xs-12 col-sm-3">

@@ -1,4 +1,23 @@
-<?php include '../models/Event.php';?>
+<?php 
+include '../models/Event.php';
+include_once 'cards/event_card.php';
+?>
+<?php
+        $event = new Event(
+          1,
+          "Eventazo",
+          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod soluta corrupti earum officia vel inventore vitae quidem, consequuntur odit impedit.",
+          "Terreno salado y resbaladizo",
+          "10/10/2017",
+          "Fiesta",
+          1,
+          [1, 2, 3],
+          [1, 2, 3],
+          "../images/pino.jpg",
+          "Lomé",
+          true
+        );
+      ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,6 +77,9 @@
       <!-- Blocks of Posts -->
         <div class="col-xs-12 col-sm-8 row">
           <?php
+            for($i = 0; $i < 3; $i++){
+              show_demo_post($event);
+            }
           ?>
            <!--<div class="col-xs-12 col-sm-12">
              <div class="post">

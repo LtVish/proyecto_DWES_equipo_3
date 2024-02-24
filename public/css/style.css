@@ -1099,7 +1099,7 @@ img{
     -o-background-size: cover;
     background-size: cover;
     color: white;
-    padding-top: 10%;
+    padding-top: 5%;
 }
 
 #contact h1,
@@ -1208,4 +1208,18 @@ img{
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+
+.horizontal-scroller{
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: 25%;
+
+	overflow-x: auto;
+
+	border: solid 1px white;
+}
+
+.p-and-e{
+}
+
 /*-- End of Contact Page Stylesheet --*/

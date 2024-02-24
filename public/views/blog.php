@@ -1,4 +1,18 @@
 <?php include '../models/Post.php';?>
+<?php include_once "cards/post_card.php"?>
+<?php
+$post = new Post(
+  1,
+  "doloremque illum", 
+  "Duis ultrices tortor non felis convallis bibendum. Maecenas diam velit, sollicitudin at imperdiet ac, consectetur non nibh. Etiam eget dapibus nulla. ", 
+  "test 1/test 2",
+  "Category I",
+  "6 JANUARY", 
+  "../images/roble.jpg", 
+  10,
+  1
+);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,18 +72,9 @@
       <!-- Blocks of Posts -->
         <div class="col-xs-12 col-sm-8 row">
           <?php
-            $post = new Post(
-              "doloremque illum", 
-              "Duis ultrices tortor non felis convallis bibendum. Maecenas diam velit, sollicitudin at imperdiet ac, consectetur non nibh. Etiam eget dapibus nulla. ", 
-              array("test_1", "test_2"),
-              "Category I",
-              "6 JANUARY", 
-              "../images/blog/landscape.jpg", 
-              10
-            );
 
             for($i = 0; $i < 3; $i++){
-              $post->show_demo_post();
+              show_demo_post($post);
             }
           ?>
            <!--<div class="col-xs-12 col-sm-12">
