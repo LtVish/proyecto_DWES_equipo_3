@@ -1,3 +1,11 @@
+<?php
+include '../models/Event.php';
+
+//$events = Event::getAll();
+//$treesByLocation = Event::getTreesByLocation();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +34,13 @@
 <?php include 'nav-bar.php'; ?>
 
 <!-- CONTENIDO DE LA PÁGINA LOGROS -->
+   <div id="achievements">
+     <div class="container">
+      <div class="row">
+
+        <h3>Cantidad de árboles plantados por ubicación</h3>
+        <h3>Cantidad de árboles plantados por especie</h3>
+        <h3>Beneficios logrados</h3>
 
 <!-- Footer -->
 <?php include 'footer.php'; ?>
