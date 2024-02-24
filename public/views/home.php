@@ -29,32 +29,8 @@
 </head>
 <body id="page-top">
 
-<!-- Navigation Bar -->
-   <nav class="navbar navbar-fixed-top navbar-default">
-     <div class="container">
-         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a  class="navbar-brand page-scroll" href="#page-top">
-              <span>[PHOTO]</span>
-            </a>
-         </div>
-         <div class="collapse navbar-collapse navbar-right" id="menu">
-            <ul class="nav navbar-nav">
-              <li class="active lien"><a href="#"><i class="fa fa-home sr-icons"></i> Home</a></li>
-              <li class=" lien"><a href="about.php"><i class="fa fa-bookmark sr-icons"></i> About</a></li>
-              <li class=" lien"><a href="event.php"><i class="fa fa-calendar sr-icons"></i> Event</a></li>
-              <li class=" lien"><a href="blog.php"><i class="fa fa-file-text sr-icons"></i> Blog</a></li>
-              <li class=" lien"><a href="../controller/Controller.php?accion=login"><i class="fa fa-phone-square sr-icons"></i> Contact</a></li>
-            </ul>
-         </div>
-     </div>
-   </nav>
-<!-- End of Navigation Bar -->
+<!-- Navbar -->
+<?php include 'nav-bar.php'; ?>
 
 <!-- Principal Content Start -->
    <div id="index">
@@ -1561,26 +1537,8 @@
 
    </div><!-- End of index box -->
 
-   <!-- Footer -->
-   <footer class="home-page">
-     <div class="container text-muted text-center">
-       <div class="row">
-         <ul class="nav col-sm-4">
-           <li class="footer-number"><i class="fa fa-phone sr-icons"></i>  (00228)92229954 </li>
-           <li><i class="fa fa-envelope sr-icons"></i>  kouvenceslas93@gmail.com</li>
-           <li>Photography Fanatic Template &copy; 2017</li>
-         </ul>
-         <ul class="list-inline social-buttons col-sm-4 col-sm-push-4">
-            <li><a href="#"><i class="fa fa-facebook sr-icons"></i></a>
-            </li>
-            <li><a href="#"><i class="fa fa-twitter sr-icons"></i></a>
-            </li>
-            <li><a href="#"><i class="fa fa-google-plus sr-icons"></i></a>
-            </li>
-         </ul>
-       </div>
-     </div>
-   </footer>
+<!-- Footer -->
+<?php include 'footer.php'; ?>
 
    <!-- Jquery -->
    <script type="text/javascript" src="js/jquery.min.js"></script>
