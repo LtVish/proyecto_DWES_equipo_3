@@ -205,7 +205,7 @@ class Event{
     public static function getPlantedTreesYears(): array {
         try {
             driver->TearUp();
-            $statement = driver->prepare("SELECT DISTINCT YEAR(date) AS year FROM event");
+            $statement = driver->GetPDO()->prepare("SELECT DISTINCT YEAR(date) AS year FROM event");
             $statement->execute();
             $years = [];
             while ($row = $statement->fetch(PDO::FETCH_COLUMN)) {
@@ -223,7 +223,7 @@ class Event{
     public static function getPlantedTreesLocations(): array {
         try {
             driver->TearUp();
-            $statement = driver->prepare("SELECT DISTINCT location FROM event");
+            $statement = driver->GetPDO()->prepare("SELECT DISTINCT location FROM event");
             $statement->execute();
             $locations = [];
             while ($row = $statement->fetch(PDO::FETCH_COLUMN)) {
@@ -241,7 +241,7 @@ class Event{
     public static function getEventsWithBenefitsAbove(float $minBenefit): array {
         try {
             driver->TearUp();
-            $statement = driver->prepare("
+            $statement = driver->GetPDO()->prepare("
                 SELECT e.*
                 FROM event e
                 JOIN specie_event se ON e.id = se.event_id

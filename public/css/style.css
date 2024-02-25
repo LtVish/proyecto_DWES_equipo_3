@@ -18,7 +18,7 @@ a:hover,
 a:focus,
 a:active,
 a.active {
-    outline: 0;
+	outline: 0;
 }
 body{
 	font-family: "Raleway", sans-serif;
@@ -54,31 +54,31 @@ body{
 }
 
 @media(min-width: 768px){
-.navbar .nav li a{
-	color: #777;
-	padding: 5px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	margin-right: 10px;
-	margin-left: 10px;
-}
-.navbar .nav .lien{
-	border-right: solid 1px rgb(170,170,170);
-}
+	.navbar .nav li a{
+		color: #777;
+		padding: 5px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		margin-right: 10px;
+		margin-left: 10px;
+	}
+	.navbar .nav .lien{
+		border-right: solid 1px rgb(170,170,170);
+	}
 }
 
 @media(max-width: 768px){
-.navbar-default .navbar-nav .active,
-.navbar-default .navbar-nav .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus{
-	background-color: #f1f1f1;
-	border-bottom: solid 3px #d43f3a;
-	color: black;
-}
-.navbar-nav{
-	padding-top: 0px;
-	margin-top: 0px;
-}
+	.navbar-default .navbar-nav .active,
+	.navbar-default .navbar-nav .active > a:hover,
+	.navbar-default .navbar-nav > .active > a:focus{
+		background-color: #f1f1f1;
+		border-bottom: solid 3px #d43f3a;
+		color: black;
+	}
+	.navbar-nav{
+		padding-top: 0px;
+		margin-top: 0px;
+	}
 }
 
 .navbar .nav li a{
@@ -150,14 +150,28 @@ footer{
 	color: #2e6da4;
 }
 
-.fa-google-plus{
-	background-color: #c9302c;
-	color : white;
+.fa-instagram{
+	background-color: #F56040;
+	color: white;
 }
-.fa-google-plus:hover{
+
+.fa-instagram:hover{
 	background-color: white;
-	color : #c9302c;
+	color: #F56040
+;
 }
+
+.fa-github{
+	background-color: #3b2020;
+	color: white;
+}
+
+.fa-github:hover{
+	background-color: white;
+	color: #3b2020;
+}
+
+
 /*--End of footer Bar stylesheet --*/
 
 /*-- Home page stylesheet --*/
@@ -199,14 +213,14 @@ footer{
 	border-color: #d43f3a;
 }
 @media(max-width: 400px){
-  .carousel-caption h1{
-  	font-size: 150%;
-  }
+	.carousel-caption h1{
+		font-size: 150%;
+	}
 }
 @media screen and (min-width: 400px) and (max-width: 550px){
-  .carousel-caption h1{
-  	font-size: 250%;
-  }
+	.carousel-caption h1{
+		font-size: 250%;
+	}
 }
 
 img{
@@ -259,9 +273,9 @@ img{
 }
 
 @media(min-width: 768px){
-  #index-body hr{
-  	width: 80%;
-}
+	#index-body hr{
+		width: 80%;
+	}
 }
 
 #index-body .tab-content{
@@ -346,15 +360,15 @@ img{
 
 #index .index-form{
 	background-image: url("../images/index/newsletter.jpg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    padding-bottom: 40px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	padding-bottom: 40px;
+	margin-top: 50px;
+	margin-bottom: 50px;
 }
 
 .index-form .form-group{
@@ -376,7 +390,7 @@ img{
 	background-color: transparent;
 	border-radius: 0px;
 	border-top-color: transparent;
-	height: 50px; 
+	height: 50px;
 	color: white;
 }
 
@@ -406,10 +420,10 @@ img{
 }
 
 @media(min-width: 768px){
-  #index .last-box .last-block .partner-box{
-  	margin-top: 30px;
-  	margin-bottom: -90px;
-  }
+	#index .last-box .last-block .partner-box{
+		margin-top: 30px;
+		margin-bottom: -90px;
+	}
 }
 
 .partner-box div{
@@ -423,10 +437,10 @@ img{
 }
 
 @media(max-width: 768px){
-  #index .last-box .last-block{
-  	padding-left: 15px;
-  	padding-right: 15px;
-  }
+	#index .last-box .last-block{
+		padding-left: 15px;
+		padding-right: 15px;
+	}
 }
 
 #index .last-block{
@@ -550,9 +564,9 @@ img{
 }
 
 @media( max-width: 800px){
-  #about .pricing h3{
-  	width: 50%;
-  }
+	#about .pricing h3{
+		width: 50%;
+	}
 }
 
 #about .container hr{
@@ -632,7 +646,7 @@ img{
 	box-shadow: 0px 3px 10px rgba(0,0,0,0.3);
 }
 #about .pricing .intermediary:hover{
-  margin-top: -30px;
+	margin-top: -30px;
 }
 #about .pricing .intermediary .btn{
 	margin-top: 15px;
@@ -662,7 +676,7 @@ img{
 	box-shadow: 0px 3px 10px rgba(0,0,0,0.3);
 }
 #about .pricing .higher:hover{
-    margin-top: -30px;
+	margin-top: -30px;
 }
 #about .pricing .higher .btn{
 	margin-top: 15px;
@@ -686,9 +700,9 @@ img{
 	border-bottom: solid 1px rgba(0,0,0,0.3);
 }
 @media( max-width: 800px){
-  #about .feedback h3{
-  	width: 50%;
-  }
+	#about .feedback h3{
+		width: 50%;
+	}
 }
 
 #about .feedback .col-sm-3{
@@ -703,7 +717,7 @@ img{
 /*-- Blog Page stylesheet --*/
 #blog{
 	padding-top:100px;
-	padding-bottom: 100px; 
+	padding-bottom: 100px;
 	background-color: rgb(245,245,245);
 	color: #f1f1f1;
 }
@@ -849,7 +863,7 @@ img{
 
 #blog .panel-body ul{
 	padding-left: 30px;
-	padding-right: 30px; 
+	padding-right: 30px;
 }
 
 #blog .panel-body ul li{
@@ -930,18 +944,18 @@ img{
 	font-weight: bold;
 	color: #373d54;
 }
-	
+
 #single .subtitle{
 	margin: 0 auto;
 	width: 5%;
 	float: left;
 	height: 4px;
-	background-color: #d43f3a; 
+	background-color: #d43f3a;
 }
 @media(max-width: 500px){
-  #single .subtitle{
-  	width: 10%;
-  }
+	#single .subtitle{
+		width: 10%;
+	}
 }
 
 #single .subtitle1{
@@ -949,12 +963,12 @@ img{
 	width: 10%;
 	float: left;
 	height: 4px;
-	background-color: #d43f3a; 
+	background-color: #d43f3a;
 }
 @media(max-width: 768px){
-  #single .subtitle1{
-  	width: 5%;
-  }
+	#single .subtitle1{
+		width: 5%;
+	}
 }
 
 #single .block1{
@@ -1092,14 +1106,14 @@ img{
 /*-- Contact Page Stylesheet --*/
 #contact{
 	background-image: url(../images/black_forest.jpg);
-    background-position: center center;
+	background-position: center center;
 	background-repeat: no-repeat;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    color: white;
-    padding-top: 5%;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	color: white;
+	padding-top: 5%;
 }
 
 #contact h1,
@@ -1155,8 +1169,8 @@ img{
 #contact .btn:hover,
 #contact .btn:active,
 #contact .btn:focus{
-  background-color: #d9534f;
-  border-color: #d43f3a;
+	background-color: #d9534f;
+	border-color: #d43f3a;
 }
 
 #contact input{
@@ -1220,6 +1234,10 @@ img{
 }
 
 .p-and-e{
+}
+
+input {
+	margin-bottom: 10px;
 }
 
 /*-- End of Contact Page Stylesheet --*/

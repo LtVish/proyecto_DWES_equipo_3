@@ -27,6 +27,44 @@
 
 <!-- CONTENIDO DE LA PÁGINA NEWSLETTER -->
 
+<!-- CONTENIDO DE LA PÁGINA CONTACTO -->
+   <div id="contact">
+        <div class="container">
+
+            <h2>Suscríbete a nuestra newsletter</h2>
+
+            <!-- Formulario de contacto -->
+            <div class="row">
+                 <form action="newsletter_success.php" method="post">
+                     <div class="form-group">
+
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Nombre" required>
+
+                        <label for="surname">Apellidos</label>
+                        <input type="text" id="surname" name="surname" class="form-control" placeholder="Apellidos" required>
+
+                        <label for="nick">Nick</label>
+                        <input type="text" id="nick" name="nick" class="form-control" placeholder="Nick del usuario en Re-Forest-A" required>
+
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Email registrado en Re-Forest-A" required>
+
+                        <label for="birthDate">Fecha de nacimiento</label>
+                        <input type="date" id="birthDate" name="birthDate" class="form-control" required>
+
+                        <button type="submit" class="btn btn-primary">Suscríbete</button>
+
+                     </div>
+                 </form>
+            </div>
+
+            <?php
+            ?>
+
+        </div>
+    </div>
+
 <!-- Footer -->
 <?php include 'footer.php'; ?>
 
