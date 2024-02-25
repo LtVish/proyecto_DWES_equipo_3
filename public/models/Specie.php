@@ -1,4 +1,5 @@
 <?php
+include_once './db/DBdriver.php';
 class Specie{
     private int $id;
     private string $name;

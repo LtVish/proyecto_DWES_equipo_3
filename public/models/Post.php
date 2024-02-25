@@ -1,4 +1,5 @@
 <?php
+include_once './db/DBdriver.php';
     class Post{
         private $id;
         private $title;

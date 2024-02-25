@@ -3,10 +3,8 @@ include './models/Specie.php';
 include './models/Event.php';
 include './models/User.php';
 include './models/Post.php';
-include './db/DBdriver.php';
-require './fpdf186/fpdf.php';
-$species=Specie::GetAll();
-$species[0]->events_id=[1];
+$species=Post::GetAll();
+echo $species[0]->title;
 $species[0]->Update();
 //array_push($user->participant_events_id,2);
 

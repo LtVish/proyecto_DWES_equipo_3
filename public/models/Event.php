@@ -1,8 +1,5 @@
 <?php
-spl_autoload_register(function($class_name){
-  include "../utils/".$class_name . ".php";
-    include "../models/".$class_name . ".php";
-});
+include_once './db/DBdriver.php';
 class Event{
     private int $id;
     private string $name;

@@ -5,6 +5,7 @@ create table user(
     email varchar(100),
     full_name varchar(100),
     karma int,
+    subscription BOOLEAN,
 
     primary key(id)
 );
