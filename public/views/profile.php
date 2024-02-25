@@ -35,7 +35,7 @@
 		<div class="col-xs-4">
 			<h1><?=$user->__get("nick")?></h1>
 		   	<hr>
-		   	<form class="form-horizontal" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>", method="POST">
+		   	<form class="form-horizontal" action="<?=htmlspecialchars($_SERVER["PHP_SELF"]."?info=".$_GET["info"])?>", method="POST">
 			   <div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Karma: <?=$user->__get("karma")?></label>
@@ -52,12 +52,30 @@
 						<label class="label-control">Nombre de Usuario: <?=$user->__get("nick")?></label>
 						<input class="form-control" type="text" type="text" name="mod_nick">
 					</div>
+					<?php if(isset($errors["nick_usado"]))
+					{?>
+					<div class="alert">
+  						<strong>Error!</strong> <?=$errors["nick_usado"]?>
+					</div>
+					<?php } ?>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Email: <?=$user->__get("email")?></label>
 						<input class="form-control" type="text" type="email" name="mod_email">
 					</div>
+					<?php if(isset($errors["email_login"]))
+					{?>
+					<div class="alert">
+  						<strong>Error!</strong> <?=$errors["email_login"]?>
+					</div>
+					<?php } ?>
+					<?php if(isset($errors["email_usado"]))
+					{?>
+					<div class="alert">
+  						<strong>Error!</strong> <?=$errors["email_usado"]?>
+					</div>
+					<?php } ?>
 				</div>
 				<div class = "form-group">
 					<button class="btn btn-lg sr-button">MODIFICAR USUARIO</button>
