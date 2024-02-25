@@ -1,19 +1,19 @@
-########## PLEASE READ CAREFULLY ###########
+Funcionalidades mínimas del proyecto Re-Fores-Ta
+===============================================
 
-This template is the creative and honest work of its author, Penoel Koukou.
-It is distributed by BeauxThemes.com under a written and documented 
-contract between the author and the owners of BeauxThemes.com
+1. Listado de eventos en la página principal con los detalles de los mismos
+2. Formulario de suscripción al newsletter
+        - validación de campos (filtrado)
+        -  persistencia en BD (por ejemplo, inserción de flag de "alta en el newsletter" en usuarios)
+        - mensaje de suscripción correcta (vista)
 
-BeauxThemes.com and the author hold the copyright to this template.
-That being said, you do not have the right to sell it or distribute in any way
-without the written consents of the author and the owners of BeauxThemes.
-
-You can, however, use it for your own website or your client's website if you are a 
-web developer. You are allowed to use the template on only ONE website.
-
-The pictures and resources used in the design of this template are the properties of 
-their respective owners.
-
-
-######### CONTACT #########
-http://beauxthemes.com/contact
+3. Altas de usuarios con validación de campos y persistencia en BD
+4. Login de usuarios contra BD
+5. Consulta y modificación de usuarios contra BD
+6. Cálculo de karma de usuarios
+7. Alta de eventos contra BD
+8. Consulta y modificación de eventos contra BD
+9. Búsqueda de eventos contra BD
+10. Resumen de estadísticas de especies empleados en reforestaciones con detalle de las mismas
+11. Resumen de estadísticas de cantidad de árboles reforestados por ubicación, fecha y especie
+12. Formulario de contacto: solo validación de campos y respuesta de formulario enviado con éxito, sin persistencia ni gestión de correos

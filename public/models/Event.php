@@ -171,6 +171,109 @@ class Event{
   }
 
 
+// Métodos necesario para página de logros:
+
+    // Obtener el número de árboles plantados según el tipo de búsqueda
+    public static function getPlantedTreesCount(string $searchType, string|int $value): int {
+        try {
+            driver->TearUp();
+            $statement = null;
+            switch ($searchType) {
+                case 'location':
+                    $statement = driver->prepare("SELECT COUNT(*) AS count FROM event WHERE location=?");
+                    break;
+                case 'date':
+                    $statement = driver->prepare("SELECT COUNT(*) AS count FROM event WHERE date=?");
+                    break;
+                case 'species':
+                    $statement = driver->prepare("SELECT COUNT(*) AS count FROM event JOIN specie_event ON event.id = specie_event.event_id WHERE specie_event.specie_id=?");
+                    break;
+                default:
+                    throw new Exception("Invalid search type");
+            }
+            $statement->execute([$value]);
+            $row = $statement->fetch();
+            driver->TearDown();
+            return $row['count'] ?? 0;
+        } catch (PDOException | Exception $e) {
+            echo "<p>Error: ".$e->getMessage()."</p>";
+            return 0;
+        }
+    }
+
+    // Obtener los años en los que se han plantado árboles
+    public static function getPlantedTreesYears(): array {
+        try {
+            driver->TearUp();
+            $statement = driver->prepare("SELECT DISTINCT YEAR(date) AS year FROM event");
+            $statement->execute();
+            $years = [];
+            while ($row = $statement->fetch(PDO::FETCH_COLUMN)) {
+                $years[] = $row['year'];
+            }
+            driver->TearDown();
+            return $years;
+        } catch (PDOException | Exception $e) {
+            echo "<p>Error: ".$e->getMessage()."</p>";
+            return [];
+        }
+    }
+
+    // Obtener las localidades donde se han plantado árboles
+    public static function getPlantedTreesLocations(): array {
+        try {
+            driver->TearUp();
+            $statement = driver->prepare("SELECT DISTINCT location FROM event");
+            $statement->execute();
+            $locations = [];
+            while ($row = $statement->fetch(PDO::FETCH_COLUMN)) {
+                $locations[] = $row['location'];
+            }
+            driver->TearDown();
+            return $locations;
+        } catch (PDOException | Exception $e) {
+            echo "<p>Error: ".$e->getMessage()."</p>";
+            return [];
+        }
+    }
+
+    // Obtener beneficios que superen un valor
+    public static function getEventsWithBenefitsAbove(float $minBenefit): array {
+        try {
+            driver->TearUp();
+            $statement = driver->prepare("
+                SELECT e.*
+                FROM event e
+                JOIN specie_event se ON e.id = se.event_id
+                JOIN specie s ON se.specie_id = s.id
+                WHERE s.benefits > :minBenefit
+            ");
+            $statement->bindParam(':minBenefit', $minBenefit, PDO::PARAM_STR);
+            $statement->execute();
+            $events = [];
+            while ($row = $statement->fetch()) {
+                $events[] = new Event(
+                    $row['id'],
+                    $row['name'],
+                    $row['description'],
+                    $row['terrain'],
+                    $row['date'],
+                    $row['type'],
+                    $row['creator_id'],
+                    $row['image'],
+                    $row['location'],
+                    $row['state']
+                );
+            }
+            driver->TearDown();
+            return $events;
+        } catch (PDOException $e) {
+            echo "<p>Error: " . $e->getMessage() . "</p>";
+            return [];
+        }
+    }
+
+
 /*
     function show_demo_post(){?>
         <div class="col-xs-12 col-sm-12">
