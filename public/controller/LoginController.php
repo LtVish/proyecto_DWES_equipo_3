@@ -8,7 +8,7 @@
             && isset($_POST["nick"]) && !empty(trim($_POST["nick"]))
             && isset($_POST["email"]) && !empty(trim($_POST["email"]))){
                 
-                $user = new User(null, trim($_POST["nick"]), trim($_POST["email"]), trim($_POST["full_name"]), 0, [], [], []);
+                $user = new User(null, trim($_POST["nick"]), trim($_POST["email"]), trim($_POST["full_name"]), 0, false,[], [], []);
 
                 // Se valida el email y en función de ello se registra el usuario
                 // Errores para mostrar en la vista

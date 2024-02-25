@@ -53,40 +53,50 @@
 				 <div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Nombre</label>
-						<input class="form-control" type="text" name="name">
+						<input class="form-control" type="text" name="name" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Descripción</label>
-						<textarea class="form-control"></textarea>
+						<textarea class="form-control" name="description" required></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-12">
+						<label class="label-control">Lugar</label>
+						<input class="form-control" type="text" name="location" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Terreno</label>
-						<input class="form-control" type="text">
+						<input class="form-control" type="text" name="terrain" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Tipo</label>
-						<select class="form-control" type="text" style="background: transparent; color:#31B0D5;">
-							<option value="rg_semiillas">Recogida de semillas</option>
-							<option value="rf_plantas" selected>Reforestación con plantas jóvenes</option>
+						<select class="form-control" type="text" style="background: transparent; color: white;" name="type">
+							<option value=1 <?=isset($event)&&$event->__get("type") == "1"?"selected":""?>>
+								Reforestación con semillas
+							</option>
+							<option value=2 <?=isset($event)&&$event->__get("type") == "2"?"selected":""?>>
+								Reforestación con plantas jóvenes
+							</option>
 						</select>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Fecha</label>
-						<input class="form-control" type="date">
+						<input class="form-control" type="date" required name="date">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Foto</label>
-						<input class="form-control" type="file" name="image">
+						<input class="form-control" type="file" name="image" required>
 					</div>
 				</div>
 	       	  <!--<div class="form-group">
