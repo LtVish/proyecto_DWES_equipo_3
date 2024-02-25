@@ -20,7 +20,7 @@ include_once './db/DBdriver.php';
             $this->tags = $tags;
             $this->category = $category;
             $this->publish_date = $date;
-            $this->image_path = $image;
+            $this->image = $image;
             $this->likes = $likes;
             $this->creator_id=$creator_id;
         }
