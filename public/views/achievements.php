@@ -98,7 +98,7 @@ $filteredEvents = [];
         </div>
     </div>
 
-  <!--
+  <!-- FILTRADO Y MOSTRADO DE EVENTOS
     <?php
 
         $sql = "SELECT e.*, s.benefits FROM event e
