@@ -53,7 +53,7 @@
 				 <div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Nombre</label>
-						<input class="form-control" type="text">
+						<input class="form-control" type="text" name="name">
 					</div>
 				</div>
 				<div class="form-group">
