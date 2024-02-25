@@ -1,8 +1,10 @@
 <?php
 spl_autoload_register(function($class_name){
-    include "../utils/".$class_name . ".php";
+    include "../db/".$class_name . ".php";
     include "../models/".$class_name . ".php";
 });
+include_once "../db/DBdriver.php";
+
 class User{
     private int|null $id;
     private string $nick;
