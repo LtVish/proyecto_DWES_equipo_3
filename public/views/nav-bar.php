@@ -17,7 +17,7 @@
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/index.php') ? 'active' : ''; ?> lien">
                 <a href="index.php"><i class="fa fa-home sr-icons"></i> Inicio </a></li>
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/login.php') ? 'active' : ''; ?> lien">
-                <a href="login.php"><i class="fa fa-bookmark sr-icons"></i> Login </a></li>
+                <a href="../controller/LoginController.php"><i class="fa fa-bookmark sr-icons"></i> Login </a></li>
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/event.php') ? 'active' : ''; ?> lien">
                 <a href="event.php"><i class="fa fa-calendar sr-icons"></i> Eventos </a></li>
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/species.php') ? 'active' : ''; ?> lien">

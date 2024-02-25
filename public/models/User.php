@@ -83,7 +83,7 @@ class User{
             }
             return new User($row['id'],$row['nick'],$row['email'],$row['full_name'],$row['karma'],$created_by_id,$part_events_id);
         }catch(Exception $e){
-            echo "<p>Custom Exception: ".$e->getMessage()."</p>";
+            //echo "<p>Custom Exception: ".$e->getMessage()."</p>";
             return null;
         }
     }

@@ -64,10 +64,10 @@
   						<strong>Error!</strong> <?=$errors["email_usado"]?>
 					</div>
 					<?php } ?>
-					<?php if(isset($errors["email_invalido"]))
+					<?php if(isset($errors["email_register"]))
 					{?>
 					<div class="alert">
-  						<strong>Error!</strong> <?=$errors["email_invalido"]?>
+  						<strong>Error!</strong> <?=$errors["email_register"]?>
 					</div>
 					<?php } ?>
 				</div>
@@ -89,10 +89,28 @@
 			<hr>
 			<form class="form-horizontal" action="../controller/LoginController.php", method="POST">
 				<div class="form-group">
-				<div class="col-xs-12">
-					<label class="label-control">Nombre de Usuario o Email</label>
-					<input class="form-control" type="text" name="login">
+					<div class="col-xs-12">
+						<label class="label-control">Nombre de usuario</label>
+						<input class="form-control" type="text" name="login_nick">
+					</div>
+					<?php if(isset($errors["no_existe"]))
+					{?>
+					<div class="alert">
+  						<strong>Error!</strong> <?=$errors["no_existe"]?>
+					</div>
+					<?php } ?>
 				</div>
+				<div class="form-group">
+					<div class="col-xs-12">
+						<label class="label-control">Email</label>
+						<input class="form-control" type="text" name="login_email">
+					</div>
+					<?php if(isset($errors["email_login"]))
+					{?>
+					<div class="alert">
+  						<strong>Error!</strong> <?=$errors["email_login"]?>
+					</div>
+					<?php } ?>
 				</div>
 				<div class = "form-group">
 					<button class="pull-right btn btn-lg sr-button">SEND</button>
