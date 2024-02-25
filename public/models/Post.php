@@ -36,6 +36,7 @@
                 E_USER_NOTICE);
             return null;
         }
+
         public function __set($key,$value)
         {
             if (property_exists(__CLASS__,$key)) {
@@ -54,6 +55,7 @@
           driver->TearDown();
           return $posts;
       }
+
       public static function GetBy($key,$value,$string=false):Post|null{
         try{
             driver->TearUp();
@@ -67,14 +69,16 @@
             return null;
         }
     }
+
         private static function GetLastIdAdded():int{
             driver->TearUp();
             $row=driver->ExecuteSQLQuery("select max(id) from post;")->fetch();
             driver->TearDown();
             return $row["max(id)"];
         }
+
       //MODIFICAR
-      function Register(){  
+      function Register(){
           //TRANSACTION
           driver->TearUp();
           driver->BeginTransaction();
