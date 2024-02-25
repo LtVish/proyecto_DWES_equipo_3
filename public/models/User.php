@@ -91,6 +91,31 @@ class User{
         driver->TearDown();
         return $row["max(id)"];
     }
+
+    public static function subscriptionToNewsletter($nick, $email, $fullName) {
+        driver->TearUp();
+        $sql = "SELECT * FROM user WHERE nick=:nick AND email=:email AND full_name=:fullName";
+        $statement = driver->GetPDO()->prepare($sql);
+        $statement->bindParam(':nick', $nick);
+        $statement->bindParam(':email', $email);
+        $statement->bindParam(':fullName', $fullName);
+        $statement->execute();
+        $result = $statement->fetchAll();
+
+        if ($result) {
+            $updateSql = "UPDATE user SET suscrito = 1 WHERE nick=:nick AND email=:email AND full_name=:fullName";
+            $updateStatement = driver->GetPDO()->prepare($updateSql);
+            $updateStatement->bindParam(':nick', $nick);
+            $updateStatement->bindParam(':email', $email);
+            $updateStatement->bindParam(':fullName', $fullName);
+            $updateStatement->execute();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     //Nota: El registro puede sobreescribir y añadir propietarios de eventos
     public function Register(){
         //TRANSACTION

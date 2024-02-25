@@ -18,13 +18,17 @@
 
     function create_footer(Post $post){?>
           <div class="post-footer">
-              <?php create_submit("single_post.php?id=".$post->__get("id"), "SABER MÁS...");?>
+          <a href="single_post.html" class="btn">Read more</a>
+          <?php $category = $post->__get("category");
+          $categoryName = getCategoryName($category);?>
+          <span style="border: 1px solid black; border-radius:5px; padding: 9px; background-color:darkgrey; font-weight:bold; color:white"><?=$categoryName?></span>
               <?php $tags = explode("/", $post->__get("tags"));?>
               <?php foreach($tags as $tag){?>
-                <span style="border: 1px solid black; border-radius:5px; padding: 5px; background-color:#31B0D5; font-weight:bold; color:white"><?=$tag?></span>
+                <span style="border: 1px solid black; border-radius:5px; padding: 5px; background-color:#31B0D5; color:white"><?=$tag?></span>
               <?php }?>
             <span style="margin-left: 1em">
               <i class="fa fa-heart sr-icons" style="color:red;"></i> <?=$post->__get("likes")?>
+              <button class="fa fa-heart sr-icons" style="color:white; padding: 5px; background-color:red; border-radius:15px;">Like</i></button>
             </span>
           </div>
         </div>
@@ -37,5 +41,18 @@
         <input type="hidden" name="post" value="{}">
         <button class="btn" type=submit><?=$button_message?></button>
       </form>
+
     <?php }
+
+    function getCategoryName($category) {
+        switch($category) {
+        case 1: return "Conciencia ambiental";
+        case 2: return "Proyectos de reforestación";
+        case 3: return "Historias inspiradoras";
+        case 4: return "Educación ambiental";
+        case 5: return "Técnicas de reforestación";
+        case 6: return "Otros";
+        default: return "Categoría no definida";
+        }
+    }
 ?>

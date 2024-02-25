@@ -1,18 +1,50 @@
-<?php include '../models/Post.php';?>
-<?php include_once "cards/post_card.php"?>
-
 <?php
-$post = new Post(
-  1,
-  "doloremque illum", 
-  "Duis ultrices tortor non felis convallis bibendum. Maecenas diam velit, sollicitudin at imperdiet ac, consectetur non nibh. Etiam eget dapibus nulla. ", 
-  "test 1/test 2",
-  "Category I",
-  "6 JANUARY", 
-  "../images/roble.jpg", 
-  10,
-  1
-);
+
+include '../models/Post.php';
+include_once "cards/post_card.php";
+include '../db/DBdriver.php';
+
+$db = new DBdriver('database', 'reforestaDB', 'root', 'Pass1234');
+
+// Se comprueba si se ha enviado un nuevo post y se registra en la base de datos
+if (isset($_POST['title'])) {
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    $tags = $_POST['tags'];
+    $category = $_POST['category'];
+    $date = $_POST['date'];
+    $formattedDate = date('Y-m-d', strtotime($date));
+
+        if(isset($_FILES["image"]) && $_FILES["image"]["error"] == UPLOAD_ERR_OK){
+            $dir = "../images/";
+            $name = uniqid() . '_' . $_FILES["image"]["name"];
+            $target_file = $dir . basename($name);
+
+            if(move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)){
+                $image = $target_file;
+            }
+        }
+
+    $author = 1;
+    $likes = 0;
+
+    $newPost = new Post(
+        1,
+        $title,
+        $content,
+        $tags,
+        $category,
+        $formattedDate,
+        $image,
+        $likes,
+        $author
+    );
+    $newPost->Register();
+}
+
+// Se obtienen todos los posts de la base de datos
+$posts = Post::GetAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -49,75 +81,14 @@ $post = new Post(
 
       <!-- Blocks of Posts -->
         <div class="col-xs-12 col-sm-8 row">
-          <?php
+            <?php
+            // Se muestran todos los posts
+                foreach ($posts as $post) {
+                  show_demo_post($post);
+                }
+            ?>
 
-            for($i = 0; $i < 3; $i++){
-              show_demo_post($post);
-            }
-          ?>
-           <!--<div class="col-xs-12 col-sm-12">
-             <div class="post">
-               <div class="post-heading">
-                 <span>6 JANUARY</span>
-                 <img class="img-responsive" src="../images/blog/landscape.jpg" alt="post's picture">
-               </div>
-               <div class="post-body">
-                 <h3><a href="single_post.html"><strong>doloremque illum</strong></a></h3>
-                 <hr>
-                 <p>Duis ultrices tortor non felis convallis bibendum. Maecenas diam velit, sollicitudin at imperdiet ac, consectetur non nibh. Etiam eget dapibus nulla. 
-                 </p>
-               </div>
-               <div class="post-footer">
-                 <a class="btn" href="single_post.html">READ MORE...</a>
-                 <span>
-                 <i class="fa fa-heart sr-icons"></i> 10
-                 <i class="fa fa-comments sr-icons"></i> 10
-                 </span>
-               </div>
-             </div>
-           </div>
-           <div class="col-xs-12 col-sm-12">
-             <div class="post">
-               <div class="post-heading">
-                 <span>7 FEBRUARY</span>
-                 <img class="img-responsive" src="../images/blog/family.jpg" alt="post's picture">
-               </div>
-               <div class="post-body">
-                 <h3><a href="single_post.html"><strong>Lorem ipsum</strong></a></h3>
-                 <hr>
-                 <p>Nunc sit amet dapibus est, sit amet varius risus. Donec luctus lacinia mauris, at feugiat ligula facilisis ac. Class aptent taciti sociosqu ad litora torquent per conubia.
-                 </p>
-               </div>
-               <div class="post-footer">
-                 <a class="btn" href="single_post.html">READ MORE...</a>
-                 <span>
-                 <i class="fa fa-heart sr-icons"></i> 10
-                 <i class="fa fa-comments sr-icons"></i> 10
-                 </span>
-               </div>
-             </div>
-           </div>
-           <div class="col-xs-12 col-sm-12">
-             <div class="post">
-               <div class="post-heading">
-                 <span>8 MARCH</span>
-                 <img class="img-responsive" src="../images/blog/elephant.jpg" alt="post's picture">
-               </div>
-               <div class="post-body">
-                 <h3><a href="single_post.html"><strong>Aliquam soluta</strong></a></h3>
-                 <hr>
-                 <p>In felis ante, aliquet sit amet venenatis at, feugiat sed leo. Fusce pretium, velit in luctus ornare, elit lorem ultrices tortor, sed consectetur orci risus mollis ante. 
-                 </p>
-               </div>
-               <div class="post-footer">
-                 <a class="btn" href="single_post.html">READ MORE...</a>
-                 <span>
-                 <i class="fa fa-heart sr-icons"></i> 10
-                 <i class="fa fa-comments sr-icons"></i> 10
-                 </span>
-               </div>
-             </div>
-           </div>-->
+          <!-- Pagination -->
               <nav class="text-left">
                 <ul class="pagination">
                   <li class="active"><a href="#">1</a></li>
@@ -135,31 +106,27 @@ $post = new Post(
         <div class="col-xs-12 col-sm-4">
            <form class="form-horizontal">
              <div class="input-group">
-               <input class="form-control" type="text" placeholder="Research">
                <span class="input-group-btn">
-                  <a href="" class="btn"><i class="fa fa-search"></i></a>
+                  <a href="new_post.php" class="btn"><i class="fa fa-edit"> Nueva entrada en el blog</i></a>
                </span>
              </div>
            </form>
            <div class="panel">
              <div class="panel-heading">
-               <h4>Categories</h4>
+               <h4>Categorías</h4>
              </div>
              <div class="panel-body">
                <ul class="nav">
-                 <li><a href="#">Category I</a></li>
-                 <li><a href="#">Category II</a></li>
-                 <li><a href="#">Category III</a></li>
-                 <li><a href="#">Category IV</a></li>
-                 <li class="last"><a href="#">Category V</a></li>
+                 <li><a href="#">Conciencia ambiental</a></li>
+                 <li><a href="#">Proyectos de reforestación</a></li>
+                 <li><a href="#">Historias inspiradoras</a></li>
+                 <li><a href="#">Educación ambiental</a></li>
+                 <li><a href="#">Técnicas de reforestación</a></li>
+                 <li class="last"><a href="#">Otros</a></li>
                </ul>
              </div>
            </div>
-           <div class="well">
-             <h4>Soluta</h4>
-             <p>Quod soluta corrupti earum officia vel inventore vitae quidem, consequuntur odit impedit.</p>
-           </div>
-            <h3>Recent Posts</h3>
+            <h3>Entradas recientes</h3>
             <hr>
              <div class="post">
                <div class="post-heading">
@@ -171,7 +138,7 @@ $post = new Post(
                  <i class="fa fa-heart sr-icons"></i> 10
                  <i class="fa fa-comments sr-icons"></i> 10
                  </span>
-                 <h4 class="text-left"><a href="single_post.html"><strong>Aliquam soluta</strong></a></h4>
+                 <h4 class="text-left"><a href="single_post.html"><strong>Rubia, te voy a comer tol triángulo de las bermudas</strong></a></h4>
                </div>
              </div>
              <div class="post">
@@ -184,7 +151,7 @@ $post = new Post(
                  <i class="fa fa-heart sr-icons"></i> 10
                  <i class="fa fa-comments sr-icons"></i> 10
                  </span>
-                 <h4 class="text-left"><a href="single_post.html"><strong>Consequuntur</strong></a></h4>
+                 <h4 class="text-left"><a href="single_post.html"><strong>Estos arándanos son del tamaño de tus huevecillos</strong></a></h4>
                </div>
              </div>
         </div>

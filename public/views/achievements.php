@@ -1,19 +1,18 @@
 <?php
 include '../models/Event.php';
 include '../models/Specie.php';
+include '../db/DBdriver.php';
 
-/*
-$locations = Event::getPlantedTreesLocations();
-$years = Event::getPlantedTreesYears();
-$benefitsByValue = Event::getEventsWithBenefitsAbove($value);
-*/
+$db = new DBdriver('database', 'reforestaDB', 'root', 'Pass1234');
 
 $selectedYear = $_POST['year'] ?? null;
 $selectedLocation = $_POST['location'] ?? null;
-$selectedBenefit = $_POST['benefit'] ?? null;
-
+$selectedBenefit = $_POST['benefit'] ?? 0.0;
 $filteredEvents = [];
 
+$locations = Event::getPlantedTreesLocations();
+$years = Event::getPlantedTreesYears();
+$benefitsByValue = Event::getEventsWithBenefitsAbove($selectedBenefit);
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +44,7 @@ $filteredEvents = [];
 <?php include 'nav-bar.php'; ?>
 
 <!-- CONTENIDO DE LA PÁGINA LOGROS -->
-   <div id="achievements">
+   <div id="contact">
         <div class="container">
 
             <h2>Logros</h2>

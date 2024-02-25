@@ -1,3 +1,10 @@
+<?php
+
+    include '../models/Specie.php';
+    include '../db/DBdriver.php'
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +33,34 @@
 <?php include 'nav-bar.php'; ?>
 
 <!-- CONTENIDO DE LA PÁGINA ESPECIES -->
+
+<?php
+    $species = Specie::GetAll();
+?>
+
+<div class="container">
+    <h2>Nuestras Especies</h2>
+    <div class="row">
+        <?php foreach ($species as $specie): ?>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="<?php echo $specie->image; ?>" class="card-img-top" alt="<?php echo $specie->name; ?>">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre científico: <?php echo $specie->name; ?></h5>
+                        <p class="card-text">Clima: <?php echo $specie->climate; ?></p>
+                        <p class="card-text">Región: <?php echo $specie->region; ?></p>
+                        <p class="card-text">Tiempo que tarda en hacerse adulta: <?php echo $specie->time_to_grow; ?></p>
+                        <p class="card-text">Beneficios: <?php echo $specie->benefits; ?></p>
+                        <img src="<?php echo $specie->image; ?>" alt="<?php echo $specie->name; ?>" class="img-fluid">
+                        <a href="<?php echo $specie->wikipedia; ?>" class="btn btn-primary">Más información</a>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+
 
 <!-- Footer -->
 <?php include 'footer.php'; ?>

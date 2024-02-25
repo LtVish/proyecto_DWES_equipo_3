@@ -1,3 +1,10 @@
+<?php
+include '../models/User.php';
+include '../db/DBdriver.php';
+
+$db = new DBdriver('database', 'reforestaDB', 'root', 'Pass1234');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,34 +32,35 @@
 <!-- Navbar -->
 <?php include 'nav-bar.php'; ?>
 
-<!-- CONTENIDO DE LA PÁGINA CONTACTO -->
+<!-- CONTENIDO -->
+
    <div id="contact">
         <div class="container">
 
-            <h2>Contacta con nosotros</h2>
+            <h2>Suscríbete a nuestra newsletter</h2>
 
-            <!-- Formulario de contacto -->
-            <div class="row">
-                 <form action="contact_success.php" method="post">
-                     <div class="form-group">
+                <?php
 
-                        <label for="name">Nombre</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Nombre" required>
+                $name = $_POST['name'] ?? '';
+                $surname = $_POST['surname'] ?? '';
+                $fullName = $name . " " . $surname;
+                $nick = $_POST['nick'] ?? '';
+                $email = $_POST['email'] ?? '';
 
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+                $user = new User(0, $nick, $email, $fullName, 0, [], []);
+                $result = $user->subscriptionToNewsletter($nick, $email, $fullName, $db);
 
-                        <label for="year">Teléfono</label>
-                        <input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad" required>
+                if ($result) { ?>
+                    <p>Te has suscrito correctamente a nuestra newsletter.</p>
+                    <button type="button" class="btn btn-primary" onclick="location.href='index.php'">Volver a la página principal</button> <?php
+                } else { ?>
+                    <p>El usuario introducido no existe en nuestra base de datos.</p>
+                    <button type="button" class="btn btn-primary" onclick="location.href='newsletter.php'">Intentar de nuevo</button><?php
+                }
 
-                        <label for="message">Mensaje</label>
-                        <textarea id="message" name="message" class="form-control" placeholder="Mensaje" rows="5" required></textarea>
+                $db->TearDown();
+                ?>
 
-                        <button type="submit" class="btn btn-primary">Contacta</button>
-
-                     </div>
-                 </form>
-            </div>
 
         </div>
     </div>
