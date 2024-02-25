@@ -1,3 +1,6 @@
+<?php include_once "cards/event_profile.php";?>
+<?php include_once "cards/post_profile.php";?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,39 +33,41 @@
    	  <div class="container">
 		<!-- user profile part -->
 		<div class="col-xs-4">
-			<h1><?=$user->nick?></h1>
+			<h1><?=$user->__get("nick")?></h1>
 		   	<hr>
 		   	<form class="form-horizontal" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>", method="POST">
 			   <div class="form-group">
 					<div class="col-xs-12">
-						<label class="label-control">Karma: <?=$user->karma?></label>
+						<label class="label-control">Karma: <?=$user->__get("karma")?></label>
 					</div>
 				</div>
 			   <div class="form-group">
 					<div class="col-xs-12">
-						<label class="label-control">Nombre Completo: <?=$user->full_name?></label>
+						<label class="label-control">Nombre Completo: <?=$user->__get("full_name")?></label>
 						<input class="form-control" type="text" type="text" name="mod_nombre">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
-						<label class="label-control">Nombre de Usuario: <?=$user->nick?></label>
+						<label class="label-control">Nombre de Usuario: <?=$user->__get("nick")?></label>
 						<input class="form-control" type="text" type="text" name="mod_nick">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
-						<label class="label-control">Email: <?=$user->email?></label>
+						<label class="label-control">Email: <?=$user->__get("email")?></label>
 						<input class="form-control" type="text" type="email" name="mod_email">
 					</div>
 				</div>
-				<input type="hidden" name="id" value="<?=$user->id?>">
 				<div class = "form-group">
 					<button class="btn btn-lg sr-button">MODIFICAR USUARIO</button>
-					<button class="btn btn-lg sr-button">VER POSTS</button>
-					<button class="btn btn-lg sr-button">PANEL ADMINISTRADOR</button>
 				</div>
 		   	</form>
+			<form class="form-horizontal" action="AdminController.php", method="post">
+			   <div class = "form-group">
+					<button class="btn btn-lg sr-button">Panel Adminstrador</button>
+				</div>
+			</form>
 		</div>
 		<div class="col-xs-8 p-and-e">
 			<div>
@@ -72,21 +77,22 @@
 				</div>
 				<div class="horizontal-scroller">
 					<?php
-						for($i = 1; $i < 8; $i++){
-							?>
-							<div style="margin:10px;">
-								<h4 class="label-control">Evento <?=$i?> buen evento venid a disfrutar</h4>
-								<img src="../images/roble.jpg" class="img-responsive">
-								<p style="display:inline">Por validar</p>
-								<div class="form-group text-right">
-									<button class="btn">Modificar</button>
-								</div>
-							</div>
-					<?php
+						foreach($eventos as $event){
+							show_event($event);
+						}
+
+						foreach($posts as $post){
+							show_post($post);
 						}
 					?>
 				</div>
 			</div>
+			<form class="form-horizontal" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>", method="GET">
+			   <div class = "form-group">
+					<input type="hidden" name="info" value=<?=$_GET["info"]=="posts" ? "eventos" : "posts"?>>
+					<button class="btn btn-lg sr-button pull-right"><?=$_GET["info"]=="posts" ? "VER EVENTOS" : "VER POSTS"?></button>
+				</div>
+			</form>
 		</div>
    	  </div>
    </div>

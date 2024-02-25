@@ -8,7 +8,7 @@
             && isset($_POST["nick"]) && !empty(trim($_POST["nick"]))
             && isset($_POST["email"]) && !empty(trim($_POST["email"]))){
                 
-                $user = new User(null, trim($_POST["nick"]), trim($_POST["email"]), trim($_POST["full_name"]), 0, [], []);
+                $user = new User(null, trim($_POST["nick"]), trim($_POST["email"]), trim($_POST["full_name"]), 0, [], [], []);
 
                 // Se valida el email y en función de ello se registra el usuario
                 // Errores para mostrar en la vista
@@ -44,13 +44,13 @@
             //Se comprueba de que nick y el email introducidos en el form coincidan
             if(empty($errors)){
                 $user = User::GetBy("nick", $_POST["login_nick"], true);
-                if($user->__get("email") == $_POST["login_email"]){
+                if($user  && $user->__get("email") == $_POST["login_email"]){
                     $_SESSION["user"] = $user;
-                    header("Location: ../controller/ProfileController.php");
+                    header("Location: ProfileController.php?info=posts");
                 }
+                else
+                    $errors["no_existe"] = "El usuario introducido no existe";
             }
-            else
-                $errors["no_existe"] = "El usuario introducido no existe";
         }
     }
     session_start();
@@ -60,11 +60,10 @@
     if(!isset($_SESSION["user"])){
         $registered = check_register($errors);
         check_login($errors);
-
         if(!isset($_SESSION["user"]))
             require_once "../views/login.php";
     }
     else{
-        header("Location: ../controller/ProfileController.php");
+        header("Location: ProfileController.php?info=posts");
     }
 ?>

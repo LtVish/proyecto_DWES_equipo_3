@@ -1,8 +1,5 @@
 <?php
-spl_autoload_register(function($class_name){
-    include "../db/".$class_name . ".php";
-    include "../models/".$class_name . ".php";
-});
+
 include_once "../db/DBdriver.php";
 
 class User{
@@ -13,9 +10,10 @@ class User{
     private int $karma;
     private array $events_created_by_id;
     private array $participant_events_id;
+    private array $posts_created_by_id;
     //Meter en el resto los eventos asociados para obtener un mayor rendimiento en las consultas y no depender de event
 
-    public function __construct(int|null $id, string $nick,string $email,string $full_name,int $karma,array $events_created_by_id, array $participant_events_id)
+    public function __construct(int|null $id, string $nick,string $email,string $full_name,int $karma,array $events_created_by_id, array $participant_events_id, array $posts_created_by_id)
     {
         $this->id=$id;
         $this->nick=$nick;
@@ -24,6 +22,7 @@ class User{
         $this->karma=$karma;
         $this->events_created_by_id=$events_created_by_id;
         $this->participant_events_id=$participant_events_id;
+        $this->posts_created_by_id = $posts_created_by_id;
     }
 
     public function __get($name)
@@ -54,13 +53,17 @@ class User{
             $created_by_id=[];
             $pe_event=driver->ExecuteSQLQuery("select event_id from participant where user_id=".$row['id'].";");
             $ce_event=driver->ExecuteSQLQuery("select id from event where creator_id=".$row['id'].";");
+            $cp_post=driver->ExecuteSQLQuery("select id from post where creator_id=".$row['id'].";");
             while($newRow=$pe_event->fetch()){
                 array_push($part_events_id,$newRow['event_id']);
             }
             while($newRow2=$ce_event->fetch()){
                 array_push($created_by_id,$newRow2['id']);
             }
-            array_push($users,new User($row['id'],$row['nick'],$row['email'],$row['full_name'],$row['karma'],$created_by_id,$part_events_id));
+            while($newRow3=$cp_post->fetch()){
+                array_push($created_post_by_id,$newRow3['id']);
+            }
+            array_push($users,new User($row['id'],$row['nick'],$row['email'],$row['full_name'],$row['karma'],$created_by_id,$part_events_id, $created_post_by_id));
         }
         driver->TearDown();
         return $users;
@@ -73,15 +76,20 @@ class User{
             if($row==null)throw new Exception("User does not exist in this context");
             $part_events_id=[];
             $created_by_id=[];
+            $created_post_by_id=[];
             $pe_event=driver->ExecuteSQLQuery("select event_id from participant where user_id=".$row['id'].";");
             $ce_event=driver->ExecuteSQLQuery("select id from event where creator_id=".$row['id'].";");
+            $cp_post=driver->ExecuteSQLQuery("select id from post where creator_id=".$row['id'].";");
             while($newRow=$pe_event->fetch()){
                 array_push($part_events_id,$newRow['event_id']);
             }
             while($newRow2=$ce_event->fetch()){
                 array_push($created_by_id,$newRow2['id']);
             }
-            return new User($row['id'],$row['nick'],$row['email'],$row['full_name'],$row['karma'],$created_by_id,$part_events_id);
+            while($newRow3=$cp_post->fetch()){
+                array_push($created_post_by_id,$newRow3['id']);
+            }
+            return new User($row['id'],$row['nick'],$row['email'],$row['full_name'],$row['karma'],$created_by_id,$part_events_id, $created_post_by_id);
         }catch(Exception $e){
             //echo "<p>Custom Exception: ".$e->getMessage()."</p>";
             return null;
@@ -109,6 +117,9 @@ class User{
             }
             foreach($this->participant_events_id as $id){
                 driver->AddQueryIntoCurrentTransaction("INSERT into participant(user_id,event_id) VALUES($this->id,$id);");
+            }
+            foreach($this->posts_created_by_id as $id){
+                driver->AddQueryIntoCurrentTransaction("UPDATE post SET creator_id=".$this->id." Where id=".$id.";");
             }
             driver->ExecuteTransaction();
         }

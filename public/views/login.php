@@ -1,6 +1,3 @@
-<?php
-	include_once "../models/User.php";
-?>
 <!DOCTYPE html>
 <html>
 <head>
