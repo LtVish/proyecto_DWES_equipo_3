@@ -89,9 +89,12 @@
 		</div>
 		<div class="col-xs-8 p-and-e">
 			<div>
-				<h1>Tus Eventos</h1>
+				<h1><?=$_GET["info"]=="posts" ? "Tus posts" : "Tus eventos"?></h1>
 				<div class="form-group text-right">
-					<button class="btn btn-lg sr-button">Nuevo Evento</button>
+					<a href=<?=$_GET["info"]=="posts" ? "#" : "NewEventController.php?action=create"?>
+					>
+						<button class="btn btn-lg sr-button"><?=$_GET["info"]=="posts" ? "Nuevo post" : "Nuevo evento"?></button>
+					</a>
 				</div>
 				<div class="horizontal-scroller">
 					<?php

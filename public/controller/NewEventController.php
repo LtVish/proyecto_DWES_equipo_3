@@ -1,9 +1,12 @@
 <?php
     require_once "../models/Event.php";
+    require_once "../models/User.php";
     session_start();
     $user;
     $errors = array();
     $event;
+    $validated_inputs;
+    $debugger = 0;
     if(!isset($_SESSION["user"])){
         header("Location: LoginController.php");
     }
@@ -16,9 +19,9 @@
             $event = Event::GetBy("id", $_GET["id"], true);
         }
         
-        if($event){
+        if(isset($event)){
             $validated_inputs = 0;
-            foreach($datos as $key => $value){
+            foreach($_POST as $key => $value){
                 switch($key){
                     case "name":
                         if(trim($value)){
@@ -65,6 +68,7 @@
                             $event->__set("type", "2");
                             $validated_inputs++;
                         }
+                        $debugger = $validated_inputs;
                         break;
                     
                     case "date":
@@ -82,25 +86,42 @@
                                     throw new Exception("pass");
                             }
                             catch(Exception $e){
-                                $errors["date"] = "Escoge una fecha posterior a ".date('d-m-Y');
+                                $errors["date"] = "Escoge una fecha posterior a ".date('d-m-Y').$dias_absoluto;
                             }
                         }
                         else
                             $errors["date"] = "Escoge una fecha posterior a ".date('d-m-Y');
                         break;
-                    
-                    case "image":
-                        if (is_uploaded_file ($_FILES['image']['tmp_name'])
-                            && ($_FILES['image']['type'] == "image/png" || $_FILES['image']['type'] == "image/jpeg")){
-                            $nombreDirectorio = "../images/events/";
-                            move_uploaded_file ($_FILES['fichero']['tmp_name'], $nombreDirectorio .
-                            $_FILES['fichero']['name']);
-                        }
-                        else
-                            $errors["date"]
-                            
-                        break;
                 }
             }
+            if (isset($_FILES['image']) && is_uploaded_file ($_FILES['image']['tmp_name']) && $validated_inputs == 6
+                            && ($_FILES['image']['type'] == "image/png" || $_FILES['image']['type'] == "image/jpeg")){
+
+                $nombreImagen = "../images/events/".time().$_FILES['image']['name'];
+                move_uploaded_file ($_FILES['image']['tmp_name'], $nombreImagen);
+                $event->__set("image", $nombreImagen);
+                $validated_inputs++;   
+            }
+            elseif($validated_inputs == 6){}
+                $errors["image"] = "Seleccione un formato válido (jpeg o png)";
+
+            if($_GET["action"] == "create" && $validated_inputs == 7){
+                $event->Register();
+                $_SESSION["user"] = User::GetBy("id", $user->__get("id"));
+                $_SESSION["user"]->__set("karma", $_SESSION["user"]->__get("karma") + 7);
+                $_SESSION["user"]->Update();
+                header("Location: EventsController.php");
+            }
+            elseif($_GET["action"] == "modify" && ($validated_inputs == 7 || $validated_inputs == 6)){
+                $event->Update();
+                header("Location: EventsController.php");
+            }
+            else{
+                include_once "../views/new_event.php";
+            }
         }
+        else
+            header("Location: LoginController.php");
     }
+    else
+        header("Location: LoginController.php");
