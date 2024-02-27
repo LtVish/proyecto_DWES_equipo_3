@@ -15,11 +15,11 @@
         <div class="collapse navbar-collapse navbar-right" id="menu">
             <ul class="nav navbar-nav">
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/index.php') ? 'active' : ''; ?> lien">
-                <a href="index.php"><i class="fa fa-home sr-icons"></i> Inicio </a></li>
+                <a href="HomeController.php"><i class="fa fa-home sr-icons"></i> Inicio </a></li>
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/login.php') ? 'active' : ''; ?> lien">
-                <a href="login.php"><i class="fa fa-user sr-icons"></i> Login </a></li>
+                <a href="LoginController.php"><i class="fa fa-user sr-icons"></i> Login </a></li>
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/event.php') ? 'active' : ''; ?> lien">
-                <a href="event.php"><i class="fa fa-calendar sr-icons"></i> Eventos </a></li>
+                <a href="EventsController.php?page=1"><i class="fa fa-calendar sr-icons"></i> Eventos </a></li>
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/species.php') ? 'active' : ''; ?> lien">
                 <a href="species.php"><i class="fa fa-tree sr-icons"></i> Nuestras especies </a></li>
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/achievements.php') ? 'active' : ''; ?> lien">

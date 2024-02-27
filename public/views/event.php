@@ -83,10 +83,10 @@
              </div>-->
            </div>
            <div class="well">
-             <h4>Soluta</h4>
-             <p>Quod soluta corrupti earum officia vel inventore vitae quidem, consequuntur odit impedit.</p>
+             <h4>Atención</h4>
+             <p>A continuación se muestran los eventos añadidos en el orden cronológcio</p>
            </div>
-            <h3>Recent Posts</h3>
+            <!--<h3>Recent Posts</h3>
             <hr>
              <div class="post">
                <div class="post-heading">
@@ -114,7 +114,7 @@
                  <h4 class="text-left"><a href="single_post.html"><strong>Consequuntur</strong></a></h4>
                </div>
              </div>
-        </div>
+        </div>-->
       <!-- End of Side bar --> 
        
       </div>

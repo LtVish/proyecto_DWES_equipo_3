@@ -30,29 +30,9 @@
         <div class="container">
 
             <h2>Contacta con nosotros</h2>
+            <p>Mensaje enviado correctamente.</p>
 
-            <!-- Formulario de contacto -->
-            <div class="row">
-                 <form action="contact_success.php" method="post">
-                     <div class="form-group">
-
-                        <label for="name">Nombre</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Nombre" required>
-
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
-
-                        <label for="year">Teléfono</label>
-                        <input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad" required>
-
-                        <label for="message">Mensaje</label>
-                        <textarea id="message" name="message" class="form-control" placeholder="Mensaje" rows="5" required></textarea>
-
-                        <button type="submit" class="btn btn-primary">Contacta</button>
-
-                     </div>
-                 </form>
-            </div>
+            <button type="button" class="btn btn-primary" onclick="location.href='index.php'">Volver a la página principal</button>
 
         </div>
     </div>

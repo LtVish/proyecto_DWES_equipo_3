@@ -34,11 +34,11 @@
          <div class="col-xs-12 intro">
             <div class="carousel-inner">
                <div class="item active">
-                <img class="img-responsive" src="../images/about_us.jpg" alt="header picture">
+                <img class="img-responsive" src="../images/forest_night3.jpg" alt="header picture">
                </div>
                <div class="carousel-caption">
-                  <h1>ABOUT US</h1>
-                  <p>About Us and our Services?</p>
+                  <h1>Conócenos</h1>
+                  <p>Sobre nosotros y nuestra iniciativa.</p>
                   <hr>
                </div>
             </div>
@@ -51,118 +51,59 @@
         <div class="row">
            <div class="col-xs-12 col-sm-6">
              <div class="box-about">
-              <i class="fa fa-institution fa-2x"></i>
-              <h4>About Our Studio</h4>
-              <p class="text-left text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Tempora ea ratione vel nisi, qui perferendis nulla, fugit aut, beatae, tempore modi. Minus sequi iste, nam nobis, excepturi.Ut enim ad enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.</p>
+              <i class="fa fa-tree fa-2x"></i>
+              <h4>Sobre Re-Forest-A</h4>
+              <p class="text-left text-muted">¡Bienvenido a Reforesta, la plataforma dedicada a sembrar esperanza
+              en cada semilla que plantamos! Nuestra misión es simple pero poderosa: contribuir a la
+              salud del planeta mediante la reforestación y restauración de ecosistemas degradados.
+              Cada árbol plantado es un paso hacia adelante en la lucha contra el cambio climático y
+              la pérdida de biodiversidad. En Reforesta, no solo plantamos árboles, también sembramos conciencia
+              ambiental y un futuro más verde para las generaciones venideras.
+              Únete a nosotros y sé parte del cambio que queremos ver en el mundo.</p>
              </div>
            </div>
            <div class="col-xs-12 col-sm-6">
              <div class="box-about">
               <i class="fa fa-group fa-2x"></i>
-              <h4>About Our Team</h4>
-              <p class="text-left text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Tempora ea ratione vel nisi, qui perferendis nulla, fugit aut, beatae, tempore modi. Minus sequi iste, nam nobis, excepturi.Ut enim ad enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.</p>
-             </div>
-           </div>
-        </div>
-        <div class="row">
-           <div class="col-xs-12 col-sm-6 row">
-             <ul class="list-inline text-center">
-                <li class="line"></li>
-              <li><i class="fa fa-tasks fa-2x"></i></li>
-              <li class="line"></li>
-              <li><h4>Our Services</h4></li>
-              <li class="line"></li>
-             </ul>
-             <p class="text-muted text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Tempora ea ratione vel nisi, qui perferendis nulla, fugit aut, beatae, tempore modi.</p>
-           </div>
-           <div class="col-xs-12 col-sm-6">
-             <p class="text-muted"><strong>PHOTOSHOP</strong> <span class="pull-right">80%</span></p>
-             <div class="progress">
-              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:80%;"></div>
-             </div>
-             <p class="text-muted"><strong>SHOOTING PHOTO </strong><span class="pull-right">95%</span></p>
-             <div class="progress">
-              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width:95%;"></div>
-             </div>
-             <p class="text-muted"><strong>FORMATION</strong><span class="pull-right">90%</span></p>
-             <div class="progress">
-              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width:90%;"></div>
+              <h4>Sobre nosotros</h4>
+              <p class="text-left text-muted">En Reforesta, estamos formados por un equipo apasionado y comprometido
+              con la causa ambiental. Desde expertos en silvicultura hasta entusiastas defensores del medio ambiente,
+              cada miembro de nuestro equipo aporta su experiencia y dedicación para hacer de nuestro planeta un lugar mejor.
+              Nos guía la convicción de que juntos podemos marcar la diferencia, un árbol a la vez.
+              Nuestro trabajo va más allá de simplemente plantar árboles; nos esforzamos por educar, inspirar y
+              motivar a otros a unirse a nosotros en esta importante misión. Juntos, estamos construyendo un futuro
+              más verde y sostenible para todos.</p>
              </div>
            </div>
         </div>
 
-      <!-- Pricing Tables -->  
-        <div class="row pricing text-center">
-          <h3>FORMATION PRICING TABLES</h3>
-          <hr>
-          <div class="col-xs-12 col-sm-4 first">
-            <div class="beginner">
-              <h4>BEGINNER</h4>
-              <h5>$99.97</h5>
-              <ul class="nav">
-                <li>Beginner Option I</li>
-                <li>Beginner Option II</li>
-                <li>Beginner Option III</li>
-                <li>Beginner Option IV</li>
-                <li>Beginner Option V</li>
-              </ul>
-              <a href="#" class="btn btn-lg sr-button">SIGN UP</a>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-4 middle">
-            <div class="intermediary">
-              <h4>INTERMEDIARY</h4>
-              <h5>$199.97</h5>
-              <ul class="nav">
-                <li>Intermediary Option I</li>
-                <li>Intermediary Option II</li>
-                <li>Intermediary Option III</li>
-                <li>Intermediary Option IV</li>
-                <li>Intermediary Option V</li>
-              </ul>
-              <a href="#" class="btn btn-lg sr-button">SIGN UP</a>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-4">
-            <div class="higher">
-              <h4>PROFESSIONAL</h4>
-              <h5>$299.97</h5>
-              <ul class="nav">
-                <li>High Option I</li>
-                <li>High Option II</li>
-                <li>High Option III</li>
-                <li>High Option IV</li>
-                <li>High Option V</li>
-              </ul>
-              <a href="#" class="btn btn-lg sr-button">SIGN UP</a>
-            </div>
-          </div>
-        </div>
-      <!-- End of Pricing Tables -->
-
-      <!-- Clients Feedback -->
+      <!-- Opiniones de usuarios de Re-Forest-A -->
         <div class="row feedback text-center">
-           <h3>CLIENTS FEEDBACK</h3>
+           <h3>Opiniones de usuarios de Re-Forest-A</h3>
            <hr>
            <div class="col-xs-12 col-sm-3">
              <img class="img-responsive" src="../images/clients/client1.jpg" alt="client's picture">
-             <h5>MISS BELLA</h5>
-             <q>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</q>
+             <h5>Miren Melano</h5>
+             <q>La plataforma de reforestación es una herramienta esencial en la lucha contra el cambio climático,
+             permitiendo a personas y organizaciones plantar árboles y restaurar ecosistemas.</q>
            </div>
            <div class="col-xs-12 col-sm-3">
              <img class="img-responsive" src="../images/clients/client2.jpg" alt="client's picture">
-             <h5>DON PENO</h5>
-             <q>Tempora ea ratione vel nisi, qui perferendis nulla, fugit aut, beatae, tempore modi.</q>
+             <h5>Kerry Kopene</h5>
+             <q>Esta plataforma ofrece una solución innovadora para abordar la crisis ambiental global al involucrar
+              a individuos en la plantación de árboles, promoviendo la responsabilidad ambiental.</q>
            </div>
            <div class="col-xs-12 col-sm-3">
              <img class="img-responsive" src="../images/clients/client3.jpg" alt="client's picture">
-             <h5>SWEETY</h5>
-             <q>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</q>
+             <h5>Dolores Crotal</h5>
+             <q>La plataforma facilita a empresas y personas compensar su huella de carbono y contribuir
+             a la sostenibilidad ambiental a través de proyectos de reforestación transparentes y accesibles.</q>
            </div>
            <div class="col-xs-12 col-sm-3">
              <img class="img-responsive" src="../images/clients/client4.jpg" alt="client's picture">
-             <h5>LADY</h5>
-             <q>Tempora ea ratione vel nisi, qui perferendis nulla, fugit aut, beatae, tempore modi.</q>
+             <h5>Elva Ginón</h5>
+             <q>Es inspirador ver cómo la tecnología se usa para promover la reforestación y la educación ambiental,
+             creando una comunidad comprometida con la conservación forestal para un futuro sostenible.</q>
            </div>
         </div>
       <!-- End of Clients Feedback --> 
