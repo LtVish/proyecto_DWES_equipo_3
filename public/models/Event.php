@@ -161,8 +161,8 @@ class Event{
     driver->ExecuteTransaction();
     driver->TearDown();
   }
-  function CalendarFilteredEvents():array{
-  return array_filter($this->GetAll(),fn($event)=>date_diff(date_create(),
+  static function CalendarFilteredEvents():array{
+  return array_filter(self::GetAll(),fn($event)=>date_diff(date_create(),
   date_create($event->date))->m<=3 && date_create()<date_create($event->date) && 
   date_diff(date_create(),date_create($event->date))->days<=93);
   }

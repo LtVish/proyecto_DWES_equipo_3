@@ -42,20 +42,20 @@
         <p><?=$event-> terrain?></p>
         <h3>Tipo</h3>
         <p><?=$event-> type == 1 ?"Reforestación con semillas" : "Reforestación con plantas jóvenes"?></p>
-        <?php if($user && !$is_participant){?>
+        <?php if(isset($user) && $user && !$is_participant){?>
         <form style="display: inline;" method=post action="">
             <input type=hidden name=participar value=1>
           <button type="submit" class="btn btn-success">Participar</button>
         </form>
         <?php }?>
-        <?php if($is_creator){?>
+        <?php if(isset($is_creator) && $is_creator){?>
         <form style="display: inline;" action="NewEventController.php">
           <input type="hidden" name="action" value="modify">
           <input type="hidden" name="id" value=<?=$event->id?>>
           <button type="submit" class="btn btn-primary">Modificar</button>
         </form>
         <?php }?>
-        <?php if($is_admin && !$event -> state){?>
+        <?php if(isset($is_admin) && $is_admin && !$event -> state){?>
         <form style="display: inline;" method=post action="">
           <input type=hidden name=validar value=1>
           <button type="submit" class="btn btn-warning">Validar</button>

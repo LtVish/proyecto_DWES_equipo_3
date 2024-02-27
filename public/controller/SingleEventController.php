@@ -38,23 +38,27 @@
     session_start();
     $user;
     $is_from_user;
+
     if(isset($_SESSION["user"]))
         $user = $_SESSION["user"];
+
     if(isset($_GET["id"]) && is_numeric($_GET["id"])){
         $event = Event::GetBy("id", $_GET["id"]);
 
         if($event){
-            add_participant($event, $user);
-            validate($event, $user);
-            $is_from_user = $event-> creator_id == $user-> id;
             $creator_name = User::GetBy("id", $event-> creator_id)->nick;
-            $is_participant = false;
-            $is_creater = false;
-            $is_admin = false;
             if($user){
-                $is_participant = in_array($user->id, $event->participants_id);
-                $is_creator = $event->creator_id == $user -> id;
-                $is_admin = $user->nick == "admin";
+                add_participant($event, $user);
+                validate($event, $user);
+                $is_from_user = $event-> creator_id == $user-> id;
+                $is_participant = false;
+                $is_creater = false;
+                $is_admin = false;
+                if($user){
+                    $is_participant = in_array($user->id, $event->participants_id);
+                    $is_creator = $event->creator_id == $user -> id;
+                    $is_admin = $user->nick == "admin";
+                }
             }
             include_once "../views/single_event.php";
         }
