@@ -108,8 +108,8 @@
             if($_GET["action"] == "create" && $validated_inputs == 7){
                 $event->Register();
                 $_SESSION["user"] = User::GetBy("id", $user->__get("id"));
-                $_SESSION["user"]->__set("karma", $_SESSION["user"]->__get("karma") + 7);
-                $_SESSION["user"]->Update();
+                /*$_SESSION["user"]->__set("karma", $_SESSION["user"]->__get("karma") + 7);
+                $_SESSION["user"]->Update();*/
                 header("Location: EventsController.php");
             }
             elseif($_GET["action"] == "modify" && ($validated_inputs == 7 || $validated_inputs == 6)){

@@ -135,7 +135,7 @@ class Event{
       SET name='$this->name', description='$this->description', terrain='$this->terrain',
       date='$this->date', type='$this->type', creator_id=".
       $this->creator_id.", image='$this->image'
-      , location='$this->location'
+      , location='$this->location', state=$this->state
       WHERE event.id=$this->id;");
       driver->AddQueryIntoCurrentTransaction("DELETE FROM participant WHERE event_id=$this->id");
       driver->AddQueryIntoCurrentTransaction("DELETE FROM specie_event WHERE event_id=$this->id");
@@ -152,7 +152,7 @@ class Event{
       return array_filter(Event::GetAll(),
       fn($event)=>str_contains($event->name,$word)||str_contains($event->description,$word)
       ||str_contains($event->location,$word)||str_contains($event->terrain,$word)||
-  str_contains($event->type,$word)||$word==$event->date||str_contains($event->state,$word)||$word=$event->creator_id);
+  str_contains($event->type,$word)||$word==$event->date||str_contains($event->state,$word)||$word==$event->creator_id);
   }
   function ValidateEvent():void{
     driver->TearUp();
@@ -166,41 +166,5 @@ class Event{
   date_create($event->date))->m<=3 && date_create()<date_create($event->date) && 
   date_diff(date_create(),date_create($event->date))->days<=93);
   }
-
-
-/*
-    function show_demo_post(){?>
-        <div class="col-xs-12 col-sm-12">
-          <div class="post">
-            <div class="post-heading">
-              <span><?=$this->date?></span>
-              <img class="img-responsive" src=<?= $this->image?> alt="post's picture">
-            </div>
-            <div class="post-body">
-              <h3><a href="single_post.html"><strong><?=$this->name?></strong></a></h3>
-              <hr>
-              <p><?=substr($this->description, 0, 250)?>
-              </p>
-            </div>
-          <?php $this->create_footer();?>
-    <?php
-    }
-
-    function create_footer(){?>
-          <div class="post-footer">
-              <?php $this -> create_submit("single_post.php", "SABER MÁS...");?>
-          </div>
-        </div>
-      </div>
-    <?php
-    }
-    
-    function create_submit($action, $button_message){?>
-      <form method="post" action=<?=$action?> style="display:inline;">
-        <input type="hidden" name="post" value="{}">
-        <button class="btn" type=submit><?=$button_message?></button>
-      </form>
-    <?php }
-*/
 }
 ?>

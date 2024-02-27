@@ -34,81 +34,24 @@
       <!-- Blocks of Posts -->
         <div class="col-xs-12 col-sm-8 row">
           <?php
-            foreach($events as $event){
+            foreach($show_events as $event){
               show_demo_post($event);
             }
           ?>
-           <!--<div class="col-xs-12 col-sm-12">
-             <div class="post">
-               <div class="post-heading">
-                 <span>6 JANUARY</span>
-                 <img class="img-responsive" src="../images/blog/landscape.jpg" alt="post's picture">
-               </div>
-               <div class="post-body">
-                 <h3><a href="single_post.html"><strong>doloremque illum</strong></a></h3>
-                 <hr>
-                 <p>Duis ultrices tortor non felis convallis bibendum. Maecenas diam velit, sollicitudin at imperdiet ac, consectetur non nibh. Etiam eget dapibus nulla. 
-                 </p>
-               </div>
-               <div class="post-footer">
-                 <a class="btn" href="single_post.html">READ MORE...</a>
-                 <span>
-                 <i class="fa fa-heart sr-icons"></i> 10
-                 <i class="fa fa-comments sr-icons"></i> 10
-                 </span>
-               </div>
-             </div>
-           </div>
-           <div class="col-xs-12 col-sm-12">
-             <div class="post">
-               <div class="post-heading">
-                 <span>7 FEBRUARY</span>
-                 <img class="img-responsive" src="../images/blog/family.jpg" alt="post's picture">
-               </div>
-               <div class="post-body">
-                 <h3><a href="single_post.html"><strong>Lorem ipsum</strong></a></h3>
-                 <hr>
-                 <p>Nunc sit amet dapibus est, sit amet varius risus. Donec luctus lacinia mauris, at feugiat ligula facilisis ac. Class aptent taciti sociosqu ad litora torquent per conubia.
-                 </p>
-               </div>
-               <div class="post-footer">
-                 <a class="btn" href="single_post.html">READ MORE...</a>
-                 <span>
-                 <i class="fa fa-heart sr-icons"></i> 10
-                 <i class="fa fa-comments sr-icons"></i> 10
-                 </span>
-               </div>
-             </div>
-           </div>
-           <div class="col-xs-12 col-sm-12">
-             <div class="post">
-               <div class="post-heading">
-                 <span>8 MARCH</span>
-                 <img class="img-responsive" src="../images/blog/elephant.jpg" alt="post's picture">
-               </div>
-               <div class="post-body">
-                 <h3><a href="single_post.html"><strong>Aliquam soluta</strong></a></h3>
-                 <hr>
-                 <p>In felis ante, aliquet sit amet venenatis at, feugiat sed leo. Fusce pretium, velit in luctus ornare, elit lorem ultrices tortor, sed consectetur orci risus mollis ante. 
-                 </p>
-               </div>
-               <div class="post-footer">
-                 <a class="btn" href="single_post.html">READ MORE...</a>
-                 <span>
-                 <i class="fa fa-heart sr-icons"></i> 10
-                 <i class="fa fa-comments sr-icons"></i> 10
-                 </span>
-               </div>
-             </div>
-           </div>-->
-              <nav class="text-left">
+              <nav class="text-center" style="font-size: 20px;">
                 <ul class="pagination">
-                  <li class="active"><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#" aria-label="suivant">
-                    <span aria-hidden="true">&raquo;</span>
+                  <?php if($page > 1){
+                  ?>
+                  <li><a href=<?=!isset($_GET["search"])?"EventsController.php?page=".($page -1):"EventsController.php?page=".($page -1)."&search=".$_GET["search"]?> aria-label="suivant">
+                    <span aria-hidden="true">&laquo; Anterior</span>
                   </a></li>
+                  <?php } ?>
+                  <?php if($page < $pages){
+                  ?>
+                  <li><a href=<?=!isset($_GET["search"])?"EventsController.php?page=".($page +1):"EventsController.php?page=".($page +1)."&search=".$_GET["search"]?> aria-label="suivant">
+                    <span aria-hidden="true">Siguiente &raquo;</span>
+                  </a></li>
+                  <?php } ?>
                 </ul>
               </nav>
         </div>
@@ -116,17 +59,18 @@
 
       <!-- Side bar -->  
         <div class="col-xs-12 col-sm-4">
-           <form class="form-horizontal">
+           <form class="form-horizontal" action="EventsController.php?page=1" method=get>
              <div class="input-group">
-               <input class="form-control" type="text" placeholder="Buscar Evento">
+              <input type="hidden" name="page" value=1>
+               <input class="form-control" type="text" placeholder="Buscar" name="search">
                <span class="input-group-btn">
-                  <a href="" class="btn"><i class="fa fa-search"></i></a>
+                  <a class="btn" type="submit"><i class="fa fa-search"></i></a>
                </span>
              </div>
            </form>
            <div class="panel">
              <div class="panel-heading">
-                <form action="new_event.php" metjod="post">
+                <form action="NewEventController.php?action=create">
                   <button class="btn btn-primary btn-block" type="submit">Nuevo Evento</button>
                 </form>
              </div>

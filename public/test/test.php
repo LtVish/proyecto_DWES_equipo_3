@@ -1,11 +1,18 @@
 <?php
     include_once dirname(__DIR__)."/db/DBdriver.php";
-    include_once dirname(__DIR__)."/models/Post.php";
+    include_once dirname(__DIR__)."/models/Event.php";
 
+    /*$event = Event::GetBy("id", 13);
 
+    $event->__set("state", true);
 
-    $post = new Post(null, "Postazo", "", "", "", date('Y-m-d'), "/images/roble.jpg", 2, 1);
+    $event->Update();
 
-    $post->Register();
+    echo "Evento modificado";*/
 
-    echo "Post registrado";
+    $test = Event::GetBy("id", 13);
+    $tests = $test->CalendarFilteredEvents();
+
+    foreach($tests as $test){
+        echo $test->__get("name");
+    }

@@ -10,7 +10,7 @@
       ?>
       </p>
       <div class="form-group text-right">
-        <button class="btn">Modificar</button>
+        <button class="btn">Ver</button>
       </div>
     </div>
     <?php

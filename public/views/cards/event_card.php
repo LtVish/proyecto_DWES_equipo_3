@@ -19,7 +19,11 @@ function show_demo_post(Event $event){?>
 
     function create_footer(Event $event){?>
           <div class="post-footer">
-              <?php create_submit("single_event.php?id=".$event->__get("id"), "SABER MÁS...");?>
+              <?php create_submit("SingleEventController.php?id=".$event->__get("id"), "SABER MÁS...");
+                if(!$event->__get("state")){
+              ?>
+              <span style="border: 1px solid black; border-radius:5px; padding: 5px; background-color:#FFFF00; font-weight:bold; color:black">Por validar</span>
+              <?php } ?>
           </div>
         </div>
       </div>
