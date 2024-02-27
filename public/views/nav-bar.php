@@ -17,7 +17,6 @@
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/index.php') ? 'active' : ''; ?> lien">
                 <a href="index.php"><i class="fa fa-home sr-icons"></i> Inicio </a></li>
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/login.php') ? 'active' : ''; ?> lien">
-                <a href="../controller/LoginController.php"><i class="fa fa-bookmark sr-icons"></i> Login </a></li>
                 <a href="login.php"><i class="fa fa-user sr-icons"></i> Login </a></li>
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/event.php') ? 'active' : ''; ?> lien">
                 <a href="event.php"><i class="fa fa-calendar sr-icons"></i> Eventos </a></li>
@@ -33,6 +32,11 @@
                 <a href="about.php"><i class="fa fa-users sr-icons"></i> Sobre nosotros</a></li>
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/contact.php') ? 'active' : ''; ?> lien">
                 <a href="contact.php"><i class="fa fa-phone-square sr-icons"></i> Contacto</a></li>
+                <?php if(isset($_SESSION["user"])){?>
+                <li style="font-size: 20px;">
+                    <?php echo $_SESSION["user"] -> nick . "---karma: " . $_SESSION["user"] -> karma;?>
+                </li>
+                <?php }?>
             </ul>
         </div>
     </div>

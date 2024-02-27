@@ -5,10 +5,10 @@ function show_demo_post(Event $event){?>
           <div class="post">
             <div class="post-heading">
               <span><?=$event->__get("date")?></span>
-              <img class="img-responsive" src=<?= $event->__get("image")?> alt="post's picture">
+              <img class="img-responsive" src=<?= $event-> image?> alt="post's picture">
             </div>
             <div class="post-body">
-              <h3><a href="single_post.html"><strong><?=$event->__get("name")?></strong></a></h3>
+              <h3><a href="single_post.html"><strong><?=$event-> name ?></strong></a></h3>
               <hr>
               <p><?=substr($event->description, 0, 250)?>
               </p>
@@ -19,8 +19,8 @@ function show_demo_post(Event $event){?>
 
     function create_footer(Event $event){?>
           <div class="post-footer">
-              <?php create_submit("SingleEventController.php?id=".$event->__get("id"), "SABER MÁS...");
-                if(!$event->__get("state")){
+              <?php create_submit("SingleEventController.php?id=".$event-> id, "SABER MÁS...");
+                if(!$event-> state){
               ?>
               <span style="border: 1px solid black; border-radius:5px; padding: 5px; background-color:#FFFF00; font-weight:bold; color:black">Por validar</span>
               <?php } ?>

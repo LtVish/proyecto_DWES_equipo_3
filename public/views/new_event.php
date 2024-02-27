@@ -30,8 +30,11 @@
    <div id="contact">
    	  <div class="container">
    	    <div class="col-xs-12 col-sm-8 col-sm-push-2">
-       	   <h1>Crea Nuevo Evento</h1>
+       	   <h1><?=$_GET["action"]=="create"?"Crea Nuevo Evento":"Modifica tu evento"?></h1>
        	   <hr>
+			  <p>
+					<?php echo $modified ? "¡Se ha modificado con éxito!": ""?>
+				</p>
        	   <!--<p>Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>-->
 	       <form class="form-horizontal" action="<?=htmlspecialchars($_SERVER["REQUEST_URI"])?>", method="POST" enctype="multipart/form-data">
 	       	  <!--<div class="form-group">
@@ -49,7 +52,7 @@
 						<label class="label-control">Nombre</label>
 						<input class="form-control" type="text" name="name" 
 						<?php
-							echo $_GET["action"] == "modify" ? "value=".$event->__get("name") : "";
+							echo $_GET["action"] == "modify" ? "value=".$event-> name  : "";
 						?>
 						>
 					</div>
@@ -63,7 +66,7 @@
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control" for="description">Descripción</label>
-						<textarea class="form-control" id="description" name="description" required><?=$_GET["action"] == "modify" ?$event->__get("description") : ""?></textarea>
+						<textarea class="form-control" id="description" name="description" required><?=$_GET["action"] == "modify" ?$event-> description  : ""?></textarea>
 					</div>
 					<?php if(isset($errors["description"]))
 					{?>
@@ -77,7 +80,7 @@
 						<label class="label-control">Lugar</label>
 						<input class="form-control" type="text" name="location" required
 						<?php
-							echo $_GET["action"] == "modify" ? "value=".$event->__get("location") : "";
+							echo $_GET["action"] == "modify" ? "value=".$event-> location  : "";
 						?>
 						>
 					</div>
@@ -93,7 +96,7 @@
 						<label class="label-control">Terreno</label>
 						<input class="form-control" type="text" name="terrain" required
 						<?php
-							echo $_GET["action"] == "modify" ? "value=".$event->__get("terrain") : "";
+							echo $_GET["action"] == "modify" ? "value=".$event-> terrain : "";
 						?>
 						>
 					</div>
@@ -108,10 +111,10 @@
 					<div class="col-xs-12">
 						<label class="label-control">Tipo</label>
 						<select class="form-control" type="text" style="background: transparent; color: white;" name="type" required>
-							<option value=1 <?=isset($event)&&$event->__get("type") == "1"?"selected":""?>>
+							<option value=1 <?=isset($event)&&$event-> type == "1"?"selected":""?>>
 								Reforestación con semillas
 							</option>
-							<option value=2 <?=isset($event)&&$event->__get("type") == "2"?"selected":""?>>
+							<option value=2 <?=isset($event)&&$event-> type == "2"?"selected":""?>>
 								Reforestación con plantas jóvenes
 							</option>
 						</select>
@@ -122,7 +125,7 @@
 						<label class="label-control">Fecha</label>
 						<input class="form-control" type="date"  name="date" required
 						<?php
-							echo $_GET["action"] == "modify" ? "value=".$event->__get("date") : "";
+							echo $_GET["action"] == "modify" ? "value=".$event-> date : "";
 						?>
 						>
 					</div>

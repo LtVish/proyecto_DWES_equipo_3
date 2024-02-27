@@ -7,25 +7,27 @@
     $event;
     $validated_inputs;
     $debugger = 0;
+    $modified = false;
     if(!isset($_SESSION["user"])){
         header("Location: LoginController.php");
     }
-    elseif(isset($_POST) && isset($_GET["action"]) && ($_GET["action"] == "create" || $_GET["action"] == "modify")){
+    elseif(isset($_GET["action"]) && ($_GET["action"] == "create" || $_GET["action"] == "modify")){
         $user = $_SESSION["user"];
 
         if($_GET["action"] == "create")
             $event = new Event(1, "", "", "", "", "", $user->__get("id"), [$user->__get("id")], [], "", "", false);
-        elseif(isset($_GET["id"]) && in_array($_GET["id"], $user->__get("events_created_by_id"))){
+        elseif(isset($_GET["id"]) && is_numeric($_GET["id"]) 
+            && in_array((int)$_GET["id"], $user->events_created_by_id)){
             $event = Event::GetBy("id", $_GET["id"], true);
         }
         
-        if(isset($event)){
+        if($event){
             $validated_inputs = 0;
             foreach($_POST as $key => $value){
                 switch($key){
                     case "name":
                         if(trim($value)){
-                            $event->__set("name", trim($value));
+                            $event->name = trim($value);
                             $validated_inputs++;
                         }
                         else
@@ -34,7 +36,7 @@
                     
                     case "description":
                         if(trim($value)){
-                            $event->__set("description", trim($value));
+                            $event-> description = trim($value);
                             $validated_inputs++;
                         }
                         else
@@ -43,7 +45,7 @@
 
                     case "location":
                         if(trim($value)){
-                            $event->__set("location", trim($value));
+                            $event-> location = trim($value);
                             $validated_inputs++;
                         }
                         else
@@ -52,7 +54,7 @@
                     
                     case "terrain":
                         if(trim($value)){
-                            $event->__set("terrain", trim($value));
+                            $event-> terrain = trim($value);
                             $validated_inputs++;
                         }
                         else
@@ -61,11 +63,11 @@
                     
                     case "type":
                         if($value == "1"){
-                            $event->__set("type", "1");
+                            $event->type =  "1";
                             $validated_inputs++;
                         }
                         elseif($value == "2"){
-                            $event->__set("type", "2");
+                            $event->type = "2";
                             $validated_inputs++;
                         }
                         $debugger = $validated_inputs;
@@ -79,7 +81,7 @@
                                 $intervalo = $actual_date -> diff($new_date);
                                 $dias_absoluto = $intervalo -> format("%R%d");
                                 if($dias_absoluto > 0){
-                                    $event->__set("date", $value);
+                                    $event-> date = $value;
                                     $validated_inputs++;
                                 }
                                 else
@@ -99,7 +101,7 @@
 
                 $nombreImagen = "../images/events/".time().$_FILES['image']['name'];
                 move_uploaded_file ($_FILES['image']['tmp_name'], $nombreImagen);
-                $event->__set("image", $nombreImagen);
+                $event-> image = $nombreImagen;
                 $validated_inputs++;   
             }
             elseif($validated_inputs == 6){}
@@ -107,21 +109,22 @@
 
             if($_GET["action"] == "create" && $validated_inputs == 7){
                 $event->Register();
-                $_SESSION["user"] = User::GetBy("id", $user->__get("id"));
+                $_SESSION["user"] = User::GetBy("id", $user-> id);
                 /*$_SESSION["user"]->__set("karma", $_SESSION["user"]->__get("karma") + 7);
                 $_SESSION["user"]->Update();*/
-                header("Location: EventsController.php");
+                header("Location: SingleEventController.php?id=$event->id");
             }
             elseif($_GET["action"] == "modify" && ($validated_inputs == 7 || $validated_inputs == 6)){
                 $event->Update();
-                header("Location: EventsController.php");
+                $modified = true;
+                include_once "../views/new_event.php";
             }
             else{
                 include_once "../views/new_event.php";
             }
         }
-        else
-            header("Location: LoginController.php");
+        else{}
+            //header("Location: LoginController.php");
     }
-    else
-        header("Location: LoginController.php");
+    else{}
+        //header("Location: LoginController.php");

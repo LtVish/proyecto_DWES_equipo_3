@@ -12,20 +12,20 @@
 
                 // Se valida el email y en función de ello se registra el usuario
                 // Errores para mostrar en la vista
-                $errors = validate_user($user ->__get("email"), false);
+                $errors = validate_user($user ->email, false);
                 if(empty($errors)){
 
                     //Se comprueba de que el usuario no esté registrado en la base de datos
-                    if(!User::GetBy("nick", $user->__get("nick"), true) && !User::GetBy("email", $user->__get("email"), true)){
+                    if(!User::GetBy("nick", $user->nick, true) && !User::GetBy("email", $user->email, true)){
                         $user->Register();
                         if(User::getBy("nick", $_POST["nick"], true))
                             $registered = true;
                     }
                     //Se generan los mensajes de error correspondientes en caso de que el usuario ya esssté registrado
                     else{
-                        if(User::GetBy("nick", $user->__get("nick"), true))
+                        if(User::GetBy("nick", $user-> nick, true))
                             $errors["nick_usado"] = "El nickname está ya en uso";
-                        if(User::GetBy("email", $user->__get("email"), true))
+                        if(User::GetBy("email", $user->email, true))
                             $errors["email_usado"] = "El email está ya en uso";
                     }
                 }
@@ -44,7 +44,7 @@
             //Se comprueba de que nick y el email introducidos en el form coincidan
             if(empty($errors)){
                 $user = User::GetBy("nick", $_POST["login_nick"], true);
-                if($user  && $user->__get("email") == $_POST["login_email"]){
+                if($user  && $user->email == $_POST["login_email"]){
                     $_SESSION["user"] = $user;
                     header("Location: ProfileController.php?info=posts");
                 }

@@ -7,7 +7,7 @@
     function generate_events(User $user): array{
         $eventos = array();
 
-        foreach($user->__get("participant_events_id") as $id){
+        foreach($user-> participant_events_id  as $id){
             $eventos[] = Event::getBy("id", $id);
         }
 
@@ -17,7 +17,7 @@
     function generate_posts(User $user): array{
         $posts = array();
 
-        foreach($user->__get("posts_created_by_id") as $id){
+        foreach($user-> posts_created_by_id  as $id){
             $posts[] = Post::getBy("id", $id);
         }
 
@@ -30,20 +30,20 @@
             if(!$errors){
                 $test_user = User::GetBy("email", trim($_POST["mod_email"]), true);
                 if(!$test_user)
-                    $user->__set("email", trim($_POST["mod_email"]));
+                    $user-> email = trim($_POST["mod_email"]);
                 else
                     $errors["email_usado"] = "El email ya está en uso";
             }
         }
 
         if(isset($_POST["mod_nombre"]) && !empty(trim($_POST["mod_nombre"]))){
-            $user->__set("full_name", $_POST["mod_nombre"]);
+            $user-> full_name =  $_POST["mod_nombre"];
         }
 
         if(isset($_POST["mod_nick"]) && !empty(trim($_POST["mod_nick"]))){
             $test_user = User::GetBy("nick", trim($_POST["mod_nick"]), true);
             if(!$test_user)
-                $user->__set("nick", trim($_POST["mod_nick"]));
+                $user-> nick = trim($_POST["mod_nick"]);
             else
                 $errors["nick_usado"] = "El nick ya está en uso";
         }
@@ -55,7 +55,7 @@
     
     if(!isset($_SESSION["user"])){
 
-        header("Location: controller/LoginController.php");
+        header("Location: LoginController.php");
     }
     else{
         $user = $_SESSION["user"];

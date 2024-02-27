@@ -92,7 +92,7 @@ class Event{
         return new Event($row['id'],$row['name'],$row['description'],$row['terrain'],$row['date'],$row['type'],$row['creator_id'],$part_users_id,$part_species_id
         ,$row['image'],$row['location'],$row['state']);
     }catch(Exception $e){
-        echo "<p>Custom Exception: ".$e->getMessage()."</p>";
+        /*echo "<p>Custom Exception: ".$e->getMessage()."</p>";*/
         return null;
     }
 }
@@ -135,7 +135,7 @@ class Event{
       SET name='$this->name', description='$this->description', terrain='$this->terrain',
       date='$this->date', type='$this->type', creator_id=".
       $this->creator_id.", image='$this->image'
-      , location='$this->location', state=$this->state
+      , location='$this->location'
       WHERE event.id=$this->id;");
       driver->AddQueryIntoCurrentTransaction("DELETE FROM participant WHERE event_id=$this->id");
       driver->AddQueryIntoCurrentTransaction("DELETE FROM specie_event WHERE event_id=$this->id");

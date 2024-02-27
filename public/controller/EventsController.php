@@ -1,10 +1,13 @@
 <? 
     include_once "../models/Event.php";
-
+    include_once "../models/User.php";
+    session_start();
     if(!isset($_GET["search"]))
         $events = Event::GetAll();
     else
         $events = Event::FilteredEvents($_GET["search"]);
+
+    $events = array_reverse($events);
 
     $pages = count($events)%3 ? intdiv(count($events), 3) + 1 : intdiv(count($events),3);
     

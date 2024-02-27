@@ -107,7 +107,13 @@ class User{
         //TRANSACTION
         driver->TearUp();
         driver->BeginTransaction();
-        driver->AddQueryIntoCurrentTransaction("INSERT INTO user (nick,email,full_name,karma,subscription) VALUES('$this->nick', '$this->email', '$this->full_name',$this->karma,$this->subscription);");
+        $subscription = "";
+        if($this->subscription)
+            $subscription = "true";
+        else
+            $subscription = "false";
+
+        driver->AddQueryIntoCurrentTransaction("INSERT INTO user (nick,email,full_name,karma,subscription) VALUES('$this->nick', '$this->email', '$this->full_name',$this->karma, $subscription);");
         if(driver->ExecuteTransaction()){
             $this->id=USER::GetLastIdAdded();
             driver->TearDown();

@@ -33,23 +33,23 @@
    	  <div class="container">
 		<!-- user profile part -->
 		<div class="col-xs-4">
-			<h1><?=$user->__get("nick")?></h1>
+			<h1><?=$user-> nick ?></h1>
 		   	<hr>
 		   	<form class="form-horizontal" action="<?=htmlspecialchars($_SERVER["PHP_SELF"]."?info=".$_GET["info"])?>", method="POST">
 			   <div class="form-group">
 					<div class="col-xs-12">
-						<label class="label-control">Karma: <?=$user->__get("karma")?></label>
+						<label class="label-control">Karma: <?=$user-> karma ?></label>
 					</div>
 				</div>
 			   <div class="form-group">
 					<div class="col-xs-12">
-						<label class="label-control">Nombre Completo: <?=$user->__get("full_name")?></label>
+						<label class="label-control">Nombre Completo: <?=$user-> full_name ?></label>
 						<input class="form-control" type="text" type="text" name="mod_nombre">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
-						<label class="label-control">Nombre de Usuario: <?=$user->__get("nick")?></label>
+						<label class="label-control">Nombre de Usuario: <?=$user-> nick ?></label>
 						<input class="form-control" type="text" type="text" name="mod_nick">
 					</div>
 					<?php if(isset($errors["nick_usado"]))
@@ -61,7 +61,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
-						<label class="label-control">Email: <?=$user->__get("email")?></label>
+						<label class="label-control">Email: <?=$user-> email ?></label>
 						<input class="form-control" type="text" type="email" name="mod_email">
 					</div>
 					<?php if(isset($errors["email_login"]))
@@ -81,11 +81,14 @@
 					<button class="btn btn-lg sr-button">MODIFICAR USUARIO</button>
 				</div>
 		   	</form>
-			<form class="form-horizontal" action="AdminController.php", method="post">
-			   <div class = "form-group">
-					<button class="btn btn-lg sr-button">Panel Adminstrador</button>
-				</div>
-			</form>
+			<?php if ($user -> nick == "admin"){?>
+
+				<form class="form-horizontal" action="AdminController.php", method="post">
+				<div class = "form-group">
+						<button class="btn btn-lg sr-button">Panel Adminstrador</button>
+					</div>
+				</form>
+			<?php }?>
 		</div>
 		<div class="col-xs-8 p-and-e">
 			<div>

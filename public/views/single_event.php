@@ -1,4 +1,3 @@
-<?php include "../models/Event.php";?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,43 +30,41 @@
      <div class="container">
 
     <!-- Full Article -->
-      <?php
-        $event = new Event(
-          1,
-          "Eventazo",
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod soluta corrupti earum officia vel inventore vitae quidem, consequuntur odit impedit.",
-          "Terreno salado y resbaladizo",
-          "10/10/2017",
-          "Fiesta",
-          1,
-          [1, 2, 3],
-          [1, 2, 3],
-          "../images/pino.jpg",
-          "Lomé",
-          true
-        );
-      ?>
       <div class="row">
-      <h2><?=$event->__get("name")?></h2>
+      <h2><?=$event-> name?></h2>
       <hr class="subtitle">
       <div class=" block1">
       <div class="col-xs-12 col-sm-9">
+        <img src=<?="../".$event-> image?> class="img-responsive">
         <h3>Descripción</h3>
-        <p><?=$event->__get("description")?></p>
+        <p><?=$event-> description?></p>
         <h3>Terreno</h3>
-        <p><?=$event->__get("terrain")?></p>
-        <h3>Type</h3>
-        <p><?=$event->__get("type")?></p>
-        <form style="display: inline;">
+        <p><?=$event-> terrain?></p>
+        <h3>Tipo</h3>
+        <p><?=$event-> type == 1 ?"Reforestación con semillas" : "Reforestación con plantas jóvenes"?></p>
+        <?php if($user && !$is_participant){?>
+        <form style="display: inline;" method=post action="">
+            <input type=hidden name=participar value=1>
           <button type="submit" class="btn btn-success">Participar</button>
         </form>
-        <form style="display: inline;">
+        <?php }?>
+        <?php if($is_creator){?>
+        <form style="display: inline;" action="NewEventController.php">
+          <input type="hidden" name="action" value="modify">
+          <input type="hidden" name="id" value=<?=$event->id?>>
+          <button type="submit" class="btn btn-primary">Modificar</button>
+        </form>
+        <?php }?>
+        <?php if($is_admin && !$event -> state){?>
+        <form style="display: inline;" method=post action="">
+          <input type=hidden name=validar value=1>
           <button type="submit" class="btn btn-warning">Validar</button>
         </form>
-        <h4>- By <?=$event->__get("creator_id")?></h4>
+        <?php }?>
+        <h4>- By <?=$creator_name?></h4>
         <hr>
         <ul class="list-inline">
-          <li><?=$event->__get("date")?>|</li>
+          <li><?=$event->date?>|</li>
         </ul>
       </div>
       <div class="col-xs-12 col-sm-3">

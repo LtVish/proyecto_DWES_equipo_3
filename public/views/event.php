@@ -70,9 +70,7 @@
            </form>
            <div class="panel">
              <div class="panel-heading">
-                <form action="NewEventController.php?action=create">
-                  <button class="btn btn-primary btn-block" type="submit">Nuevo Evento</button>
-                </form>
+                 <a href="NewEventController.php?action=create"> <button class="btn btn-primary btn-block" type="submit">Nuevo Evento</button></a>
              </div>
              <!--<div class="panel-body">
                <ul class="nav">

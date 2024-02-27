@@ -1,18 +1,10 @@
 <?php
     include_once dirname(__DIR__)."/db/DBdriver.php";
     include_once dirname(__DIR__)."/models/Event.php";
+    include_once dirname(__DIR__)."/models/User.php";
 
-    /*$event = Event::GetBy("id", 13);
+    $event = Event::GetBy("id", 14);
 
-    $event->__set("state", true);
+    $event -> name = "adios";
 
-    $event->Update();
-
-    echo "Evento modificado";*/
-
-    $test = Event::GetBy("id", 13);
-    $tests = $test->CalendarFilteredEvents();
-
-    foreach($tests as $test){
-        echo $test->__get("name");
-    }
+    echo $event -> name;
