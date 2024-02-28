@@ -1,4 +1,5 @@
 <?php
+include_once '../db/DBdriver.php';
 class Specie{
     private int $id;
     private string $name;
@@ -120,20 +121,6 @@ class Specie{
       }
       driver->ExecuteTransaction();
       driver->TearDown();
-  }
-
-  // Método para obtener los beneficios vinculados a una especie en un evento (Para página de logros)
-  function GetBenefitsFromSpecie(string $speciesName):array{
-        try {
-            driver->TearUp();
-            $statement=driver->prepare("SELECT e.*, s.benefits FROM event e JOIN specie_event se ON e.id=se.event_id JOIN specie s ON se.specie_id=s.id WHERE s.name = ?;");
-            $statement->execute([$speciesName]);
-            driver->TearDown();
-            return $statement->fetchAll();
-        } catch (Exception $e) {
-            echo "<p>Error: ".$e->getMessage()."</p>";
-            return [];
-        }
   }
 }
 ?>

@@ -1,10 +1,4 @@
-<?php
-	if(isset($_FILES["image"]["tmp_name"]) && is_uploaded_file($_FILES["image"]["tmp_name"])){
-		$dir = "images/";
-		$name = $_FILES["image"]["name"];
-		move_uploaded_file($_FILES["image"]["tmp_name"], $dir.$name);
-	}
-?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,10 +30,13 @@
    <div id="contact">
    	  <div class="container">
    	    <div class="col-xs-12 col-sm-8 col-sm-push-2">
-       	   <h1>Crea Nuevo Evento</h1>
+       	   <h1><?=$_GET["action"]=="create"?"Crea Nuevo Evento":"Modifica tu evento"?></h1>
        	   <hr>
+			  <p>
+					<?php echo $modified ? "¡Se ha modificado con éxito!": ""?>
+				</p>
        	   <!--<p>Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>-->
-	       <form class="form-horizontal" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>", method="POST" enctype="multipart/form-data">
+	       <form class="form-horizontal" action="<?=htmlspecialchars($_SERVER["REQUEST_URI"])?>", method="POST" enctype="multipart/form-data">
 	       	  <!--<div class="form-group">
 	       	  	<div class="col-xs-6">
 	       	  	    <label class="label-control">First Name</label>
@@ -53,41 +50,103 @@
 				 <div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Nombre</label>
-						<input class="form-control" type="text">
+						<input class="form-control" type="text" name="name" 
+						<?php
+							echo $_GET["action"] == "modify" ? "value=".$event-> name  : "";
+						?>
+						>
 					</div>
+					<?php if(isset($errors["name"]))
+					{?>
+					<div class="alert">
+  						<?=$errors["name"]?>
+					</div>
+					<?php } ?>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
-						<label class="label-control">Descripción</label>
-						<textarea class="form-control"></textarea>
+						<label class="label-control" for="description">Descripción</label>
+						<textarea class="form-control" id="description" name="description" required><?=$_GET["action"] == "modify" ?$event-> description  : ""?></textarea>
 					</div>
+					<?php if(isset($errors["description"]))
+					{?>
+					<div class="alert">
+  						<?=$errors["description"]?>
+					</div>
+					<?php } ?>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-12">
+						<label class="label-control">Lugar</label>
+						<input class="form-control" type="text" name="location" required
+						<?php
+							echo $_GET["action"] == "modify" ? "value=".$event-> location  : "";
+						?>
+						>
+					</div>
+					<?php if(isset($errors["location"]))
+					{?>
+					<div class="alert">
+  						<?=$errors["location"]?>
+					</div>
+					<?php } ?>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Terreno</label>
-						<input class="form-control" type="text">
+						<input class="form-control" type="text" name="terrain" required
+						<?php
+							echo $_GET["action"] == "modify" ? "value=".$event-> terrain : "";
+						?>
+						>
 					</div>
+					<?php if(isset($errors["terrain"]))
+					{?>
+					<div class="alert">
+  						<?=$errors["terrain"]?>
+					</div>
+					<?php } ?>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Tipo</label>
-						<select class="form-control" type="text" style="background: transparent; color:#31B0D5;">
-							<option value="rg_semiillas">Recogida de semillas</option>
-							<option value="rf_plantas" selected>Reforestación con plantas jóvenes</option>
+						<select class="form-control" type="text" style="background: transparent; color: white;" name="type" required>
+							<option value=1 <?=isset($event)&&$event-> type == "1"?"selected":""?>>
+								Reforestación con semillas
+							</option>
+							<option value=2 <?=isset($event)&&$event-> type == "2"?"selected":""?>>
+								Reforestación con plantas jóvenes
+							</option>
 						</select>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Fecha</label>
-						<input class="form-control" type="date">
+						<input class="form-control" type="date"  name="date" required
+						<?php
+							echo $_GET["action"] == "modify" ? "value=".$event-> date : "";
+						?>
+						>
 					</div>
+					<?php if(isset($errors["date"]))
+					{?>
+					<div class="alert">
+  						<?=$errors["date"]?>
+					</div>
+					<?php } ?>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Foto</label>
-						<input class="form-control" type="file" name="image">
+						<input class="form-control" type="file" name="image" <?=!$_GET["action"] == "modify" ?"required" : ""?>>
 					</div>
+					<?php if(isset($errors["image"]))
+					{?>
+					<div class="alert">
+  						<?=$errors["image"]?>
+					</div>
+					<?php } ?>
 				</div>
 	       	  <!--<div class="form-group">
 	       	  	<div class="col-xs-12">

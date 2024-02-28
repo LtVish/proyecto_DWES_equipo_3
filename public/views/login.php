@@ -1,6 +1,3 @@
-<?php
-	include_once "../models/User.php";
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,11 +28,10 @@
 <!-- Loggin and Register part -->
    <div id="contact">
    	  <div class="container">
-		<?php if (!$logged) { ?>
    	    <div class="col-xs-12 col-sm-6">
        	   <h1>Regístrate</h1>
 		   <hr>
-	       <form class="form-horizontal" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>", method="POST">
+	       <form class="form-horizontal" action="../controller/LoginController.php", method="POST">
 				 <div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Nombre completo</label>
@@ -47,14 +43,32 @@
 						<label class="label-control">Nombre de usuario</label>
 						<input class="form-control" type="text" name="nick" required>
 					</div>
+					<?php if(isset($errors["nick_usado"]))
+					{?>
+						<div class="alert">
+							<strong>Error!</strong> <?=$errors["nick_usado"]?>
+						</div>
+					<?php } ?>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Email</label>
 						<input class="form-control" type="text" type="email" name="email" required>
 					</div>
+					<?php if(isset($errors["email_usado"]))
+					{?>
+					<div class="alert">
+  						<strong>Error!</strong> <?=$errors["email_usado"]?>
+					</div>
+					<?php } ?>
+					<?php if(isset($errors["email_register"]))
+					{?>
+					<div class="alert">
+  						<strong>Error!</strong> <?=$errors["email_register"]?>
+					</div>
+					<?php } ?>
 				</div>
-				<?php if ($registered) { ?>
+				<?php if (!empty($registered) && $registered) { ?>
 					<div class="form-group">
 						<div class="col-xs-12">
 							<label class="label-control">¡Te has registrado!</label>
@@ -70,12 +84,30 @@
 		<div class="col-xs-12 col-sm-6">
 			<h1>Iniciar Sesión</h1>
 			<hr>
-			<form class="form-horizontal" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>", method="POST">
+			<form class="form-horizontal" action="../controller/LoginController.php", method="POST">
 				<div class="form-group">
-				<div class="col-xs-12">
-					<label class="label-control">Nombre de Usuario o Email</label>
-					<input class="form-control" type="text" name="login">
+					<div class="col-xs-12">
+						<label class="label-control">Nombre de usuario</label>
+						<input class="form-control" type="text" name="login_nick">
+					</div>
+					<?php if(isset($errors["no_existe"]))
+					{?>
+					<div class="alert">
+  						<strong>Error!</strong> <?=$errors["no_existe"]?>
+					</div>
+					<?php } ?>
 				</div>
+				<div class="form-group">
+					<div class="col-xs-12">
+						<label class="label-control">Email</label>
+						<input class="form-control" type="text" name="login_email">
+					</div>
+					<?php if(isset($errors["email_login"]))
+					{?>
+					<div class="alert">
+  						<strong>Error!</strong> <?=$errors["email_login"]?>
+					</div>
+					<?php } ?>
 				</div>
 				<div class = "form-group">
 					<button class="pull-right btn btn-lg sr-button">SEND</button>
@@ -84,67 +116,6 @@
 		</div>
 
 		<!-- user profile part -->
-		<?php } else { ?>
-		<div class="col-xs-4">
-			<h1><?=$user->nick?></h1>
-		   	<hr>
-		   	<form class="form-horizontal" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>", method="POST">
-			   <div class="form-group">
-					<div class="col-xs-12">
-						<label class="label-control">Karma: <?=$user->karma?></label>
-					</div>
-				</div>
-			   <div class="form-group">
-					<div class="col-xs-12">
-						<label class="label-control">Nombre Completo: <?=$user->full_name?></label>
-						<input class="form-control" type="text" type="text" name="mod_nombre">
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-xs-12">
-						<label class="label-control">Nombre de Usuario: <?=$user->nick?></label>
-						<input class="form-control" type="text" type="text" name="mod_nick">
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-xs-12">
-						<label class="label-control">Email: <?=$user->email?></label>
-						<input class="form-control" type="text" type="email" name="mod_email">
-					</div>
-				</div>
-				<input type="hidden" name="id" value="<?=$user->id?>">
-				<div class = "form-group">
-					<button class="btn btn-lg sr-button">MODIFICAR USUARIO</button>
-					<button class="btn btn-lg sr-button">VER POSTS</button>
-					<button class="btn btn-lg sr-button">PANEL ADMINISTRADOR</button>
-				</div>
-		   	</form>
-		</div>
-		<div class="col-xs-8 p-and-e">
-			<div>
-				<h1>Tus Eventos</h1>
-				<div class="form-group text-right">
-					<button class="btn btn-lg sr-button">Nuevo Evento</button>
-				</div>
-				<div class="horizontal-scroller">
-					<?php
-						for($i = 1; $i < 8; $i++){
-							?>
-							<div style="margin:10px;">
-								<h4 class="label-control">Evento <?=$i?> buen evento venid a disfrutar</h4>
-								<img src="../images/roble.jpg" class="img-responsive">
-								<p style="display:inline">Por validar</p>
-								<div class="form-group text-right">
-									<button class="btn">Modificar</button>
-								</div>
-							</div>
-					<?php
-						}
-					?>
-				</div>
-			</div>
-		</div>
-		<?php } ?>
    	  </div>
    </div>
 <!-- Principal Content Start -->

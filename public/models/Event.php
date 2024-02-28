@@ -1,8 +1,5 @@
 <?php
-spl_autoload_register(function($class_name){
-  include "../utils/".$class_name . ".php";
-    include "../models/".$class_name . ".php";
-});
+include_once '../db/DBdriver.php';
 class Event{
     private int $id;
     private string $name;
@@ -95,7 +92,7 @@ class Event{
         return new Event($row['id'],$row['name'],$row['description'],$row['terrain'],$row['date'],$row['type'],$row['creator_id'],$part_users_id,$part_species_id
         ,$row['image'],$row['location'],$row['state']);
     }catch(Exception $e){
-        echo "<p>Custom Exception: ".$e->getMessage()."</p>";
+        /*echo "<p>Custom Exception: ".$e->getMessage()."</p>";*/
         return null;
     }
 }
@@ -155,7 +152,7 @@ class Event{
       return array_filter(Event::GetAll(),
       fn($event)=>str_contains($event->name,$word)||str_contains($event->description,$word)
       ||str_contains($event->location,$word)||str_contains($event->terrain,$word)||
-  str_contains($event->type,$word)||$word==$event->date||str_contains($event->state,$word)||$word=$event->creator_id);
+  str_contains($event->type,$word)||$word==$event->date||str_contains($event->state,$word)||$word==$event->creator_id);
   }
   function ValidateEvent():void{
     driver->TearUp();
@@ -164,8 +161,8 @@ class Event{
     driver->ExecuteTransaction();
     driver->TearDown();
   }
-  function CalendarFilteredEvents():array{
-  return array_filter($this->GetAll(),fn($event)=>date_diff(date_create(),
+  static function CalendarFilteredEvents():array{
+  return array_filter(self::GetAll(),fn($event)=>date_diff(date_create(),
   date_create($event->date))->m<=3 && date_create()<date_create($event->date) && 
   date_diff(date_create(),date_create($event->date))->days<=93);
   }
@@ -238,7 +235,7 @@ class Event{
     }
 
     // Obtener beneficios que superen un valor
-    public static function getEventsWithBenefitsAbove(float $minBenefit): array {
+    /*public static function getEventsWithBenefitsAbove(float $minBenefit): array {
         try {
             driver->TearUp();
             $statement = driver->GetPDO()->prepare("
@@ -271,7 +268,7 @@ class Event{
             echo "<p>Error: " . $e->getMessage() . "</p>";
             return [];
         }
-    }
+    }*/
 
 
 /*
