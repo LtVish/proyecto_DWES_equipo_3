@@ -1,18 +1,36 @@
 <?php
-include '../models/Event.php';
-include '../models/Specie.php';
-include '../db/DBdriver.php';
+    include '../models/Event.php';
+    include '../models/Specie.php';
 
-$db = new DBdriver('database', 'reforestaDB', 'root', 'Pass1234');
+    $selectedYear = isset($_POST['year']) ? $_POST['year'] : null;
+    $selectedLocation = isset($_POST['location']) ? $_POST['location'] : null;
+    $selectedSpecies = isset($_POST['species']) ? $_POST['species'] : null;
+    $selectedBenefit = isset($_POST['benefit']) ? (float)$_POST['benefit'] : 0.0;
 
-$selectedYear = $_POST['year'] ?? null;
-$selectedLocation = $_POST['location'] ?? null;
-$selectedBenefit = $_POST['benefit'] ?? 0.0;
-$filteredEvents = [];
+    $locations = Event::getPlantedTreesLocations();
+    $years = Event::getPlantedTreesYears();
+    $species = Specie::GetAll();
+    $benefitsByValue = Event::getEventsWithBenefitsAbove($selectedBenefit);
 
-$locations = Event::getPlantedTreesLocations();
-$years = Event::getPlantedTreesYears();
-$benefitsByValue = Event::getEventsWithBenefitsAbove($selectedBenefit);
+    //Filtered parameters
+    $filteredLocations = [];
+    $filteredYears = [];
+    $filteredSpecies = [];
+    $filteredBenefits = [];
+
+    if (!empty($selectedYear)) {
+        $filteredYears = Event::getPlantedTreesCount('year', $selectedYear);
+    }
+
+    if (!empty($selectedLocation)) {
+        $filteredLocations = Event::getPlantedTreesCount('location', $selectedLocation);
+    }
+
+    if (!empty($selectedSpecies)) {
+        $filteredSpecies = Event::getPlantedTreesCount('species', $selectedSpecies);
+    }
+
+    $totalBenefits = Event::getPlantedTreesBenefits();
 ?>
 
 <!DOCTYPE html>
@@ -51,17 +69,31 @@ $benefitsByValue = Event::getEventsWithBenefitsAbove($selectedBenefit);
 
             <!-- Información sobre logros-->
             <div class="row">
-                <h4>Cantidad de árboles plantados por ubicación</h4>
-                    <?php //$locationCount = Event::getPlantedTreesCount('location', 'LocationQueSea'); ?>
+                <h4>Cantidad total de árboles plantados por ubicación</h4>
+                <ul>
+                    <?php foreach ($locations as $location): ?>
+                        <li><?php echo $location; ?> - <?php echo Event::getPlantedTreesCount('location', $location); ?></li>
+                    <?php endforeach; ?>
+                </ul>
 
-                <h4>Cantidad de árboles plantados por especie</h4>
-                    <?php //$speciesCount = Event::getPlantedTreesCount('species', 'SpeciesQueSea'); ?>
+                <h4>Cantidad total de árboles plantados por especie</h4>
+                <ul>
+                    <?php foreach (Specie::GetAll() as $specie): ?>
+                        <li><?php echo $specie->name; ?> - <?php echo Event::getPlantedTreesCount('species', $specie->id); ?></li>
+                    <?php endforeach; ?>
+                </ul>
 
-                <h4>Cantidad de árboles plantados por fecha</h4>
-                    <?php //$dateCount = Event::getPlantedTreesCount('date', 'DateQueSea'); ?>
+                <h4>Cantidad total de árboles plantados por fecha</h4>
+                <ul>
+                    <?php foreach ($years as $year): ?>
+                        <li><?php echo $year; ?> - <?php echo Event::getPlantedTreesCount('year', $year); ?></li>
+                    <?php endforeach; ?>
+                </ul>
 
                 <h4>Beneficios logrados</h4>
-                    <?php //$benefits = Species::GetBenefitsFromSpecies('SpeciesQueSea'); ?>
+                <ul>
+                    <li>Beneficio total: <?php echo $totalBenefits ?></li>
+                </ul>
             </div>
 
             <!-- Formulario para filtrar logros -->
@@ -85,6 +117,14 @@ $benefitsByValue = Event::getEventsWithBenefitsAbove($selectedBenefit);
                             <?php endforeach; ?>
                         </select>
 
+                        <label for="species">Especie</label>
+                        <select name="species" id="species" class="form-control">
+                            <option value="" selected disabled>Seleccione una especie</option>
+                            <?php foreach ($species as $specie): ?>
+                                <option value="<?php echo $specie->id; ?>"><?php echo $specie->name; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+
                         <label for="benefit">Beneficio mínimo</label><br>
                         <input type="number" name="benefit" id="benefit"><br><br>
 
@@ -94,51 +134,35 @@ $benefitsByValue = Event::getEventsWithBenefitsAbove($selectedBenefit);
                  </form>
             </div>
 
+                    <!-- Información sobre logros (FILTRADO)-->
+                    <div class="row">
+
+                        <?php if (!empty($filteredYears)): ?>
+                            <h4>Cantidad de árboles plantados por fecha (Filtrado)</h4>
+                            <ul>
+                                <li><?php echo $selectedYear; ?> - <?php echo $filteredYears ?></li>
+                            </ul>
+                        <?php endif; ?>
+
+                        <?php if (!empty($filteredLocations)): ?>
+                            <h4>Cantidad de árboles plantados por ubicación (Filtrado)</h4>
+                            <ul>
+                                <li><?php echo $selectedLocation; ?> - <?php echo $filteredLocations ?></li>
+                            </ul>
+                        <?php endif; ?>
+
+                        <?php if (!empty($filteredSpecies)): ?>
+                            <h4>Cantidad de árboles plantados por especie (Filtrado)</h4>
+                            <?php $specie = Specie::GetBy('id', $selectedSpecies); ?>
+                            <ul>
+                                <li><?php echo $specie->name; ?> - <?php echo $filteredSpecies ?></li>
+                            </ul>
+                        <?php endif; ?>
+                    </div>
+
+
         </div>
     </div>
-
-  <!-- FILTRADO Y MOSTRADO DE EVENTOS
-    <?php
-
-        $sql = "SELECT e.*, s.benefits FROM event e
-        LEFT JOIN specie_event se ON e.id = se.event_id
-        LEFT JOIN specie s ON se.specie_id = s.id
-        WHERE 1";
-
-        if (!empty($selectedYear)) {
-            $sql .= " AND YEAR(e.date) = :year";
-        }
-
-        if (!empty($selectedLocation)) {
-            $sql .= " AND e.location = :location";
-        }
-
-        if (!empty($selectedBenefit)) {
-            $sql .= " AND b.benefits = :benefit";
-        }
-
-        $statement = $pdo->prepare($sql);
-
-        if (!empty($selectedYear)) {
-            $statement->bindParam(':year', $selectedYear, PDO::PARAM_STR);
-        }
-
-        if (!empty($selectedLocation)) {
-            $statement->bindParam(':location', $selectedLocation, PDO::PARAM_STR);
-        }
-
-        if (!empty($selectedBenefit)) {
-            $statement->bindParam(':benefit', $selectedBenefit, PDO::PARAM_STR);
-        }
-
-        $statement->execute();
-
-        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-            echo $row['date'] . ' - ' . $row['location'] . ' - ' . $row['benefit'] . '<br>';
-        }
-
-    ?>
-  -->
 
 <!-- Footer -->
 <?php include 'footer.php'; ?>

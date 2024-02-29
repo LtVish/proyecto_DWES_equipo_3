@@ -90,6 +90,10 @@ class User{
             while($newRow3=$ce_posts->fetch()){
                 array_push($posts_created_by_id,$newRow3['id']);
             }
+
+            if ($row['subscription'] == null) {
+                $row['subscription'] = 0;
+            }
             return new User($row['id'],$row['nick'],$row['email'],$row['full_name'],$row['karma'],$row['subscription'],$created_by_id,$part_events_id,$posts_created_by_id);
         }catch(Exception $e){
             echo "<p>Custom Exception: ".$e->getMessage()."</p>";
@@ -114,13 +118,26 @@ class User{
         $result = $statement->fetchAll();
 
         if ($result) {
-            $updateSql = "UPDATE user SET suscrito = 1 WHERE nick=:nick AND email=:email AND full_name=:fullName";
+            $updateSql = "UPDATE user SET subscription = 1 WHERE nick=:nick AND email=:email AND full_name=:fullName";
             $updateStatement = driver->GetPDO()->prepare($updateSql);
             $updateStatement->bindParam(':nick', $nick);
             $updateStatement->bindParam(':email', $email);
             $updateStatement->bindParam(':fullName', $fullName);
             $updateStatement->execute();
             return true;
+        } else {
+            return false;
+        }
+    }
+    public static function getIdByNick($nick) {
+        driver->TearUp();
+        $sql = "SELECT id FROM user WHERE nick=:nick";
+        $statement = driver->GetPDO()->prepare($sql);
+        $statement->bindParam(':nick', $nick);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        if ($result) {
+            return $result[0]['id'];
         } else {
             return false;
         }

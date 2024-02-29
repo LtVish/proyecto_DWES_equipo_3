@@ -68,6 +68,19 @@ include_once '../db/DBdriver.php';
             return null;
         }
     }
+
+    public static function GetByCategory($category):array{
+        $posts=[];
+        driver->TearUp();
+        $statement=driver->ExecuteSQLQuery("select * from post where category='".$category."';");
+        while($row=$statement->fetch()){
+            array_push($posts,new Post($row['id'],$row['title'],$row['content'],$row['tags'],$row['category'],$row['publish_date'],
+            $row['image'],$row['likes'],$row['creator_id']));
+        }
+        driver->TearDown();
+        return $posts;
+
+    }
         private static function GetLastIdAdded():int{
             driver->TearUp();
             $row=driver->ExecuteSQLQuery("select max(id) from post;")->fetch();

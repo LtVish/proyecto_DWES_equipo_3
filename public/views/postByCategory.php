@@ -1,52 +1,14 @@
 <?php
 
-include '../models/Post.php';
-include_once "cards/post_card.php";
+    include '../models/Post.php';
+    include_once "cards/post_card.php";
 
-// Se comprueba si se ha enviado un nuevo post y se registra en la base de datos
-if (isset($_POST['title'])) {
-    $title = $_POST['title'];
-    $content = $_POST['content'];
-    $tags = $_POST['tags'];
-    $category = $_POST['category'];
-    $date = $_POST['date'];
-    $formattedDate = date('Y-m-d', strtotime($date));
-
-        if(isset($_FILES["image"]) && $_FILES["image"]["error"] == UPLOAD_ERR_OK){
-            $dir = "../images/";
-            $name = uniqid() . '_' . $_FILES["image"]["name"];
-            $target_file = $dir . basename($name);
-
-            if(move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)){
-                $image = $target_file;
-            }
-        }
-
-        if(isset($_SESSION['user'])){
-            $author = $_SESSION['user']->getId(user);
-        } else {
-        // Error, no se ha iniciado sesión
-        }
-
-    $likes = 0;
-
-    $newPost = new Post(
-        1,
-        $title,
-        $content,
-        $tags,
-        $category,
-        $formattedDate,
-        $image,
-        $likes,
-        $author
-    );
-    $newPost->Register();
-}
-
-// Se obtienen todos los posts de la base de datos
-$posts = Post::GetAll();
-
+    if(isset($_GET['category'])){
+      $category = $_GET['category'];
+      $postByCategory = Post::GetByCategory($category);
+    } else{
+      $postByCategory = Post::GetAll();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -55,14 +17,14 @@ $posts = Post::GetAll();
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <title>Re-Forest-A | Blog</title>
+	  <title>Re-Forest-A | Logros </title>
 
-    <!-- Bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
-    <!-- Bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <!-- Font Awesome icons -->
-    <link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
+  	<!-- Bootstrap core css -->
+  	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
+  	<!-- Bootstrap core css -->
+  	<link rel="stylesheet" type="text/css" href="../css/style.css">
+  	<!-- Font Awesome icons -->
+  	<link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -72,6 +34,7 @@ $posts = Post::GetAll();
     <![endif]-->
 </head>
 
+<body id="page-top">
 
 <!-- Navbar -->
 <?php include 'nav-bar.php'; ?>
@@ -85,7 +48,7 @@ $posts = Post::GetAll();
         <div class="col-xs-12 col-sm-8 row">
             <?php
             // Se muestran todos los posts
-                foreach ($posts as $post) {
+                foreach ($postByCategory as $post) {
                   show_demo_post($post);
                 }
             ?>
@@ -102,14 +65,13 @@ $posts = Post::GetAll();
                 </ul>
               </nav>
         </div>
-      <!-- End of Blog Post -->  
+      <!-- End of Blog Post -->
 
-    <?php include 'sidebar_blog.php' ?>
-       
+      <?php include 'sidebar_blog.php' ?>
       </div>
      </div>
    </div>
-<!-- End of Principal Content Start --> 
+<!-- End of Principal Content Start -->
 
 <!-- Footer -->
 <?php include 'footer.php'; ?>

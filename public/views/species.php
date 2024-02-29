@@ -1,7 +1,6 @@
 <?php
 
     include '../models/Specie.php';
-    include '../db/DBdriver.php'
 
 ?>
 
@@ -49,10 +48,10 @@
                         <h5 class="card-title">Nombre científico: <?php echo $specie->name; ?></h5>
                         <p class="card-text">Clima: <?php echo $specie->climate; ?></p>
                         <p class="card-text">Región: <?php echo $specie->region; ?></p>
-                        <p class="card-text">Tiempo que tarda en hacerse adulta: <?php echo $specie->time_to_grow; ?></p>
+                        <p class="card-text">Tiempo que tarda en hacerse adulta: <?php echo $specie->growth_time_days; ?></p>
                         <p class="card-text">Beneficios: <?php echo $specie->benefits; ?></p>
                         <img src="<?php echo $specie->image; ?>" alt="<?php echo $specie->name; ?>" class="img-fluid">
-                        <a href="<?php echo $specie->wikipedia; ?>" class="btn btn-primary">Más información</a>
+                        <a href="<?php echo $specie->link; ?>" class="btn btn-primary">Más información</a>
                     </div>
                 </div>
             </div>

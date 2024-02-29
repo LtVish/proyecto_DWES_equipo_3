@@ -18,7 +18,10 @@
 
     function create_footer(Post $post){?>
           <div class="post-footer">
-          <a href="single_post.html" class="btn">Read more</a>
+          <form method="post" action="single_post.php" style="display:inline;">
+              <input type="hidden" name="post_id" value=<?=$post->__get("id")?>>
+              <button type="submit" class="btn">Read more</button>
+          </form>
           <?php $category = $post->__get("category");
           $categoryName = getCategoryName($category);?>
           <span style="border: 1px solid black; border-radius:5px; padding: 9px; background-color:darkgrey; font-weight:bold; color:white"><?=$categoryName?></span>
@@ -27,8 +30,10 @@
                 <span style="border: 1px solid black; border-radius:5px; padding: 5px; background-color:#31B0D5; color:white"><?=$tag?></span>
               <?php }?>
             <span style="margin-left: 1em">
-              <i class="fa fa-heart sr-icons" style="color:red;"></i> <?=$post->__get("likes")?>
-              <button class="fa fa-heart sr-icons" style="color:white; padding: 5px; background-color:red; border-radius:15px;">Like</i></button>
+                <form method="post" action="like.php" style="display:inline;">
+                <input type="hidden" name="post_id" value=<?=$post->__get("id")?>>
+                    <button type="submit" class="fa fa-heart sr-icons" style="color:red;"></i> <?=$post->__get("likes")?>
+                </form>
             </span>
           </div>
         </div>

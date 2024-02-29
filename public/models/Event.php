@@ -179,8 +179,8 @@ class Event{
                 case 'location':
                     $statement = driver->prepare("SELECT COUNT(*) AS count FROM event WHERE location=?");
                     break;
-                case 'date':
-                    $statement = driver->prepare("SELECT COUNT(*) AS count FROM event WHERE date=?");
+                case 'year':
+                    $statement = driver->prepare("SELECT COUNT(*) AS count FROM event WHERE YEAR(date) = ?");
                     break;
                 case 'species':
                     $statement = driver->prepare("SELECT COUNT(*) AS count FROM event JOIN specie_event ON event.id = specie_event.event_id WHERE specie_event.specie_id=?");
@@ -198,6 +198,21 @@ class Event{
         }
     }
 
+    // Obtener los beneficios totales obtenidos por plantar árboles
+    public static function getPlantedTreesBenefits(): float {
+        try {
+            driver->TearUp();
+            $statement = driver->GetPDO()->prepare("SELECT SUM(benefits) AS benefits FROM specie");
+            $statement->execute();
+            $row = $statement->fetch();
+            driver->TearDown();
+            return $row['benefits'] ?? 0;
+        } catch (PDOException | Exception $e) {
+            echo "<p>Error: ".$e->getMessage()."</p>";
+            return 0;
+        }
+    }
+
     // Obtener los años en los que se han plantado árboles
     public static function getPlantedTreesYears(): array {
         try {
@@ -206,7 +221,7 @@ class Event{
             $statement->execute();
             $years = [];
             while ($row = $statement->fetch(PDO::FETCH_COLUMN)) {
-                $years[] = $row['year'];
+                $years[] = $row;
             }
             driver->TearDown();
             return $years;
@@ -224,7 +239,7 @@ class Event{
             $statement->execute();
             $locations = [];
             while ($row = $statement->fetch(PDO::FETCH_COLUMN)) {
-                $locations[] = $row['location'];
+                $locations[] = $row;
             }
             driver->TearDown();
             return $locations;
@@ -235,11 +250,11 @@ class Event{
     }
 
     // Obtener beneficios que superen un valor
-    /*public static function getEventsWithBenefitsAbove(float $minBenefit): array {
+    public static function getEventsWithBenefitsAbove(float $minBenefit): array {
         try {
             driver->TearUp();
             $statement = driver->GetPDO()->prepare("
-                SELECT e.*
+                SELECT e.id, e.name, e.description, e.terrain, e.date, e.type, e.creator_id, e.image, e.location, e.state
                 FROM event e
                 JOIN specie_event se ON e.id = se.event_id
                 JOIN specie s ON se.specie_id = s.id
@@ -257,9 +272,11 @@ class Event{
                     $row['date'],
                     $row['type'],
                     $row['creator_id'],
+                    [],
+                    [],
                     $row['image'],
                     $row['location'],
-                    $row['state']
+                    false
                 );
             }
             driver->TearDown();
@@ -268,7 +285,69 @@ class Event{
             echo "<p>Error: " . $e->getMessage() . "</p>";
             return [];
         }
-    }*/
+    }
+
+public static function getFilteredEvents($selectedYear, $selectedLocation, $selectedBenefit)
+{
+    try {
+        driver->TearUp();
+        $statement = driver->GetPDO();
+
+        $sql = "SELECT e.id, e.name, e.description, e.terrain, e.date, e.type, e.creator_id, e.image, e.location, e.state,
+        COUNT(*) AS tree_count
+        FROM event e
+        LEFT JOIN specie_event se ON e.id = se.event_id
+        LEFT JOIN specie s ON se.specie_id = s.id
+        WHERE 1";
+
+        $parameters = [];
+
+        if (!empty($selectedYear)) {
+            $sql .= " AND YEAR(e.date) = ?";
+        }
+
+        if (!empty($selectedLocation)) {
+            $sql .= " AND e.location = ?";
+        }
+
+        if (!empty($selectedBenefit)) {
+            $sql .= " AND s.benefits > ?";
+        }
+
+        $sql .= " GROUP BY e.id, e.name, e.description, e.terrain, e.date, e.type, e.creator_id, e.image, e.location, e.state";
+
+        $statement = $statement->prepare($sql);
+        $statement->execute();
+        $events = [];
+
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            $state = isset($row['state']) ? (bool)$row['state'] : false;
+
+            $events[] = new Event(
+                $row['id'],
+                $row['name'],
+                $row['description'],
+                $row['terrain'],
+                $row['date'],
+                $row['type'],
+                $row['creator_id'],
+                [],
+                [],
+                $row['image'],
+                $row['location'],
+                $state,
+                $row['tree_count'] ?? 0
+            );
+        }
+
+        return $events;
+
+    } catch (PDOException $e) {
+        echo "<p>Error: " . $e->getMessage() . "</p>";
+        return [];
+    }
+}
+
 
 
 /*
