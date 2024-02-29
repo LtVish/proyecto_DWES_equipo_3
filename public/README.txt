@@ -18,17 +18,24 @@ Funcionalidades mínimas del proyecto Re-Fores-Ta
 
 EN PROCESO:
 
+Controladores - Rutas
+
 Blog
-    Restringir el posteo solo a usuarios registrados (misma restriccion que en newsletter)
-    Filtrado de post por categorias
-    ¿Validación de campos en el formulario de posteo?
-    Botón de "me gusta" que aumente en 1 los likes del post
-    Aprobación por parte del administrador.
+    Boton de like en página single_post
+    Entradas recientes (Vista Sidebar_blog)
+    Aprobación por parte del administrador. ????
+
+
+
+-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+
 
 POR PROBAR:
+Blog
+    Restringir el posteo solo a usuarios registrados
+    Botón de "me gusta" que aumente en 1 los likes del post
 
-10. Resumen de estadísticas de especies empleados en reforestaciones con detalle de las mismas -> Nuestras especies
-11. Resumen de estadísticas de cantidad de árboles reforestados por ubicación, fecha y especie -> Logros
+-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
 
 HECHO:
 
@@ -36,6 +43,8 @@ HECHO:
         - validación de campos (filtrado)
         - persistencia en BD (por ejemplo, inserción de flag de "alta en el newsletter" en usuarios)
         - mensaje de suscripción correcta (vista)
+            Filtrado de post por categorias (Vista PostByCategory)
 
+11. Resumen de estadísticas de cantidad de árboles reforestados por ubicación, fecha y especie -> Logros
 12. Formulario de contacto: solo validación de campos y respuesta de formulario enviado con éxito, sin persistencia ni gestión de correos
 Página "About us".

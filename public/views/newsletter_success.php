@@ -1,8 +1,5 @@
 <?php
 include '../models/User.php';
-include '../db/DBdriver.php';
-
-$db = new DBdriver('database', 'reforestaDB', 'root', 'Pass1234');
 ?>
 
 <!DOCTYPE html>
@@ -47,8 +44,8 @@ $db = new DBdriver('database', 'reforestaDB', 'root', 'Pass1234');
                 $nick = $_POST['nick'] ?? '';
                 $email = $_POST['email'] ?? '';
 
-                $user = new User(0, $nick, $email, $fullName, 0, [], []);
-                $result = $user->subscriptionToNewsletter($nick, $email, $fullName, $db);
+                $user = new User(0, $nick, $email, $fullName, 0, 0, [], [], []);
+                $result = $user->subscriptionToNewsletter($nick, $email, $fullName);
 
                 if ($result) { ?>
                     <p>Te has suscrito correctamente a nuestra newsletter.</p>
@@ -58,7 +55,6 @@ $db = new DBdriver('database', 'reforestaDB', 'root', 'Pass1234');
                     <button type="button" class="btn btn-primary" onclick="location.href='newsletter.php'">Intentar de nuevo</button><?php
                 }
 
-                $db->TearDown();
                 ?>
 
 

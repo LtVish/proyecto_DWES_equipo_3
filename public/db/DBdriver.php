@@ -1,4 +1,5 @@
 <?php
+
     class DBdriver{
         private PDO|null $pdo;
         private string $host;
@@ -24,6 +25,9 @@
         }
         function GetPDO():PDO{
             return $this->pdo;
+        }
+        function prepare($query) {
+            return $this->GetPDO()->prepare($query);
         }
         function ExecuteSQLQuery(string $query,bool $fetch=true,array $bind=[]):PDOStatement{
             $statement=$this->GetPDO()->prepare($query);
