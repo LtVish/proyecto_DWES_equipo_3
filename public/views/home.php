@@ -98,21 +98,6 @@
     <!-- End of Navigation Table Content -->
       </div><!-- End of Index-body box -->
 
-    <!-- Newsletter form -->
-      <div class="index-form text-center">
-        <h3>SUSCRIBE TO OUR NEWSLETTER </h3>
-        <h5>Suscribe to receive our News and Gifts</h5>
-        <form class="form-horizontal">
-          <div class="form-group">
-            <div class="col-xs-12 col-sm-6 col-sm-push-3 col-md-4 col-md-push-4">
-            <input class="form-control" type="text" placeholder="Type here your email address">
-            <a href="" class="btn btn-lg sr-button">SUBSCRIBE</a>
-            </div>
-          </div>
-        </form>
-      </div>
-    <!-- End of Newsletter form -->  
-
     <!-- Box within partners name and logo -->
       <!--<div class="last-box row">
         <div class="col-xs-12 col-sm-4 col-sm-push-4 last-block">

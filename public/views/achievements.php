@@ -5,12 +5,12 @@
     $selectedYear = isset($_POST['year']) ? $_POST['year'] : null;
     $selectedLocation = isset($_POST['location']) ? $_POST['location'] : null;
     $selectedSpecies = isset($_POST['species']) ? $_POST['species'] : null;
-    $selectedBenefit = isset($_POST['benefit']) ? (float)$_POST['benefit'] : 0.0;
+    $selectedBenefit = isset($_POST['benefit']) ? $_POST['benefit'] : null;
 
     $locations = Event::getPlantedTreesLocations();
     $years = Event::getPlantedTreesYears();
     $species = Specie::GetAll();
-    $benefitsByValue = Event::getEventsWithBenefitsAbove($selectedBenefit);
+    $benefits = Event::getPlantedTreesBenefits();
 
     //Filtered parameters
     $filteredLocations = [];
@@ -30,7 +30,9 @@
         $filteredSpecies = Event::getPlantedTreesCount('species', $selectedSpecies);
     }
 
-    $totalBenefits = Event::getPlantedTreesBenefits();
+    if (!empty($selectedBenefit)) {
+        $filteredBenefits = Event::getPlantedTreesCount('benefits', $selectedBenefit);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +94,9 @@
 
                 <h4>Beneficios logrados</h4>
                 <ul>
-                    <li>Beneficio total: <?php echo $totalBenefits ?></li>
+                    <?php foreach ($benefits as $benefit): ?>
+                        <li><?php echo $benefit; ?></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
 
@@ -125,8 +129,13 @@
                             <?php endforeach; ?>
                         </select>
 
-                        <label for="benefit">Beneficio mínimo</label><br>
-                        <input type="number" name="benefit" id="benefit"><br><br>
+                        <label for="benefit">Beneficio</label>
+                        <select name="benefit" id="benefit" class="form-control">
+                            <option value="" selected disabled>Seleccione un beneficio</option>
+                            <?php foreach ($benefits as $benefit): ?>
+                                <option value="<?php echo $benefit; ?>"><?php echo $benefit; ?></option>
+                            <?php endforeach; ?>
+                        </select>
 
                         <button type="submit" class="btn btn-primary">Filtrar</button>
 
@@ -156,6 +165,13 @@
                             <?php $specie = Specie::GetBy('id', $selectedSpecies); ?>
                             <ul>
                                 <li><?php echo $specie->name; ?> - <?php echo $filteredSpecies ?></li>
+                            </ul>
+                        <?php endif; ?>
+
+                        <?php if (!empty($filteredBenefits)): ?>
+                            <h4>Beneficios logrados (Filtrado)</h4>
+                            <ul>
+                                <li><?php echo $selectedBenefit; ?> - <?php echo $filteredBenefits ?></li>
                             </ul>
                         <?php endif; ?>
                     </div>

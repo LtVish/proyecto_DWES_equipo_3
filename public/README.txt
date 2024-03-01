@@ -43,7 +43,8 @@ HECHO:
         - validación de campos (filtrado)
         - persistencia en BD (por ejemplo, inserción de flag de "alta en el newsletter" en usuarios)
         - mensaje de suscripción correcta (vista)
-            Filtrado de post por categorias (Vista PostByCategory)
+
+Filtrado de post por categorias (Vista PostByCategory)
 
 11. Resumen de estadísticas de cantidad de árboles reforestados por ubicación, fecha y especie -> Logros
 12. Formulario de contacto: solo validación de campos y respuesta de formulario enviado con éxito, sin persistencia ni gestión de correos
