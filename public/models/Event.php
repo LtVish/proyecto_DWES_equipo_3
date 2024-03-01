@@ -65,9 +65,10 @@ class Event{
           while($s_row=$s_statement->fetch()){
               array_push($species,$s_row['id']);
           }
+          $state = $row['state'] ?? false;
           array_push($events,new Event($row['id'],$row['name'],$row['description'],$row['terrain'],$row['date'],
             $row['type'],$row['creator_id'],
-            $participants,$species,$row['image'],$row['location'],$row["state"]));
+            $participants,$species,$row['image'],$row['location'],$state));
       }
       driver->TearDown();
       return $events;
@@ -88,9 +89,10 @@ class Event{
         }
         while($newRow2=$ce_specie->fetch()){
             array_push($part_species_id,$newRow2['id']);
-        }
+        }+
+        $state = $row['state'] ?? false;
         return new Event($row['id'],$row['name'],$row['description'],$row['terrain'],$row['date'],$row['type'],$row['creator_id'],$part_users_id,$part_species_id
-        ,$row['image'],$row['location'],$row['state']);
+        ,$row['image'],$row['location'],$state);
     }catch(Exception $e){
         /*echo "<p>Custom Exception: ".$e->getMessage()."</p>";*/
         return null;
@@ -171,7 +173,7 @@ class Event{
 // Métodos necesario para página de logros:
 
     // Obtener el número de árboles plantados según el tipo de búsqueda
-    public static function getPlantedTreesCount(string $searchType, string|int $value): int {
+    public static function getPlantedTreesCount(string $searchType, string $value): int {
         try {
             driver->TearUp();
             $statement = null;
@@ -184,6 +186,9 @@ class Event{
                     break;
                 case 'species':
                     $statement = driver->prepare("SELECT COUNT(*) AS count FROM event JOIN specie_event ON event.id = specie_event.event_id WHERE specie_event.specie_id=?");
+                    break;
+                case 'benefits':
+                    $statement = driver->prepare("SELECT COUNT(*) AS count FROM event JOIN specie_event ON event.id = specie_event.event_id JOIN specie ON specie_event.specie_id = specie.id WHERE specie.benefits = ?");
                     break;
                 default:
                     throw new Exception("Invalid search type");
@@ -198,18 +203,21 @@ class Event{
         }
     }
 
-    // Obtener los beneficios totales obtenidos por plantar árboles
-    public static function getPlantedTreesBenefits(): float {
+    // Obtener los beneficios de los árboles plantados
+    public static function getPlantedTreesBenefits(): array {
         try {
             driver->TearUp();
-            $statement = driver->GetPDO()->prepare("SELECT SUM(benefits) AS benefits FROM specie");
+            $statement = driver->GetPDO()->prepare("SELECT DISTINCT benefits FROM specie");
             $statement->execute();
-            $row = $statement->fetch();
+            $benefits = [];
+            while ($row = $statement->fetch(PDO::FETCH_COLUMN)) {
+                $benefits[] = $row;
+            }
             driver->TearDown();
-            return $row['benefits'] ?? 0;
+            return $benefits;
         } catch (PDOException | Exception $e) {
             echo "<p>Error: ".$e->getMessage()."</p>";
-            return 0;
+            return [];
         }
     }
 
@@ -245,44 +253,6 @@ class Event{
             return $locations;
         } catch (PDOException | Exception $e) {
             echo "<p>Error: ".$e->getMessage()."</p>";
-            return [];
-        }
-    }
-
-    // Obtener beneficios que superen un valor
-    public static function getEventsWithBenefitsAbove(float $minBenefit): array {
-        try {
-            driver->TearUp();
-            $statement = driver->GetPDO()->prepare("
-                SELECT e.id, e.name, e.description, e.terrain, e.date, e.type, e.creator_id, e.image, e.location, e.state
-                FROM event e
-                JOIN specie_event se ON e.id = se.event_id
-                JOIN specie s ON se.specie_id = s.id
-                WHERE s.benefits > :minBenefit
-            ");
-            $statement->bindParam(':minBenefit', $minBenefit, PDO::PARAM_STR);
-            $statement->execute();
-            $events = [];
-            while ($row = $statement->fetch()) {
-                $events[] = new Event(
-                    $row['id'],
-                    $row['name'],
-                    $row['description'],
-                    $row['terrain'],
-                    $row['date'],
-                    $row['type'],
-                    $row['creator_id'],
-                    [],
-                    [],
-                    $row['image'],
-                    $row['location'],
-                    false
-                );
-            }
-            driver->TearDown();
-            return $events;
-        } catch (PDOException $e) {
-            echo "<p>Error: " . $e->getMessage() . "</p>";
             return [];
         }
     }
