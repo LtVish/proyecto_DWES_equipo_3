@@ -1,16 +1,3 @@
-<?php
-
-    include '../models/Post.php';
-    include_once "cards/post_card.php";
-
-    if(isset($_GET['category'])){
-      $category = $_GET['category'];
-      $postByCategory = Post::GetByCategory($category);
-    } else{
-      $postByCategory = Post::GetAll();
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,22 +35,32 @@
         <div class="col-xs-12 col-sm-8 row">
             <?php
             // Se muestran todos los posts
-                foreach ($postByCategory as $post) {
+                foreach ($show_posts as $post) {
                   show_demo_post($post);
                 }
             ?>
 
-          <!-- Pagination -->
-              <nav class="text-left">
-                <ul class="pagination">
-                  <li class="active"><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#" aria-label="suivant">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a></li>
-                </ul>
-              </nav>
+            <!-- Pagination -->
+          <nav class="text-center" style="font-size: 20px;">
+            <ul class="pagination">
+              <?php if($page > 1){
+              ?>
+            <li><a href="<?= !isset($_GET["search"]) ? "PostByCategoryController.php?category=".$_GET['category']."&page=".($page - 1) :
+            "PostByCategoryController.php?category=".$_GET['category']."&page=".($page - 1)."&search=".$_GET["search"] ?>"
+            aria-label="Anterior"><span aria-hidden="true">&laquo; Anterior</span></a></li>
+                <span aria-hidden="true">&laquo; Anterior</span>
+              </a></li>
+              <?php } ?>
+              <?php if($page < $pages){
+              ?>
+            <li><a href="<?= !isset($_GET["search"]) ? "PostByCategoryController.php?category=".$_GET['category']."&page=".($page + 1) :
+            "PostByCategoryController.php?category=".$_GET['category']."&page=".($page + 1)."&search=".$_GET["search"] ?>"
+            aria-label="Siguiente"><span aria-hidden="true">Siguiente &raquo;</span></a></li>
+                <span aria-hidden="true">Siguiente &raquo;</span>
+              </a></li>
+              <?php } ?>
+            </ul>
+          </nav>
         </div>
       <!-- End of Blog Post -->
 

@@ -47,6 +47,7 @@ create table event(
     creator_id int,
     image varchar(100),
     location varchar(100),
+    state boolean,
 
     primary key(id),
     foreign key(creator_id) references user(id)
@@ -97,11 +98,11 @@ VALUES ('Tomate', 'Templado', 'Todo el mundo', 90, 'Rico en antioxidantes y vita
 
 -- Inserts para la tabla 'event'
 INSERT INTO event (name, description, terrain, date, type, creator_id, image, location)
-VALUES ('Feria de Agricultura Sostenible', 'Evento anual dedicado a la promoción de la agricultura sostenible.', 'Campo', '2024-03-15', 'Feria', 3, 'feria_agricultura.jpg', 'Granja Ecológica "La Esperanza"'),
-       ('Taller de Cocina Saludable', 'Aprende a preparar platos saludables y deliciosos con ingredientes naturales.', 'Cocina', '2024-03-20', 'Taller', 4, 'taller_cocina.jpg', 'Escuela de Cocina "Sabores Naturales"'),
-       ('Excursión de Observación de Aves', 'Únete a nosotros para una emocionante excursión de observación de aves en el bosque local.', 'Bosque', '2024-03-25', 'Excursión', 2, 'observacion_aves.jpg', 'Reserva Natural "Los Pájaros"'),
-       ('Conferencia sobre Sostenibilidad', 'Conferencia dirigida a promover la conciencia sobre la sostenibilidad y el medio ambiente.', 'Centro de Convenciones', '2024-03-30', 'Conferencia', 5, 'conferencia_sostenibilidad.jpg', 'Centro de Convenciones "Verde Vivo"'),
-       ('Curso de Jardinería Urbana', 'Aprende a cultivar tu propio jardín en casa, incluso en espacios pequeños.', 'Terraza', '2024-04-05', 'Curso', 3, 'curso_jardineria.jpg', 'Vivero "Jardines Urbanos"');
+VALUES ('Feria de Agricultura Sostenible', 'Evento anual dedicado a la promoción de la agricultura sostenible.', 'Campo', '2024-03-15', 'Feria', 3, 'feria_agricultura.jpg', 'Granja Ecológica "La Esperanza"', 'true'),
+       ('Taller de Cocina Saludable', 'Aprende a preparar platos saludables y deliciosos con ingredientes naturales.', 'Cocina', '2024-03-20', 'Taller', 4, 'taller_cocina.jpg', 'Escuela de Cocina "Sabores Naturales"', 'false'),
+       ('Excursión de Observación de Aves', 'Únete a nosotros para una emocionante excursión de observación de aves en el bosque local.', 'Bosque', '2024-03-25', 'Excursión', 2, 'observacion_aves.jpg', 'Reserva Natural "Los Pájaros"', 'false'),
+       ('Conferencia sobre Sostenibilidad', 'Conferencia dirigida a promover la conciencia sobre la sostenibilidad y el medio ambiente.', 'Centro de Convenciones', '2024-03-30', 'Conferencia', 5, 'conferencia_sostenibilidad.jpg', 'Centro de Convenciones "Verde Vivo"', 'true'),
+       ('Curso de Jardinería Urbana', 'Aprende a cultivar tu propio jardín en casa, incluso en espacios pequeños.', 'Terraza', '2024-04-05', 'Curso', 3, 'curso_jardineria.jpg', 'Vivero "Jardines Urbanos"', 'true');
 
 -- Inserts para la tabla 'participant'
 INSERT INTO participant (user_id, event_id)

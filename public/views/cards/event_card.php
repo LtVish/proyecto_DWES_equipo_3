@@ -1,4 +1,3 @@
-
 <?php
 function show_demo_post(Event $event){?>
         <div class="col-xs-12 col-sm-12">
@@ -8,6 +7,7 @@ function show_demo_post(Event $event){?>
               <img class="img-responsive" src=<?= $event-> image?> alt="post's picture">
             </div>
             <div class="post-body">
+            <!-- Por arreglar, lleva a post y no al evento seleccionado.-->
               <h3><a href="single_post.html"><strong><?=$event-> name ?></strong></a></h3>
               <hr>
               <p><?=substr($event->description, 0, 250)?>

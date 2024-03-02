@@ -37,22 +37,22 @@
               show_demo_post($event);
             }
           ?>
-              <nav class="text-center" style="font-size: 20px;">
-                <ul class="pagination">
-                  <?php if($page > 1){
-                  ?>
-                  <li><a href=<?=!isset($_GET["search"])?"EventsController.php?page=".($page -1):"EventsController.php?page=".($page -1)."&search=".$_GET["search"]?> aria-label="suivant">
-                    <span aria-hidden="true">&laquo; Anterior</span>
-                  </a></li>
-                  <?php } ?>
-                  <?php if($page < $pages){
-                  ?>
-                  <li><a href=<?=!isset($_GET["search"])?"EventsController.php?page=".($page +1):"EventsController.php?page=".($page +1)."&search=".$_GET["search"]?> aria-label="suivant">
-                    <span aria-hidden="true">Siguiente &raquo;</span>
-                  </a></li>
-                  <?php } ?>
-                </ul>
-              </nav>
+          <nav class="text-center" style="font-size: 20px;">
+            <ul class="pagination">
+              <?php if($page > 1){
+              ?>
+              <li><a href=<?=!isset($_GET["search"])?"EventsController.php?page=".($page -1):"EventsController.php?page=".($page -1)."&search=".$_GET["search"]?> aria-label="suivant">
+                <span aria-hidden="true">&laquo; Anterior</span>
+              </a></li>
+              <?php } ?>
+              <?php if($page < $pages){
+              ?>
+              <li><a href=<?=!isset($_GET["search"])?"EventsController.php?page=".($page +1):"EventsController.php?page=".($page +1)."&search=".$_GET["search"]?> aria-label="suivant">
+                <span aria-hidden="true">Siguiente &raquo;</span>
+              </a></li>
+              <?php } ?>
+            </ul>
+          </nav>
         </div>
       <!-- End of Blog Post -->  
 

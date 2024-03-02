@@ -33,7 +33,7 @@
 
             <!-- Formulario de contacto -->
             <div class="row">
-                 <form action="contact_success.php" method="post">
+                 <form action="../views/contact_success.php" method="post">
                      <div class="form-group">
 
                         <label for="name">Nombre</label>

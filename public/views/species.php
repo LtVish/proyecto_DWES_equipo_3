@@ -1,9 +1,3 @@
-<?php
-
-    include '../models/Specie.php';
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,14 +1,10 @@
-<?php
-include '../models/User.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <title>Re-Forest-A | Contacto</title>
+	  <title>Re-Forest-A | Newsletter</title>
 
   	<!-- Bootstrap core css -->
   	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
@@ -24,6 +20,7 @@ include '../models/User.php';
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body id="page-top">
 
 <!-- Navbar -->
@@ -34,29 +31,15 @@ include '../models/User.php';
    <div id="contact">
         <div class="container">
 
-            <h2>Suscríbete a nuestra newsletter</h2>
+        <h2>Suscríbete a nuestra newsletter</h2>
 
-                <?php
-
-                $name = $_POST['name'] ?? '';
-                $surname = $_POST['surname'] ?? '';
-                $fullName = $name . " " . $surname;
-                $nick = $_POST['nick'] ?? '';
-                $email = $_POST['email'] ?? '';
-
-                $user = new User(0, $nick, $email, $fullName, 0, 0, [], [], []);
-                $result = $user->subscriptionToNewsletter($nick, $email, $fullName);
-
-                if ($result) { ?>
-                    <p>Te has suscrito correctamente a nuestra newsletter.</p>
-                    <button type="button" class="btn btn-primary" onclick="location.href='index.php'">Volver a la página principal</button> <?php
-                } else { ?>
-                    <p>El usuario introducido no existe en nuestra base de datos.</p>
-                    <button type="button" class="btn btn-primary" onclick="location.href='newsletter.php'">Intentar de nuevo</button><?php
-                }
-
-                ?>
-
+        <?php if ($result) { ?>
+            <p>Te has suscrito correctamente a nuestra newsletter.</p>
+            <button type="button" class="btn btn-primary" onclick="location.href='HomeController.php'">Volver a la página principal</button> <?php
+        } else { ?>
+            <p>El usuario introducido no existe en nuestra base de datos.</p>
+            <button type="button" class="btn btn-primary" onclick="location.href='../views/newsletter.php'">Intentar de nuevo</button><?php
+        } ?>
 
         </div>
     </div>

@@ -35,7 +35,7 @@
 
             <!-- Formulario de contacto -->
             <div class="row">
-                 <form action="newsletter_success.php" method="post">
+                 <form action="../controller/NewsletterSuccessController.php" method="post">
                      <div class="form-group">
 
                         <label for="name">Nombre</label>
