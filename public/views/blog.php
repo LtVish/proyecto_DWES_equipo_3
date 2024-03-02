@@ -1,52 +1,6 @@
 <?php
-
-include '../models/Post.php';
-include_once "cards/post_card.php";
-
-// Se comprueba si se ha enviado un nuevo post y se registra en la base de datos
-if (isset($_POST['title'])) {
-    $title = $_POST['title'];
-    $content = $_POST['content'];
-    $tags = $_POST['tags'];
-    $category = $_POST['category'];
-    $date = $_POST['date'];
-    $formattedDate = date('Y-m-d', strtotime($date));
-
-        if(isset($_FILES["image"]) && $_FILES["image"]["error"] == UPLOAD_ERR_OK){
-            $dir = "../images/";
-            $name = uniqid() . '_' . $_FILES["image"]["name"];
-            $target_file = $dir . basename($name);
-
-            if(move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)){
-                $image = $target_file;
-            }
-        }
-
-        if(isset($_SESSION['user'])){
-            $author = $_SESSION['user']->getId(user);
-        } else {
-        // Error, no se ha iniciado sesión
-        }
-
-    $likes = 0;
-
-    $newPost = new Post(
-        1,
-        $title,
-        $content,
-        $tags,
-        $category,
-        $formattedDate,
-        $image,
-        $likes,
-        $author
-    );
-    $newPost->Register();
-}
-
-// Se obtienen todos los posts de la base de datos
-$posts = Post::GetAll();
-
+    include_once "../views/cards/post_card.php";
+    include_once "../models/User.php";
 ?>
 
 <!DOCTYPE html>
@@ -85,31 +39,39 @@ $posts = Post::GetAll();
         <div class="col-xs-12 col-sm-8 row">
             <?php
             // Se muestran todos los posts
-                foreach ($posts as $post) {
-                  show_demo_post($post);
+                foreach ($show_posts as $post) {
+                    if ($posts != null) {
+                        show_demo_post($post);
+                    } else {
+                        echo "<h2>No hay posts</h2>";
+                    }
                 }
             ?>
 
-          <!-- Pagination -->
-              <nav class="text-left">
-                <ul class="pagination">
-                  <li class="active"><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#" aria-label="suivant">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a></li>
-                </ul>
-              </nav>
-        </div>
-      <!-- End of Blog Post -->  
+            <!-- Pagination -->
+          <nav class="text-center" style="font-size: 20px;">
+            <ul class="pagination">
+              <?php if($page > 1){
+              ?>
+              <li><a href=<?=!isset($_GET["search"])?"BlogController.php?page=".($page -1):"BlogController.php?page=".($page -1)."&search=".$_GET["search"]?> aria-label="suivant">
+                <span aria-hidden="true">&laquo; Anterior</span>
+              </a></li>
+              <?php } ?>
+              <?php if($page < $pages){
+              ?>
+              <li><a href=<?=!isset($_GET["search"])?"BlogController.php?page=".($page +1):"BlogController.php?page=".($page +1)."&search=".$_GET["search"]?> aria-label="suivant">
+                <span aria-hidden="true">Siguiente &raquo;</span>
+              </a></li>
+              <?php } ?>
+            </ul>
+          </nav>
+      </div>
 
     <?php include 'sidebar_blog.php' ?>
-       
-      </div>
+
      </div>
    </div>
-<!-- End of Principal Content Start --> 
+<!-- End of Principal Content Start -->
 
 <!-- Footer -->
 <?php include 'footer.php'; ?>

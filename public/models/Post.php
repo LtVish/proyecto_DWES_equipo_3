@@ -47,7 +47,7 @@ include_once '../db/DBdriver.php';
         static function GetAll():array{
           $posts=[];
           driver->TearUp();
-          $statement=driver->ExecuteSQLQuery("select * from post;");
+          $statement=driver->ExecuteSQLQuery("select * from post ORDER BY publish_date DESC;");
           while($row=$statement->fetch()){
               array_push($posts,new Post($row['id'],$row['title'],$row['content'],$row['tags'],$row['category'],$row['publish_date'],
             $row['image'],$row['likes'],$row['creator_id']));
@@ -69,18 +69,24 @@ include_once '../db/DBdriver.php';
         }
     }
 
-    public static function GetByCategory($category):array{
+    public static function IncreaseLikes($id_post){
+        driver->TearUp();
+        driver->ExecuteSQLQuery("UPDATE post SET likes = likes + 1 WHERE id=".$id_post.";");
+        driver->TearDown();
+    }
+
+    public static function GetByCategoryAndOrdered($category):array{
         $posts=[];
         driver->TearUp();
-        $statement=driver->ExecuteSQLQuery("select * from post where category='".$category."';");
+        $statement=driver->ExecuteSQLQuery("select * from post where category='".$category."' ORDER BY publish_date DESC;");
         while($row=$statement->fetch()){
             array_push($posts,new Post($row['id'],$row['title'],$row['content'],$row['tags'],$row['category'],$row['publish_date'],
             $row['image'],$row['likes'],$row['creator_id']));
         }
         driver->TearDown();
         return $posts;
-
     }
+
         private static function GetLastIdAdded():int{
             driver->TearUp();
             $row=driver->ExecuteSQLQuery("select max(id) from post;")->fetch();

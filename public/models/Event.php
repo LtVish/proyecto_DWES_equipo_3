@@ -128,6 +128,7 @@ class Event{
         }
       driver->TearDown();
   }
+
   //Aquí se puede cambiar el creador del evento (No se puede cambiar el estado)
   function Update(){
     driver->TearUp();
@@ -150,6 +151,7 @@ class Event{
       driver->ExecuteTransaction();
       driver->TearDown();
   }
+
   static function FilteredEvents(string $word):array{
       return array_filter(Event::GetAll(),
       fn($event)=>str_contains($event->name,$word)||str_contains($event->description,$word)

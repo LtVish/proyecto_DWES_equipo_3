@@ -7,7 +7,7 @@
               <img class="img-responsive" src=<?= $post->__get("image")?> alt="post's picture">
             </div>
             <div class="post-body">
-              <h3><a href="single_post.html"><strong><?=$post->__get("title")?></strong></a></h3>
+              <h3><strong><?=$post->__get("title")?></strong></h3>
               <hr>
               <p><?=substr($post->content, 0, 250)?>
               </p>
@@ -18,7 +18,7 @@
 
     function create_footer(Post $post){?>
           <div class="post-footer">
-          <form method="post" action="single_post.php" style="display:inline;">
+          <form method="post" action="../../controller/SinglePostController.php" style="display:inline;">
               <input type="hidden" name="post_id" value=<?=$post->__get("id")?>>
               <button type="submit" class="btn">Read more</button>
           </form>
@@ -30,7 +30,7 @@
                 <span style="border: 1px solid black; border-radius:5px; padding: 5px; background-color:#31B0D5; color:white"><?=$tag?></span>
               <?php }?>
             <span style="margin-left: 1em">
-                <form method="post" action="like.php" style="display:inline;">
+                <form method="post" action="<?=htmlspecialchars($_SERVER["REQUEST_URI"])?>" style="display:inline;">
                 <input type="hidden" name="post_id" value=<?=$post->__get("id")?>>
                     <button type="submit" class="fa fa-heart sr-icons" style="color:red;"></i> <?=$post->__get("likes")?>
                 </form>

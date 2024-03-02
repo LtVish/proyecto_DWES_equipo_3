@@ -12,7 +12,12 @@
                     <hr>
                     <ul class="list-inline">
                     <li><?=$post-> publish_date ?> |</li>
-                    <li><a href="">LIKE</a></li>
+                    <span style="margin-left: 1em">
+                        <form method="post" action="<?=htmlspecialchars($_SERVER["REQUEST_URI"])?>" style="display:inline;">
+                        <input type="hidden" name="like" value=<?=$post->__get("id")?>>
+                            <button type="submit" class="fa fa-heart sr-icons" style="color:red;"></i> <?=$post->__get("likes")?>
+                        </form>
+                    </span>
                     </ul>
                 </div>
 

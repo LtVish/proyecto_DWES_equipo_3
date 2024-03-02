@@ -32,7 +32,7 @@
             <h2>Contacta con nosotros</h2>
             <p>Mensaje enviado correctamente.</p>
 
-            <button type="button" class="btn btn-primary" onclick="location.href='index.php'">Volver a la página principal</button>
+            <button type="button" class="btn btn-primary" onclick="location.href='../Controller/HomeController.php'">Volver a la página principal</button>
 
         </div>
     </div>

@@ -1,18 +1,3 @@
-<?php
-
-    include '../models/Post.php';
-    include 'cards/post_profile.php';
-    include '../models/User.php';
-
-    if(isset($_POST['post_id'])) {
-        $post_id = $_POST['post_id'];
-
-        $post = Post::GetBy('id', $post_id);
-        $user = User::GetBy('id', $post->creator_id);
-    }
-
-?>
-
 <!DOCTYPE html>
 <html>
 <head>

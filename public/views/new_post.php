@@ -1,17 +1,10 @@
-<?php
-	if(isset($_FILES["image"]["tmp_name"]) && is_uploaded_file($_FILES["image"]["tmp_name"])){
-		$dir = "images/";
-		$name = $_FILES["image"]["name"];
-		move_uploaded_file($_FILES["image"]["tmp_name"], $dir.$name);
-	}
-?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <title>Re-Forest-A | Nuevo evento</title>
+	  <title>Re-Forest-A | Nuevo Post</title>
 
 	<!-- Bootstrap core css -->
 	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
@@ -39,32 +32,32 @@
        	   <h1>Nueva entrada en el blog</h1>
        	   <hr>
 
-	       <form class="form-horizontal" action="blog.php", method="POST" enctype="multipart/form-data">
+	       <form class="form-horizontal" action="../controller/BlogController.php?page=1", method="POST" enctype="multipart/form-data">
 				 <div class="form-group">
 					<div class="col-xs-12">
 					    <label class="label-control" for="title">Título</label>
-						<input class="form-control" type="text" name="title" id="title">
+						<input class="form-control" type="text" name="title" id="title" required>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control" for="content">Contenido</label>
-						<textarea class="form-control" name="content" id="content"></textarea>
+						<textarea class="form-control" name="content" id="content" required></textarea>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control" for="tags">Etiquetas (Separadas por "/")</label>
-						<input class="form-control" type="text" name="tags" id="tags">
+						<input class="form-control" type="text" name="tags" id="tags" required>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control" for="category">Categoría</label>
-						<select class="form-control" type="text" name="category" id="category" style="background: transparent; color:#31B0D5;">
+						<select class="form-control" type="text" name="category" id="category" required style="background: transparent; color:#31B0D5;">
 							<option value="" selected disabled>Selecciona una categoría</option>
 							<option value="1">Conciencia ambiental</option>
 							<option value="2">Proyectos de reforestación</option>
@@ -79,14 +72,14 @@
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control" for="date">Fecha</label>
-						<input class="form-control" name="date" id="date" type="date">
+						<input class="form-control" name="date" id="date" type="date" required>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control" for="image">Foto</label>
-						<input class="form-control" type="file" name="image" id="image">
+						<input class="form-control" type="file" name="image" id="image" required>
 					</div>
 				</div>
 
