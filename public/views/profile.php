@@ -106,7 +106,7 @@
 						}
 
 						foreach($posts as $post){
-							show_post($post);
+							show_post($post, $user);
 						}
 					?>
 				</div>

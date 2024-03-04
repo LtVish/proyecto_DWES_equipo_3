@@ -71,8 +71,8 @@
            <div id="category1" class="tab-pane active" >
               <div class="row popup-gallery">
                 <?php
-                  for($i = 0; $i < 8 ; $i++){
-                    generate_card($events[$i], true);
+                  foreach($events as $event){
+                    generate_card($event, true);
                   }
                   ?>
               </div>

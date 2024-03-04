@@ -1240,4 +1240,14 @@ input {
 	margin-bottom: 10px;
 }
 
+#anterior, #siguiente{
+	margin-right: 5px;
+	margin-left: 5px;
+	color: #31b0d5;
+}
+#anterior, #siguiente{
+	background-color: #31b0d5;
+	color: #f1f1f1;
+}
+
 /*-- End of Contact Page Stylesheet --*/
