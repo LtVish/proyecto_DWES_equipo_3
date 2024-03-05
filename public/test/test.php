@@ -3,8 +3,6 @@
     include_once dirname(__DIR__)."/models/Event.php";
     include_once dirname(__DIR__)."/models/User.php";
 
-    $event = Event::GetBy("id", 14);
+    $palabra = "palabra";
 
-    $event -> name = "adios";
-
-    echo $event -> name;
+    echo(str_contains('', $palabra));

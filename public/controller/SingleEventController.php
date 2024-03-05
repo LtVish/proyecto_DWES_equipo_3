@@ -36,7 +36,7 @@
     }
 
     session_start();
-    $user;
+    $user = "";
     $is_from_user;
 
     if(isset($_SESSION["user"]))

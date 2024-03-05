@@ -31,20 +31,19 @@
     $species = Specie::GetAll();
 ?>
 
-<div class="container">
+<div class="container" style="margin-top: 100px;">
     <h2>Nuestras Especies</h2>
     <div class="row">
         <?php foreach ($species as $specie): ?>
             <div class="col-md-4">
                 <div class="card">
-                    <img src="<?php echo $specie->image; ?>" class="card-img-top" alt="<?php echo $specie->name; ?>">
+                    <img src="<?php echo $specie->image; ?>" width=200 hieght=200 alt="<?php echo $specie->name; ?>">
                     <div class="card-body">
                         <h5 class="card-title">Nombre científico: <?php echo $specie->name; ?></h5>
                         <p class="card-text">Clima: <?php echo $specie->climate; ?></p>
                         <p class="card-text">Región: <?php echo $specie->region; ?></p>
                         <p class="card-text">Tiempo que tarda en hacerse adulta: <?php echo $specie->growth_time_days; ?></p>
                         <p class="card-text">Beneficios: <?php echo $specie->benefits; ?></p>
-                        <img src="<?php echo $specie->image; ?>" alt="<?php echo $specie->name; ?>" class="img-fluid">
                         <a href="<?php echo $specie->link; ?>" class="btn btn-primary">Más información</a>
                     </div>
                 </div>

@@ -19,6 +19,19 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .pagination > li > button{
+            margin-right: 5px;
+            margin-left: 5px;
+            color: #31b0d5;
+            background-color: white;
+            border-radius: 6px;
+          }
+          .pagination > li > button:hover{
+            background-color: #31b0d5;
+            color: #f1f1f1;
+          }
+    </style>
 </head>
 <body id="page-top">
 
@@ -37,19 +50,20 @@
               show_demo_post($event);
             }
           ?>
+          <form class="form-horizontal" action="EventsController.php" method=get>
           <nav class="text-center" style="font-size: 20px;">
             <ul class="pagination">
               <?php if($page > 1){
               ?>
-              <li><a href=<?=!isset($_GET["search"])?"EventsController.php?page=".($page -1):"EventsController.php?page=".($page -1)."&search=".$_GET["search"]?> aria-label="suivant">
+              <li><button id="anterior" type=submit name="page" value=<?=$page -1?> aria-label="suivant">
                 <span aria-hidden="true">&laquo; Anterior</span>
-              </a></li>
+              </button></li>
               <?php } ?>
               <?php if($page < $pages){
               ?>
-              <li><a href=<?=!isset($_GET["search"])?"EventsController.php?page=".($page +1):"EventsController.php?page=".($page +1)."&search=".$_GET["search"]?> aria-label="suivant">
+              <li><button id="siguiente" class="eventos" type=submit name="page" value=<?=($page +1)?> aria-label="suivant">
                 <span aria-hidden="true">Siguiente &raquo;</span>
-              </a></li>
+              </button></li>
               <?php } ?>
             </ul>
           </nav>
@@ -58,33 +72,51 @@
 
       <!-- Side bar -->  
         <div class="col-xs-12 col-sm-4">
-           <form class="form-horizontal" action="EventsController.php?page=1" method=get>
              <div class="input-group">
-              <input type="hidden" name="page" value=1>
-               <input class="form-control" type="text" placeholder="Buscar" name="search">
+               <input class="form-control" type="text" placeholder="Buscar" name="search" 
+                <?=isset($_GET["search"])?"value='".$_GET["search"]."'":""?>>
                <span class="input-group-btn">
                   <a class="btn" type="submit"><i class="fa fa-search"></i></a>
                </span>
+             </div>
+             <div class="panel-body" style="color: black;">
+                <label for="filter_location">
+                  <input type="checkbox" id="filter_location" name="location" 
+                  <?=isset($_GET["location"])?"checked":""?>> Ubicación
+                </label><br>
+
+                <label for="filter_type">
+                  <input type="checkbox" id="filter_type" name="type_terrain"
+                  <?=isset($_GET["type_terrain"])?"checked":""?>> Tipo Terreno
+                </label><br>
+
+                <label for="filter_type">
+                  <input type="checkbox" id="filter_type" name="type"
+                  <?=isset($_GET["type"])?"checked":""?>> Tipo Evento
+                </label><br>
+
+                <label for="filter_date">
+                  <input type="checkbox" id="filter_date" name="date"
+                  <?=isset($_GET["date"])?"checked":""?>> Fecha
+                </label><br>
+
+                <label for="filter_state">
+                  <input type="checkbox" id="filter_state" name="state"
+                    <?=isset($_GET["state"])?"checked":""?>> Validado
+                </label><br>
+
+                <label for="filter_user">
+                  <input type="checkbox" id="filter_user" name="user"
+                  <?=isset($_GET["user"])?"checked":""?>> Anfitrión
+                </label>
              </div>
            </form>
            <div class="panel">
              <div class="panel-heading">
                  <a href="NewEventController.php?action=create"> <button class="btn btn-primary btn-block" type="submit">Nuevo Evento</button></a>
              </div>
-             <!--<div class="panel-body">
-               <ul class="nav">
-                 <li><a href="#">Category I</a></li>
-                 <li><a href="#">Category II</a></li>
-                 <li><a href="#">Category III</a></li>
-                 <li><a href="#">Category IV</a></li>
-                 <li class="last"><a href="#">Category V</a></li>
-               </ul>
-             </div>-->
            </div>
-           <div class="well">
-             <h4>Atención</h4>
-             <p>A continuación se muestran los eventos añadidos en el orden cronológcio</p>
-           </div>
+
             <!--<h3>Recent Posts</h3>
             <hr>
              <div class="post">
@@ -113,7 +145,7 @@
                  <h4 class="text-left"><a href="single_post.html"><strong>Consequuntur</strong></a></h4>
                </div>
              </div>
-        </div>-->
+        </div>--!>
       <!-- End of Side bar --> 
        
       </div>
