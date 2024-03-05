@@ -30,7 +30,7 @@
             $likes = 0;
 
             if(isset($_FILES["image"]) && $_FILES["image"]["error"] == UPLOAD_ERR_OK){
-                $dir = "../images/";
+                $dir = "../images/blog/";
                 $name = uniqid() . '_' . $_FILES["image"]["name"];
                 $target_file = $dir . basename($name);
 
@@ -49,6 +49,8 @@
                         $author
                     );
                     $newPost->Register();
+                    $_SESSION["user"] = User::GetBy("id", $author);
+                    header("Location: BlogController.php");
                 }
             }
         } else {

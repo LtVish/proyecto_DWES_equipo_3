@@ -62,15 +62,12 @@
                         break;
                     
                     case "type":
-                        if($value == "1"){
-                            $event->type =  "1";
+                        if(trim($value)){
+                            $event-> type = trim($value);
                             $validated_inputs++;
                         }
-                        elseif($value == "2"){
-                            $event->type = "2";
-                            $validated_inputs++;
-                        }
-                        $debugger = $validated_inputs;
+                        else
+                            $errors["type"] = "Introduce el tipo del evento";
                         break;
                     
                     case "date":

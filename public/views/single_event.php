@@ -41,7 +41,7 @@
         <h3>Terreno</h3>
         <p><?=$event-> terrain?></p>
         <h3>Tipo</h3>
-        <p><?=$event-> type == 1 ?"Reforestación con semillas" : "Reforestación con plantas jóvenes"?></p>
+        <p><?=$event-> type?></p>
         <?php if(isset($user) && $user && !$is_participant){?>
         <form style="display: inline;" method=post action="">
             <input type=hidden name=participar value=1>
