@@ -25,6 +25,7 @@
         $date = $_POST['date'];
         $formattedDate = date('Y-m-d', strtotime($date));
 
+        //
         if(isset($_SESSION["user"])){
             $author = $_SESSION["user"]->id;
             $likes = 0;

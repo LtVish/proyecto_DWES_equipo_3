@@ -13,12 +13,6 @@
     <!-- Font Awesome icons -->
     <link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
     <style>
         .pagination > li > button{
             margin-right: 5px;
@@ -116,37 +110,6 @@
                  <a href="NewEventController.php?action=create"> <button class="btn btn-primary btn-block" type="submit">Nuevo Evento</button></a>
              </div>
            </div>
-
-            <!--<h3>Recent Posts</h3>
-            <hr>
-             <div class="post">
-               <div class="post-heading">
-                 <span>10 APRIL</span>
-                 <img class="img-responsive" src="../images/blog/wedding.jpg" alt="post's picture">
-               </div>
-               <div class="post-body">
-                 <span>
-                 <i class="fa fa-heart sr-icons"></i> 10
-                 <i class="fa fa-comments sr-icons"></i> 10
-                 </span>
-                 <h4 class="text-left"><a href="single_post.html"><strong>Aliquam soluta</strong></a></h4>
-               </div>
-             </div>
-             <div class="post">
-               <div class="post-heading">
-                 <span>12 MAY</span>
-                 <img class="img-responsive" src="../images/blog/woman.jpg" alt="post's picture">
-               </div>
-               <div class="post-body">
-                 <span>
-                 <i class="fa fa-heart sr-icons"></i> 10
-                 <i class="fa fa-comments sr-icons"></i> 10
-                 </span>
-                 <h4 class="text-left"><a href="single_post.html"><strong>Consequuntur</strong></a></h4>
-               </div>
-             </div>
-        </div>--!>
-      <!-- End of Side bar --> 
        
       </div>
      </div>

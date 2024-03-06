@@ -12,13 +12,6 @@
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<!-- Font Awesome icons -->
 	<link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body id="page-top">
 
@@ -32,6 +25,7 @@
        	   <h1>Nueva entrada en el blog</h1>
        	   <hr>
 
+            <!-- Formulario para insertar un nuevo post al blog -->
 	       <form class="form-horizontal" action="../controller/BlogController.php?page=1", method="POST" enctype="multipart/form-data">
 				 <div class="form-group">
 					<div class="col-xs-12">
@@ -57,7 +51,8 @@
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control" for="category">Categoría</label>
-						<select class="form-control" type="text" name="category" id="category" required style="background: transparent; color:#31B0D5;">
+						<select class="form-control" type="text" name="category" id="category"
+						required style="background: transparent; color:#31B0D5;">
 							<option value="" selected disabled>Selecciona una categoría</option>
 							<option value="1">Conciencia ambiental</option>
 							<option value="2">Proyectos de reforestación</option>

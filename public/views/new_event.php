@@ -35,18 +35,8 @@
 			  <p>
 					<?php echo $modified ? "¡Se ha modificado con éxito!": ""?>
 				</p>
-       	   <!--<p>Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>-->
+
 	       <form class="form-horizontal" action="<?=htmlspecialchars($_SERVER["REQUEST_URI"])?>", method="POST" enctype="multipart/form-data">
-	       	  <!--<div class="form-group">
-	       	  	<div class="col-xs-6">
-	       	  	    <label class="label-control">First Name</label>
-	       	  		<input class="form-control" type="text">
-	       	  	</div>
-	       	  	<div class="col-xs-6">
-	       	  	    <label class="label-control">Last Name</label>
-	       	  		<input class="form-control" type="text">
-	       	  	</div>
-	       	  </div>-->
 				 <div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Nombre</label>
@@ -171,25 +161,6 @@
 				<button class="pull-right btn btn-lg sr-button">SEND</button>
 			  </div>
 	       </form>
-	       <hr class="divider">
-	       <div class="address">
-	           <!--<p>Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero.</p>
-		       <div class="ending text-center">
-			        <ul class="list-inline social-buttons">
-			            <li><a href="#"><i class="fa fa-facebook sr-icons"></i></a>
-			            </li>
-			            <li><a href="#"><i class="fa fa-twitter sr-icons"></i></a>
-			            </li>
-			            <li><a href="#"><i class="fa fa-google-plus sr-icons"></i></a>
-			            </li>
-			        </ul>
-				    <ul class="list-inline contact">
-				       <li class="footer-number"><i class="fa fa-phone sr-icons"></i>  (00228)92229954 </li>
-				       <li><i class="fa fa-envelope sr-icons"></i>  kouvenceslas93@gmail.com</li>
-				    </ul>
-				    <p>Photography Fanatic Template &copy; 2017</p>
-		       </div>-->
-	       </div>
 	    </div>   
    	  </div>
    </div>

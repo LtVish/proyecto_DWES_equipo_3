@@ -12,13 +12,6 @@
   	<link rel="stylesheet" type="text/css" href="../css/style.css">
   	<!-- Font Awesome icons -->
   	<link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body id="page-top">
@@ -60,10 +53,13 @@
                     <?php foreach ($benefits as $benefit): ?>
                         <li><?php echo $benefit; ?></li>
                     <?php endforeach; ?>
-                </ul>
+                </ul><br><hr><br>
             </div>
 
             <!-- Formulario para filtrar logros -->
+
+            <h2>Filtros: </h2>
+
             <div class="row">
                  <form action="<?=htmlspecialchars($_SERVER["REQUEST_URI"])?>" method="post">
                      <div class="form-group">
@@ -102,43 +98,45 @@
 
                         <button type="submit" class="btn btn-primary">Filtrar</button>
 
-                     </div>
-                 </form>
+                     </div><br>
+                 </form><hr><br>
             </div>
 
-                    <!-- Información sobre logros (FILTRADO)-->
-                    <div class="row">
+            <!-- Información sobre logros (FILTRADO)-->
 
-                        <?php if (!empty($filteredYears)): ?>
-                            <h4>Cantidad de árboles plantados por fecha (Filtrado)</h4>
-                            <ul>
-                                <li><?php echo $selectedYear; ?> - <?php echo $filteredYears ?></li>
-                            </ul>
-                        <?php endif; ?>
+            <h2>Resultados filtrados</h2>
 
-                        <?php if (!empty($filteredLocations)): ?>
-                            <h4>Cantidad de árboles plantados por ubicación (Filtrado)</h4>
-                            <ul>
-                                <li><?php echo $selectedLocation; ?> - <?php echo $filteredLocations ?></li>
-                            </ul>
-                        <?php endif; ?>
+            <div class="row">
 
-                        <?php if (!empty($filteredSpecies)): ?>
-                            <h4>Cantidad de árboles plantados por especie (Filtrado)</h4>
-                            <?php $specie = Specie::GetBy('id', $selectedSpecies); ?>
-                            <ul>
-                                <li><?php echo $specie->name; ?> - <?php echo $filteredSpecies ?></li>
-                            </ul>
-                        <?php endif; ?>
+                <?php if (!empty($filteredYears)): ?>
+                    <h4>Cantidad de árboles plantados por fecha (Filtrado)</h4>
+                    <ul>
+                        <li><?php echo $selectedYear; ?> - <?php echo $filteredYears ?></li>
+                    </ul>
+                <?php endif; ?>
 
-                        <?php if (!empty($filteredBenefits)): ?>
-                            <h4>Beneficios logrados (Filtrado)</h4>
-                            <ul>
-                                <li><?php echo $selectedBenefit; ?> - <?php echo $filteredBenefits ?></li>
-                            </ul>
-                        <?php endif; ?>
-                    </div>
+                <?php if (!empty($filteredLocations)): ?>
+                    <h4>Cantidad de árboles plantados por ubicación (Filtrado)</h4>
+                    <ul>
+                        <li><?php echo $selectedLocation; ?> - <?php echo $filteredLocations ?></li>
+                    </ul>
+                <?php endif; ?>
 
+                <?php if (!empty($filteredSpecies)): ?>
+                    <h4>Cantidad de árboles plantados por especie (Filtrado)</h4>
+                    <?php $specie = Specie::GetBy('id', $selectedSpecies); ?>
+                    <ul>
+                        <li><?php echo $specie->name; ?> - <?php echo $filteredSpecies ?></li>
+                    </ul>
+                <?php endif; ?>
+
+                <?php if (!empty($filteredBenefits)): ?>
+                    <h4>Beneficios logrados (Filtrado)</h4>
+                    <ul>
+                        <li><?php echo $selectedBenefit; ?> - <?php echo $filteredBenefits ?></li>
+                    </ul>
+                <?php endif; ?>
+            </div>
 
         </div>
     </div>
