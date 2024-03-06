@@ -42,6 +42,15 @@
         <p><?=$event-> terrain?></p>
         <h3>Tipo</h3>
         <p><?=$event-> type?></p>
+        <h3>Especies</h3>
+        <p>
+          <?php 
+            foreach($event->species_id as $id){
+              $specie = Specie::GetBy("id", $id);
+              echo '"'.$specie->name.'"  ';
+            }
+          ?>
+        </p>
         <?php if(isset($user) && $user && !$is_participant){?>
         <form style="display: inline;" method=post action="">
             <input type=hidden name=participar value=1>
@@ -70,27 +79,28 @@
       <div class="col-xs-12 col-sm-3">
         <h4>Añade Especies</h4>
         <hr class="subtitle1">
-        <form>
+        <?php
+              if(isset($is_creator) && $is_creator){?>
+        <form method="post" action="">
             <div>
               <br>
               <label for="especie">Especie: </label>
-              <select>
-                <option value="1">Especie 1</option>
-                <option value="2">Especie 2</option>
-                <option value="3">Especie 3</option>
-                <option value="4">Especie 4</option>
+              <select name="specie" id="specie">
+                <?php
+                  foreach($species as $specie){
+                    ?>
+                    <option value=<?=$specie->id?>><?=$specie->name?></option>
+                <?php
+                  }
+                ?>
               </select>
-            </div>
-            <br>
-            <div>
-              <label for="cantidad">Cantidad: </label>
-              <input type=number id=cantidad>
             </div>
             <br>
             <div>
               <button type="submit" class="btn btn-primary">Añadir</button>
             </div>
         </form>
+        <?php } ?>
       </div>
     <!-- End of Full Article -->
      </div>

@@ -2,8 +2,8 @@
     function generate_card($publicado, bool $event){
 ?>
         <div class="col-xs-12 col-sm-6 col-md-3">
-                <div class="sol">
-                  <img  src=<?=$publicado->image?> width=485 height=300>
+                <div class="sol" style="text-align: center">
+                  <img  src=<?=$publicado->image?>  width=430 height=300>
                   <div class="behind">
                       <div class="head text-center">
                         <ul class="list-inline">
