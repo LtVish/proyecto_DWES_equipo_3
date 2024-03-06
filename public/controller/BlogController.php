@@ -13,7 +13,7 @@
         $post_id = $_POST['post_id'];
         Post::IncreaseLikes($post_id);
 
-        header("Location: ".$_SERVER['PHP_SELF']);
+        header("Location: ".$_SERVER['PHP_SELF']."?page=".$_GET['page']);
     }
 
     // Se comprueba si se ha enviado un nuevo post y se registra en la base de datos
@@ -30,7 +30,7 @@
             $likes = 0;
 
             if(isset($_FILES["image"]) && $_FILES["image"]["error"] == UPLOAD_ERR_OK){
-                $dir = "../images/";
+                $dir = "../images/blog/";
                 $name = uniqid() . '_' . $_FILES["image"]["name"];
                 $target_file = $dir . basename($name);
 
@@ -49,6 +49,8 @@
                         $author
                     );
                     $newPost->Register();
+                    $_SESSION["user"] = User::GetBy("id", $author);
+                    header("Location: BlogController.php");
                 }
             }
         } else {
