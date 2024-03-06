@@ -19,7 +19,7 @@
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/login.php') ? 'active' : ''; ?> lien">
                 <a href="LoginController.php"><i class="fa fa-user sr-icons"></i> Login </a></li>
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/event.php') ? 'active' : ''; ?> lien">
-                <a href="EventsController.php?"><i class="fa fa-calendar sr-icons"></i> Eventos </a></li>
+                <a href="EventsController.php?page=1"><i class="fa fa-calendar sr-icons"></i> Eventos </a></li>
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/species.php') ? 'active' : ''; ?> lien">
                 <a href="SpeciesController.php"><i class="fa fa-tree sr-icons"></i> Nuestras especies </a></li>
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/achievements.php') ? 'active' : ''; ?> lien">

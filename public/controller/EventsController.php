@@ -76,7 +76,6 @@
     $filtered_events = array_reverse($filtered_events);
 
     $pages = count($filtered_events)%3 ? intdiv(count($filtered_events), 3) + 1 : intdiv(count($filtered_events),3);
-    
     $page = (int)$_GET["page"];
     //echo "<h1>$page</h1>";
 

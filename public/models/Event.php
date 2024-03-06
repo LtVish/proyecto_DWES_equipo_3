@@ -181,16 +181,21 @@ class Event{
             $statement = null;
             switch ($searchType) {
                 case 'location':
-                    $statement = driver->prepare("SELECT COUNT(*) AS count FROM event WHERE location=?");
+                    $statement = driver->prepare("SELECT COUNT(specie_event.specie_id) AS count FROM event
+                    JOIN specie_event ON event.id = specie_event.event_id WHERE event.location=?");
                     break;
                 case 'year':
-                    $statement = driver->prepare("SELECT COUNT(*) AS count FROM event WHERE YEAR(date) = ?");
+                    $statement = driver->prepare("SELECT COUNT(specie_event.specie_id) AS count FROM event
+                    JOIN specie_event ON event.id = specie_event.event_id WHERE YEAR(event.date) = ?");
                     break;
                 case 'species':
-                    $statement = driver->prepare("SELECT COUNT(*) AS count FROM event JOIN specie_event ON event.id = specie_event.event_id WHERE specie_event.specie_id=?");
+                    $statement = driver->prepare("SELECT COUNT(*) AS count FROM event
+                    JOIN specie_event ON event.id = specie_event.event_id WHERE specie_event.specie_id=?");
                     break;
                 case 'benefits':
-                    $statement = driver->prepare("SELECT COUNT(*) AS count FROM event JOIN specie_event ON event.id = specie_event.event_id JOIN specie ON specie_event.specie_id = specie.id WHERE specie.benefits = ?");
+                    $statement = driver->prepare("SELECT COUNT(*) AS count FROM event
+                    JOIN specie_event ON event.id = specie_event.event_id
+                    JOIN specie ON specie_event.specie_id = specie.id WHERE specie.benefits = ?");
                     break;
                 default:
                     throw new Exception("Invalid search type");
