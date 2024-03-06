@@ -15,7 +15,7 @@
         $post_id = $_POST['post_id'];
         Post::IncreaseLikes($post_id);
 
-        header("Location: ".$_SERVER['PHP_SELF']);
+        header("Location: ".$_SERVER['PHP_SELF']."?page=".$_GET['page']);
     }
 
     // Paginación
