@@ -1,6 +1,7 @@
 <?php
     include_once "../models/Event.php";
     include_once "../models/User.php";
+    include_once "../models/Specie.php";
 
     function add_participant(Event $event, User $user){
         if(isset($_POST["participar"])){
@@ -35,9 +36,43 @@
         }
     }
 
+    //Función para obtener las especies en el menu desplegable del form añadir especie
+    function getSpecies(array & $species, Event $event){
+        $species_id = [];
+        $species = Specie::GetAll();
+        foreach($species as $specie){
+            $species_id[] = $specie->id;
+        }
+
+        //Para ahorrar obtener todos los id's de nuevo de los eventos y poder registrar el evento pues
+        //ya estan hechas todas las comprobaciones
+        if(isset($_POST["specie"]) && is_numeric($_POST["specie"])){
+            echo "<h1>Hooooolllaaaa</h1>";
+            $id = (int) $_POST["specie"];
+            if(!in_array($id, $event->species_id)){
+                $s_ids = $event->species_id;
+                $s_ids[] = $id;
+                $event->species_id = $s_ids;
+                $event->Update();
+                $event = Event::GetBy("id", $event->id);
+            }
+        }
+
+        $species = [];
+
+        foreach($species_id as $id){
+            if(!in_array($id, $event->species_id))
+                $species[] = Specie::GetBy("id", $id);
+        }
+    }
+
     session_start();
-    $user;
+    $species = [];
+    $user = "";
     $is_from_user;
+    $is_participant = false;
+    $is_creator = false;
+    $is_admin = false;
 
     if(isset($_SESSION["user"]))
         $user = $_SESSION["user"];
@@ -51,14 +86,11 @@
                 add_participant($event, $user);
                 validate($event, $user);
                 $is_from_user = $event-> creator_id == $user-> id;
-                $is_participant = false;
-                $is_creater = false;
-                $is_admin = false;
-                if($user){
-                    $is_participant = in_array($user->id, $event->participants_id);
-                    $is_creator = $event->creator_id == $user -> id;
-                    $is_admin = $user->nick == "admin";
-                }
+                $is_participant = in_array($user->id, $event->participants_id);
+                $is_creator = $event->creator_id == $user -> id;
+                $is_admin = $user->nick == "admin";
+                
+                getSpecies($species, $event);
             }
             include_once "../views/single_event.php";
         }

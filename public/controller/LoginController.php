@@ -64,6 +64,12 @@
             require_once "../views/login.php";
     }
     else{
-        header("Location: ProfileController.php?info=posts");
+        if(isset($_GET["logout"])){
+            $_SESSION = array();
+            session_destroy();
+            require_once "../views/login.php";
+        }
+        else
+            header("Location: ProfileController.php?info=posts");
     }
 ?>

@@ -50,9 +50,12 @@
 				 <div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Nombre</label>
-						<input class="form-control" type="text" name="name" 
+						<input required class="form-control" type="text" name="name"
 						<?php
 							echo $_GET["action"] == "modify" ? "value=".$event-> name  : "";
+						?>
+						<?php
+							echo isset($_POST["name"]) && trim($_POST["name"]) ? "value=".$event-> name  : "";
 						?>
 						>
 					</div>
@@ -66,7 +69,7 @@
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control" for="description">Descripción</label>
-						<textarea class="form-control" id="description" name="description" required><?=$_GET["action"] == "modify" ?$event-> description  : ""?></textarea>
+						<textarea class="form-control" id="description" name="description" required><?=$_GET["action"] == "modify" ?$event-> description  : ""?><?php echo isset($_POST["terrain"]) && trim($_POST["terrain"]) ? $event-> description  : "";?></textarea>
 					</div>
 					<?php if(isset($errors["description"]))
 					{?>
@@ -81,6 +84,9 @@
 						<input class="form-control" type="text" name="location" required
 						<?php
 							echo $_GET["action"] == "modify" ? "value=".$event-> location  : "";
+						?>
+						<?php
+							echo isset($_POST["location"]) && trim($_POST["location"]) ? "value=".$event-> location  : "";
 						?>
 						>
 					</div>
@@ -98,6 +104,9 @@
 						<?php
 							echo $_GET["action"] == "modify" ? "value=".$event-> terrain : "";
 						?>
+						<?php
+							echo isset($_POST["terrain"]) && trim($_POST["terrain"]) ? "value=".$event-> terrain  : "";
+						?>
 						>
 					</div>
 					<?php if(isset($errors["terrain"]))
@@ -110,14 +119,14 @@
 				<div class="form-group">
 					<div class="col-xs-12">
 						<label class="label-control">Tipo</label>
-						<select class="form-control" type="text" style="background: transparent; color: white;" name="type" required>
-							<option value=1 <?=isset($event)&&$event-> type == "1"?"selected":""?>>
-								Reforestación con semillas
-							</option>
-							<option value=2 <?=isset($event)&&$event-> type == "2"?"selected":""?>>
-								Reforestación con plantas jóvenes
-							</option>
-						</select>
+						<input type="text" class="form-control" name="type" required
+						<?php
+							echo $_GET["action"] == "modify" ? "value=".$event-> type : "";
+						?>
+						<?php
+							echo isset($_POST["type"]) && trim($_POST["type"]) ? "value=".$event-> type  : "";
+						?>
+						>
 					</div>
 				</div>
 				<div class="form-group">
@@ -126,6 +135,9 @@
 						<input class="form-control" type="date"  name="date" required
 						<?php
 							echo $_GET["action"] == "modify" ? "value=".$event-> date : "";
+						?>
+						<?php
+							echo isset($_POST["date"]) && trim($_POST["date"]) ? "value=".$event-> date  : "";
 						?>
 						>
 					</div>

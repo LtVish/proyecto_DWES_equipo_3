@@ -1,7 +1,7 @@
 <?php
 
     include '../models/Post.php';
-    include '../views/cards/post_profile.php';
+    include '../views/cards/single_post_template.php';
     include '../models/User.php';
 
     if(isset($_POST['post_id'])) {
