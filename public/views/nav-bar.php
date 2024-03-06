@@ -36,6 +36,9 @@
                 <li>
                     <?php echo $_SESSION["user"] -> nick . " - karma: " . $_SESSION["user"] -> karma;?>
                 </li>
+                <li>
+                    <a href="LoginController.php?logout"><i class="fa fa-user sr-icons"></i>Logout</a>
+                </li>
                 <?php }?>
             </ul>
         </div>

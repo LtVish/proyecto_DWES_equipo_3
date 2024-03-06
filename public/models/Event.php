@@ -88,8 +88,8 @@ class Event{
             array_push($part_users_id,$newRow['user_id']);
         }
         while($newRow2=$ce_specie->fetch()){
-            array_push($part_species_id,$newRow2['id']);
-        }+
+            array_push($part_species_id,$newRow2['specie_id']);
+        }
         $state = $row['state'] ?? false;
         return new Event($row['id'],$row['name'],$row['description'],$row['terrain'],$row['date'],$row['type'],$row['creator_id'],$part_users_id,$part_species_id
         ,$row['image'],$row['location'],$state);

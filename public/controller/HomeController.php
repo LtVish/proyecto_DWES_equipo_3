@@ -1,6 +1,9 @@
 <?php
     include_once "../models/Event.php";
     include_once "../models/Post.php";
+    include_once "../models/User.php";
+
+    session_start();
 
     function compareDates(Event $a, Event $b) {
 
