@@ -83,25 +83,25 @@
            <hr>
            <div class="col-xs-12 col-sm-3">
              <img class="img-responsive" src="../images/clients/client1.jpg" alt="client's picture">
-             <h5>Miren Melano</h5>
+             <h5>Lola Mento Mucho</h5>
              <q>La plataforma de reforestación es una herramienta esencial en la lucha contra el cambio climático,
              permitiendo a personas y organizaciones plantar árboles y restaurar ecosistemas.</q>
            </div>
            <div class="col-xs-12 col-sm-3">
              <img class="img-responsive" src="../images/clients/client2.jpg" alt="client's picture">
-             <h5>Kerry Kopene</h5>
+             <h5>Armando Bronca Segura</h5>
              <q>Esta plataforma ofrece una solución innovadora para abordar la crisis ambiental global al involucrar
               a individuos en la plantación de árboles, promoviendo la responsabilidad ambiental.</q>
            </div>
            <div class="col-xs-12 col-sm-3">
              <img class="img-responsive" src="../images/clients/client3.jpg" alt="client's picture">
-             <h5>Dolores Crotal</h5>
+             <h5>Elena Nito Del Bosque</h5>
              <q>La plataforma facilita a empresas y personas compensar su huella de carbono y contribuir
              a la sostenibilidad ambiental a través de proyectos de reforestación transparentes y accesibles.</q>
            </div>
            <div class="col-xs-12 col-sm-3">
              <img class="img-responsive" src="../images/clients/client4.jpg" alt="client's picture">
-             <h5>Elva Ginón</h5>
+             <h5>Eva Fina Segura</h5>
              <q>Es inspirador ver cómo la tecnología se usa para promover la reforestación y la educación ambiental,
              creando una comunidad comprometida con la conservación forestal para un futuro sostenible.</q>
            </div>
