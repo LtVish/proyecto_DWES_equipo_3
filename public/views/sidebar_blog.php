@@ -2,8 +2,10 @@
     include_once '../db/DBdriver.php';
     include_once '../models/Post.php';
 
+    // Se obtienen todos los posts
     $posts = Post::GetAll();
 
+    // Se recogen los posts más recientes
     function showRecentPosts (Post $post) { ?>
          <div class="post">
            <div class="post-heading">
@@ -42,6 +44,7 @@
      </div>
    </div>
 
+    <!-- Se muestran los posts más recientes -->
     <h3>Entradas recientes</h3>
     <?php showRecentPosts($posts[0]); ?>
     <hr>

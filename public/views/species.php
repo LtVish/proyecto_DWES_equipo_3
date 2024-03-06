@@ -12,25 +12,13 @@
   	<link rel="stylesheet" type="text/css" href="../css/style.css">
   	<!-- Font Awesome icons -->
   	<link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body id="page-top">
 
 <!-- Navbar -->
 <?php include 'nav-bar.php'; ?>
 
-<!-- CONTENIDO DE LA PÁGINA ESPECIES -->
-
-<?php
-    $species = Specie::GetAll();
-?>
-
+<!-- Contenido, se itera y se muestra la información de todas las especies -->
 <div class="container" style="margin-top: 100px;">
     <h2>Nuestras Especies</h2>
     <div class="row">

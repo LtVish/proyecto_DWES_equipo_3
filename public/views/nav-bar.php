@@ -14,6 +14,7 @@
         </div>
         <div class="collapse navbar-collapse navbar-right" id="menu">
             <ul class="nav navbar-nav">
+            <!-- Enlaces a las diferentes secciones de la web. Además, se muestra con subrayado la sección actual -->
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/index.php') ? 'active' : ''; ?> lien">
                 <a href="HomeController.php"><i class="fa fa-home sr-icons"></i> Inicio </a></li>
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/login.php') ? 'active' : ''; ?> lien">
@@ -32,6 +33,7 @@
                 <a href="AboutController.php"><i class="fa fa-users sr-icons"></i> Sobre nosotros</a></li>
                 <li class="<?php echo ($_SERVER['PHP_SELF'] == '/views/contact.php') ? 'active' : ''; ?> lien">
                 <a href="ContactController.php"><i class="fa fa-phone-square sr-icons"></i> Contacto</a></li>
+                <!-- Si el usuario está logueado, se muestra su nick y su karma, además de un enlace para cerrar sesión -->
                 <?php if(isset($_SESSION["user"])){?>
                 <li>
                     <?php echo $_SESSION["user"] -> nick . " - karma: " . $_SESSION["user"] -> karma;?>

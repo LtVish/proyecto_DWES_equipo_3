@@ -19,13 +19,6 @@
   	<link rel="stylesheet" type="text/css" href="../css/magnific-popup.css">
   	<!-- Font Awesome icons -->
   	<link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body id="page-top">
 
@@ -90,44 +83,10 @@
               </div>
            </div>
         <!-- End of second category pictures -->
-
-        
-        
-
         </div>
-    <!-- End of Navigation Table Content -->
-      </div><!-- End of Index-body box -->
+      </div>
 
-    <!-- Box within partners name and logo -->
-      <!--<div class="last-box row">
-        <div class="col-xs-12 col-sm-4 col-sm-push-4 last-block">
-        <div class="partner-box text-center">
-          <p>
-          <i class="fa fa-map-marker fa-2x sr-icons"></i> 
-          <span class="text-muted">35 North Drive, Adroukpape, PY 88105, Agoe Telessou</span>
-          </p>
-          <h4>Our Main Partners</h4>
-          <hr>
-          <div class="text-muted text-left">
-            <ul class="list-inline">
-              <li><img src="../images/index/log2.jpg" alt="logo"></li>
-              <li>First Partner Name</li>
-            </ul>
-            <ul class="list-inline">
-              <li><img src="../images/index/log1.jpg" alt="logo"></li>
-              <li>Second Partner Name</li>
-            </ul>
-            <ul class="list-inline">
-              <li><img src="../images/index/log3.jpg" alt="logo"></li>
-              <li>Third Partner Name</li>
-            </ul>
-          </div>
-        </div>
-        </div>
-      </div>-->
-    <!-- End of Box within partners name and logo -->
-
-   </div><!-- End of index box -->
+   </div>
 
 <!-- Footer -->
 <?php include 'footer.php'; ?>
