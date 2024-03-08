@@ -3,7 +3,7 @@
 ?>
         <div class="col-xs-12 col-sm-6 col-md-3">
                 <div class="sol" style="text-align: center">
-                  <img  src=<?=$publicado->image?>  width=430 height=300>
+                  <img  src=<?=$publicado->image?>  width=370 height=240 sytle="margin:auto;">
                   <div class="behind">
                       <div class="head text-center">
                         <ul class="list-inline">

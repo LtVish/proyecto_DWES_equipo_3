@@ -31,6 +31,8 @@
         <img src=<?="../".$event-> image?> class="img-responsive">
         <h3>Descripción</h3>
         <p><?=$event-> description?></p>
+        <h3>Lugar</h3>
+        <p><?=$event-> location?></p>
         <h3>Terreno</h3>
         <p><?=$event-> terrain?></p>
         <h3>Tipo</h3>
