@@ -14,14 +14,14 @@
     <link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
 
     <style>
-        .pagination > li > button{
+          #anterior, #siguiente{
             margin-right: 5px;
             margin-left: 5px;
             color: #31b0d5;
             background-color: white;
             border-radius: 6px;
           }
-          .pagination > li > button:hover{
+          #anterior:hover, #siguiente:hover{
             background-color: #31b0d5;
             color: #f1f1f1;
           }

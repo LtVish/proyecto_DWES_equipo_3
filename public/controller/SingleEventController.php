@@ -47,7 +47,6 @@
         //Para ahorrar obtener todos los id's de nuevo de los eventos y poder registrar el evento pues
         //ya estan hechas todas las comprobaciones
         if(isset($_POST["specie"]) && is_numeric($_POST["specie"])){
-            echo "<h1>Hooooolllaaaa</h1>";
             $id = (int) $_POST["specie"];
             if(!in_array($id, $event->species_id)){
                 $s_ids = $event->species_id;

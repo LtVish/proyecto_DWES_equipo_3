@@ -114,7 +114,7 @@
             elseif($_GET["action"] == "modify" && ($validated_inputs == 7 || $validated_inputs == 6)){
                 $event->Update();
                 $modified = true;
-                include_once "../views/new_event.php";
+                header("Location: SingleEventController.php?id=$event->id");
             }
             else{
                 include_once "../views/new_event.php";

@@ -106,11 +106,11 @@ VALUES ('Feria de Agricultura Sostenible', 'Evento anual dedicado a la promoció
 
 -- Inserts para la tabla 'participant'
 INSERT INTO participant (user_id, event_id)
-VALUES (2, 1),
-       (3, 2),
-       (4, 3),
+VALUES (3, 1),
+       (4, 2),
+       (2, 3),
        (5, 4),
-       (2, 5);
+       (3, 5);
 
 -- Inserts para la tabla 'specie_event'
 INSERT INTO specie_event (specie_id, event_id)
